@@ -89,7 +89,7 @@
         <enum name="spread_inside" value="1"/>
         <enum name="packed" value="2"/>
     </attr>
-    <attr format="float" name="flow_horizontalAlign">
+    <attr format="enum" name="flow_horizontalAlign">
         <enum name="start" value="0"/>
         <enum name="end" value="1"/>
         <enum name="center" value="2"/>
@@ -248,7 +248,7 @@
     <attr format="dimension" name="layout_goneMarginTop"/>
     <attr name="layout_optimizationLevel">
         <flag name="none" value="0"/>
-        <flag name="standard" value="7"/> <!-- direct, barriers, chains -->
+        <flag name="standard" value="257"/> <!-- direct, measure caches -->
         <flag name="direct" value="1"/>
         <flag name="barrier" value="2"/>
         <flag name="chains" value="4"/>
@@ -257,6 +257,9 @@
         <flag name="groups" value="32"/>
         <flag name="graph" value="64"/>
         <flag name="graph_wrap" value="128"/>
+        <flag name="cache_measures" value="256"/>
+        <flag name="dependency_ordering" value="512"/>
+        <flag name="grouping" value="1024"/>
     </attr>
     <attr format="reference" name="materialButtonOutlinedStyle"/>
     <attr format="reference" name="materialButtonStyle"/>
@@ -975,7 +978,7 @@
     <string name="abc_shareactionprovider_share_with_application">Share with <ns1:g example="Mail" id="application_name">%s</ns1:g></string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
     <string name="action_settings">Settings</string>
-    <string name="app_name">PuzzleDruids</string>
+    <string name="app_name">ProyectoBlanco</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
     <string name="bottom_sheet_behavior" translatable="false">com.google.android.material.bottomsheet.BottomSheetBehavior</string>
     <string name="character_counter_content_description">Characters entered %1$d of %2$d</string>

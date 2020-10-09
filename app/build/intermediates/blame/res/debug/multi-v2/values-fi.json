@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Usuario\\StudioProjects\\PuzzleDroid\\DrudisPuzzle\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-fi\\values-fi.xml",
+            "outputFile": "C:\\Users\\Usuario\\StudioProjects\\PuzzleDroid\\ProyectoBlanco\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-fi\\values-fi.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Usuario\\.gradle\\caches\\transforms-2\\files-2.1\\d0f92c0b26fabb47a28488bab3cc8456\\navigation-ui-2.3.0\\res\\values-fi\\values-fi.xml",

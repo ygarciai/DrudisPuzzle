@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "applicationId": "com.example.puzzledruids",
+  "applicationId": "com.example.proyectoblanco",
   "variantType": "BASE_APK",
   "elements": [
     {
@@ -19,7 +19,7 @@
       },
       "path": "resources-debug.ap_",
       "properties": {
-        "packageId": "com.example.puzzledruids",
+        "packageId": "com.example.proyectoblanco",
         "split": "",
         "minSdkVersion": "16"
       }
