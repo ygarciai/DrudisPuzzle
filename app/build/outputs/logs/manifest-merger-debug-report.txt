@@ -41,7 +41,7 @@ INJECTED from C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\m
 INJECTED from C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:2:1-24:12
 INJECTED from C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:2:1-24:12
 	package
-		ADDED from C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:3:5-41
+		ADDED from C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:3:5-39
 		INJECTED from C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml
 	android:versionName
@@ -78,7 +78,7 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\Us
 		ADDED from C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:6:9-35
 	android:theme
 		ADDED from C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:11:9-40
-activity#com.example.proyectoblanco.MainActivity
+activity#com.example.drudispuzzle.MainActivity
 ADDED from C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:12:9-21:20
 	android:label
 		ADDED from C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:14:13-45
