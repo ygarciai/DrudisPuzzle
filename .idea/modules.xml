@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AndroidStudioProjects-DrudisPuzzle.iml" filepath="$PROJECT_DIR$/.idea/modules/AndroidStudioProjects-DrudisPuzzle.iml" group="DrudisPuzzle" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/DrudisPuzzle.iml" filepath="$PROJECT_DIR$/.idea/modules/DrudisPuzzle.iml" group="DrudisPuzzle" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="DrudisPuzzle/app" />
     </modules>
