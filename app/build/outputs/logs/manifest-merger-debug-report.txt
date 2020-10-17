@@ -82,7 +82,7 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\ce
 	android:label
 		ADDED from C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:8:9-38
 	android:roundIcon
-		ADDED from C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:9:9-54
+		ADDED from C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:9:9-47
 	android:icon
 		ADDED from C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:7:9-43
 	android:allowBackup
