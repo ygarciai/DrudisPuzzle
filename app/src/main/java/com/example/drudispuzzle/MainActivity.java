@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.botoninicio:
-                Intent intent = new Intent(view.getContext(), ElegirPuzzle.class);
+                Intent intent = new Intent(view.getContext(), PuzzleActivity.class);
                 intent.putExtra("nombrejugador",nombre.getText().toString());
                 startActivityForResult(intent, 0);
                 break;
