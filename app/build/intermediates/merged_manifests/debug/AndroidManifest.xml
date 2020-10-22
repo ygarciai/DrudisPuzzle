@@ -30,6 +30,10 @@
         </activity>
         <activity android:name="com.example.drudispuzzle.ElegirPuzzle" />
         <activity android:name="com.example.drudispuzzle.PuzzleActivity" />
+        <activity android:name="com.example.drudispuzzle.SelectionActivity" />
+        <activity android:name="com.example.drudispuzzle.Ranking" />
+        <activity android:name="com.example.drudispuzzle.Multiplayer" />
+        <activity android:name="com.example.drudispuzzle.TomarFoto" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
