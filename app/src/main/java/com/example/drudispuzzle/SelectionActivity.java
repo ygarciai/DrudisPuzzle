@@ -73,7 +73,7 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_inicioPartida:
-                Intent intent = new Intent(view.getContext(), ElegirPuzzle.class);
+                Intent intent = new Intent(view.getContext(), SeleccionTipoPuzzle.class);
                 startActivityForResult(intent, 0);
                 break;
             case R.id.button_ranking:
