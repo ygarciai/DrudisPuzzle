@@ -33,7 +33,7 @@ public class Ranking extends AppCompatActivity {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
+     * @param param1 Parameter 1b.
      * @param param2 Parameter 2a.
      * @return A new instance of fragment Ranking.
      */
