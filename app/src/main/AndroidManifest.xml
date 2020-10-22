@@ -20,7 +20,10 @@
         </activity>
         <activity android:name=".ElegirPuzzle"  />
         <activity android:name=".PuzzleActivity" />
-
+        <activity android:name=".SelectionActivity" />
+        <activity android:name=".Ranking" />
+        <activity android:name=".Multiplayer" />
+        <activity android:name=".TomarFoto" />
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"

@@ -11,7 +11,7 @@
 9-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml
 10
 11    <application
-11-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:5:5-33:19
+11-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:5:5-36:19
 12        android:allowBackup="true"
 12-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:6:9-35
 13        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -52,23 +52,35 @@
 32        <activity android:name="com.example.drudispuzzle.PuzzleActivity" />
 32-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:22:9-52
 32-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:22:19-49
-33
-34        <provider
-35            android:name="androidx.core.content.FileProvider"
-35-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:25:13-62
-36            android:authorities="com.example.drudispuzzle.fileprovider"
-36-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:26:13-64
-37            android:exported="false"
-37-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:27:13-37
-38            android:grantUriPermissions="true" >
-38-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:28:13-47
-39            <meta-data
-39-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:29:13-31:54
-40                android:name="android.support.FILE_PROVIDER_PATHS"
-40-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:30:17-67
-41                android:resource="@xml/file_paths" />
-41-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:31:17-51
-42        </provider>
-43    </application>
-44
-45</manifest>
+33        <activity android:name="com.example.drudispuzzle.SelectionActivity" />
+33-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:23:9-55
+33-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:23:19-52
+34        <activity android:name="com.example.drudispuzzle.Ranking" />
+34-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:24:9-45
+34-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:24:19-42
+35        <activity android:name="com.example.drudispuzzle.Multiplayer" />
+35-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:25:9-49
+35-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:25:19-46
+36        <activity android:name="com.example.drudispuzzle.TomarFoto" />
+36-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:26:9-47
+36-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:26:19-44
+37
+38        <provider
+39            android:name="androidx.core.content.FileProvider"
+39-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:28:13-62
+40            android:authorities="com.example.drudispuzzle.fileprovider"
+40-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:29:13-64
+41            android:exported="false"
+41-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:30:13-37
+42            android:grantUriPermissions="true" >
+42-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:31:13-47
+43            <meta-data
+43-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:32:13-34:54
+44                android:name="android.support.FILE_PROVIDER_PATHS"
+44-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:33:17-67
+45                android:resource="@xml/file_paths" />
+45-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:34:17-51
+46        </provider>
+47    </application>
+48
+49</manifest>
