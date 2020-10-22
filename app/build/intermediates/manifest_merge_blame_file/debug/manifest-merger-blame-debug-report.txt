@@ -11,7 +11,11 @@
 9-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml
 10
 11    <application
+<<<<<<< HEAD
 11-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:5:5-36:19
+=======
+11-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:5:5-38:19
+>>>>>>> YosuMaster
 12        android:allowBackup="true"
 12-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:6:9-35
 13        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -62,6 +66,7 @@
 35-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:25:9-49
 35-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:25:19-46
 36        <activity android:name="com.example.drudispuzzle.TomarFoto" />
+<<<<<<< HEAD
 36-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:26:9-47
 36-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:26:19-44
 37
@@ -84,3 +89,30 @@
 47    </application>
 48
 49</manifest>
+=======
+36-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:26:9-47
+36-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:26:19-44
+37        <activity android:name="com.example.drudispuzzle.SeleccionTipoPuzzle" />
+37-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:27:9-57
+37-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:27:19-54
+38
+39        <provider
+40            android:name="androidx.core.content.FileProvider"
+40-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:30:13-62
+41            android:authorities="com.example.drudispuzzle.fileprovider"
+41-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:31:13-64
+42            android:exported="false"
+42-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:32:13-37
+43            android:grantUriPermissions="true" >
+43-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:33:13-47
+44            <meta-data
+44-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:34:13-36:54
+45                android:name="android.support.FILE_PROVIDER_PATHS"
+45-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:35:17-67
+46                android:resource="@xml/file_paths" />
+46-->C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:36:17-51
+47        </provider>
+48    </application>
+49
+50</manifest>
+>>>>>>> YosuMaster

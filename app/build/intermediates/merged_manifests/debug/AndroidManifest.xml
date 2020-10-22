@@ -34,6 +34,7 @@
         <activity android:name="com.example.drudispuzzle.Ranking" />
         <activity android:name="com.example.drudispuzzle.Multiplayer" />
         <activity android:name="com.example.drudispuzzle.TomarFoto" />
+        <activity android:name="com.example.drudispuzzle.SeleccionTipoPuzzle" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

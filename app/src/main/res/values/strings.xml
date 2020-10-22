@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">RompeCabezas</string>
+<<<<<<< HEAD
     <string name="textoinicio">Bienvenido a Druidas</string>
+=======
+    <string name="textoinicio">Bienvenido al juego</string>
+>>>>>>> YosuMaster
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

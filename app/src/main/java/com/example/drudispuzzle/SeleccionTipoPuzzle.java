@@ -13,10 +13,10 @@ import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link SelectionActivity#newInstance} factory method to
+ * Use the {@link SeleccionTipoPuzzle#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SelectionActivity  extends AppCompatActivity implements View.OnClickListener {
+public class SeleccionTipoPuzzle  extends AppCompatActivity implements View.OnClickListener  {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,7 +27,9 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
     private String mParam1;
     private String mParam2;
 
-    public SelectionActivity() {
+
+
+    public SeleccionTipoPuzzle() {
         // Required empty public constructor
     }
 
@@ -37,11 +39,11 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SelectionActivity.
+     * @return A new instance of fragment SeleccionTipoPuzzle.
      */
     // TODO: Rename and change types and number of parameters
-    public static SelectionActivity newInstance(String param1, String param2) {
-        SelectionActivity fragment = new SelectionActivity();
+    public static SeleccionTipoPuzzle newInstance(String param1, String param2) {
+        SeleccionTipoPuzzle fragment = new SeleccionTipoPuzzle();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -51,44 +53,31 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_selection_activity);
-        Button btnPlay = (Button) findViewById(R.id.button_inicioPartida);
-        Button btnRank = (Button) findViewById(R.id.button_ranking);
-        Button btnMult = (Button) findViewById(R.id.button_Multiplayer);
-        Button btnFoto = (Button) findViewById(R.id.button_tomarFoto);
-        btnPlay.setOnClickListener(this);
-        btnRank.setOnClickListener(this);
-        btnMult.setOnClickListener(this);
-        btnFoto.setOnClickListener(this);
-    }
+        setContentView(R.layout.fragment_seleccion_tipo_puzzle);
 
+        Button btn = (Button) findViewById(R.id.button_Imagenes);
+        Button btn1 = (Button) findViewById(R.id.button_ImagenesSeg);
+        btn.setOnClickListener(this);
+        btn1.setOnClickListener(this);
+    }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_selection_activity, container, false);
+        return inflater.inflate(R.layout.fragment_seleccion_tipo_puzzle, container, false);
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.button_inicioPartida:
-                Intent intent = new Intent(view.getContext(), SeleccionTipoPuzzle.class);
+        switch (view.getId()){
+            case R.id.button_Imagenes:
+                Intent intent = new Intent(view.getContext(), ElegirPuzzle.class);
                 startActivityForResult(intent, 0);
                 break;
-            case R.id.button_ranking:
-                Intent intent1 = new Intent(view.getContext(), Ranking.class);
+            case R.id.button_ImagenesSeg:
+                Intent intent1 = new Intent(view.getContext(), SeleccionTipoPuzzle.class);
                 startActivityForResult(intent1, 0);
                 break;
-            case R.id.button_Multiplayer:
-                Intent intent2 = new Intent(view.getContext(), Multiplayer.class);
-                startActivityForResult(intent2, 0);
-                break;
-            case R.id.button_tomarFoto:
-                Intent intent3 = new Intent(view.getContext(), TomarFoto.class);
-                startActivityForResult(intent3, 0);
-                break;
         }
-
     }
 }
