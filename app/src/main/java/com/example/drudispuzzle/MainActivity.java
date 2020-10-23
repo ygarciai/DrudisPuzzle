@@ -1,11 +1,13 @@
 package com.example.drudispuzzle;
 
 import android.content.Intent;
+import android.content.res.loader.AssetsProvider;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -14,8 +16,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import java.net.URL;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     EditText nombre;
+
+    WebView webView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
 
         if (getIntent().getBooleanExtra("EXIT", false))
         {
@@ -46,7 +54,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (item.getItemId()) {
             case R.id.item1:
                 Toast.makeText(this, "Opening Help", Toast.LENGTH_SHORT).show();
+                webView = (WebView) findViewById(R.id.webviewhtml);
+                //webView.loadUrl("https://www.google.com");
+                //webView.loadUrl("file:///android_asset/webview/index.html");
                 return true;
+            case R.id.Item2:
+                finish();
+
         }
         return super.onOptionsItemSelected(item);
     }
