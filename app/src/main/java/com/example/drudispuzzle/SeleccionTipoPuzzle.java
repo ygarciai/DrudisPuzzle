@@ -71,7 +71,7 @@ public class SeleccionTipoPuzzle  extends AppCompatActivity implements View.OnCl
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.button_Imagenes:
-                Intent intent = new Intent(view.getContext(), ElegirPuzzle.class);
+                Intent intent = new Intent(view.getContext(), ElegirImagenSinFragmentar.class);
                 startActivityForResult(intent, 0);
                 break;
             case R.id.button_ImagenesSeg:
