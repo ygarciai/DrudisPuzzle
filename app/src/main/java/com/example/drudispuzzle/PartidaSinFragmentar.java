@@ -1,9 +1,14 @@
 package com.example.drudispuzzle;
 
+import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -11,6 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Chronometer;
 import android.widget.ImageView;
+
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,10 +37,11 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     private String mParam2;
 
     ImageView i1;
-    ImageView i2;
-    ImageView i3;
-    ImageView i4;
-    ImageView i5;
+
+    int Nivel;
+    int NumeroPiezas;
+
+    ArrayList<Bitmap>Piezas;
 
     public PartidaSinFragmentar() {
         // Required empty public constructor
@@ -60,26 +69,13 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_partida_sin_fragmentar);
 
+        ArrayList<Uri> listaImagenes = (ArrayList<Uri>) getIntent().getSerializableExtra("imagenesSeleccionadasUri");
+
         final Chronometer myChronometer = (Chronometer)findViewById(R.id.chronometer);
         myChronometer.start();
-
-        i1= (ImageView) findViewById(R.id.imagenSeleccionada);
-        i2= (ImageView) findViewById(R.id.imagenSeleccionada1);
-        i3= (ImageView) findViewById(R.id.imagenSeleccionada2);
-        i4= (ImageView) findViewById(R.id.imagenSeleccionada3);
-        i5= (ImageView) findViewById(R.id.imagenSeleccionada4);
-
-        Bundle bundle= getIntent().getExtras();
-        if (bundle!=null){
-            int resid= bundle.getInt("resId");
-            i1.setImageResource(resid);
-            i2.setImageResource(resid);
-            i3.setImageResource(resid);
-            i4.setImageResource(resid);
-            i5.setImageResource(resid);
-        }
-        
-    }
+        i1=(ImageView) findViewById(R.id.imageView_fondoPantalla);
+        i1.setImageURI(listaImagenes.get(0));
+   }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
