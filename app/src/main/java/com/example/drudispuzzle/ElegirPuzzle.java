@@ -40,6 +40,7 @@ public class ElegirPuzzle extends AppCompatActivity implements View.OnClickListe
         EditText score=(EditText)findViewById(R.id.score);
         Bundle parametros = this.getIntent().getExtras();
         //datos = parametros.getString("nombrejugador");
+
         if(datos!=null){
             nombre.setText("Hola, "+ datos + "! Elige un Rompecabezas!" );
         }else{

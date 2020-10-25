@@ -37,7 +37,7 @@ public class SeleccionTipoPuzzle  extends AppCompatActivity implements View.OnCl
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
+     * @param param1 Parameter 1XDDDDDDDDDDDDDDDDDDDDDDDDDD.
      * @param param2 Parameter 2.
      * @return A new instance of fragment SeleccionTipoPuzzle.
      */
@@ -71,7 +71,7 @@ public class SeleccionTipoPuzzle  extends AppCompatActivity implements View.OnCl
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.button_Imagenes:
-                Intent intent = new Intent(view.getContext(), ElegirPuzzle.class);
+                Intent intent = new Intent(view.getContext(), ElegirImagenSinFragmentar.class);
                 startActivityForResult(intent, 0);
                 break;
             case R.id.button_ImagenesSeg:

@@ -10,12 +10,12 @@
 9        android:targetSdkVersion="30" />
 9-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml
 10
-11    <uses-permission android:name="android.permission.INTERNET" />
-11-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:5:5-66
-11-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:5:22-64
+11    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+11-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:5:5-96
+11-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:5:22-77
 12
 13    <application
-13-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:7:5-40:19
+13-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:7:5-41:19
 14        android:allowBackup="true"
 14-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:8:9-35
 15        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -71,23 +71,26 @@
 39        <activity android:name="com.example.drudispuzzle.SeleccionTipoPuzzle" />
 39-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:29:9-57
 39-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:29:19-54
-40
-41        <provider
-42            android:name="androidx.core.content.FileProvider"
-42-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:32:13-62
-43            android:authorities="com.example.drudispuzzle.fileprovider"
-43-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:33:13-64
-44            android:exported="false"
-44-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:34:13-37
-45            android:grantUriPermissions="true" >
-45-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:35:13-47
-46            <meta-data
-46-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:36:13-38:54
-47                android:name="android.support.FILE_PROVIDER_PATHS"
-47-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:37:17-67
-48                android:resource="@xml/file_paths" />
-48-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:38:17-51
-49        </provider>
-50    </application>
-51
-52</manifest>
+40        <activity android:name="com.example.drudispuzzle.ElegirImagenSinFragmentar" />
+40-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:30:9-63
+40-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:30:19-60
+41
+42        <provider
+43            android:name="androidx.core.content.FileProvider"
+43-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:33:13-62
+44            android:authorities="com.example.drudispuzzle.fileprovider"
+44-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:34:13-64
+45            android:exported="false"
+45-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:35:13-37
+46            android:grantUriPermissions="true" >
+46-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:36:13-47
+47            <meta-data
+47-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:37:13-39:54
+48                android:name="android.support.FILE_PROVIDER_PATHS"
+48-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:38:17-67
+49                android:resource="@xml/file_paths" />
+49-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:39:17-51
+50        </provider>
+51    </application>
+52
+53</manifest>
