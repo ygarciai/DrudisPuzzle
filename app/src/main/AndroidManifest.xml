@@ -27,7 +27,8 @@
         <activity android:name=".Multiplayer" />
         <activity android:name=".TomarFoto" />
         <activity android:name=".SeleccionTipoPuzzle" />
-        <activity android:name=".ElegirImagenSinFragmentar" />
+        <activity android:name=".ElegirImagenSinFragmentar"/>
+        <activity android:name=".PartidaSinFragmentar"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

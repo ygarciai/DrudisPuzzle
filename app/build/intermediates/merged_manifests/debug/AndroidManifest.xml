@@ -38,6 +38,7 @@
         <activity android:name="com.example.drudispuzzle.TomarFoto" />
         <activity android:name="com.example.drudispuzzle.SeleccionTipoPuzzle" />
         <activity android:name="com.example.drudispuzzle.ElegirImagenSinFragmentar" />
+        <activity android:name="com.example.drudispuzzle.PartidaSinFragmentar" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

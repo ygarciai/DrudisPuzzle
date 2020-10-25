@@ -102,6 +102,9 @@ public class ElegirImagenSinFragmentar extends AppCompatActivity implements View
             case R.id.button_SeleccionarImagen:
                 cargarimagen();
                 break;
+            case R.id.button_empezarPartidaSinFragmentar:
+                Intent intent = new Intent(view.getContext(), PartidaSinFragmentar.class);
+                startActivityForResult(intent, 0);
         }
 
     }
