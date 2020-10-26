@@ -15,7 +15,7 @@
 11-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:5:22-77
 12
 13    <application
-13-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:7:5-41:19
+13-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:7:5-43:19
 14        android:allowBackup="true"
 14-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:8:9-35
 15        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -72,25 +72,31 @@
 39-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:29:9-57
 39-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:29:19-54
 40        <activity android:name="com.example.drudispuzzle.ElegirImagenSinFragmentar" />
-40-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:30:9-63
+40-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:30:9-62
 40-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:30:19-60
-41
-42        <provider
-43            android:name="androidx.core.content.FileProvider"
-43-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:33:13-62
-44            android:authorities="com.example.drudispuzzle.fileprovider"
-44-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:34:13-64
-45            android:exported="false"
-45-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:35:13-37
-46            android:grantUriPermissions="true" >
-46-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:36:13-47
-47            <meta-data
-47-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:37:13-39:54
-48                android:name="android.support.FILE_PROVIDER_PATHS"
-48-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:38:17-67
-49                android:resource="@xml/file_paths" />
-49-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:39:17-51
-50        </provider>
-51    </application>
-52
-53</manifest>
+41        <activity android:name="com.example.drudispuzzle.ElegirImagenSinFragmentar2" />
+41-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:31:9-63
+41-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:31:19-61
+42        <activity android:name="com.example.drudispuzzle.PartidaSinFragmentar" />
+42-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:32:9-57
+42-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:32:19-55
+43
+44        <provider
+45            android:name="androidx.core.content.FileProvider"
+45-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:35:13-62
+46            android:authorities="com.example.drudispuzzle.fileprovider"
+46-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:36:13-64
+47            android:exported="false"
+47-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:37:13-37
+48            android:grantUriPermissions="true" >
+48-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:38:13-47
+49            <meta-data
+49-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:39:13-41:54
+50                android:name="android.support.FILE_PROVIDER_PATHS"
+50-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:40:17-67
+51                android:resource="@xml/file_paths" />
+51-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:41:17-51
+52        </provider>
+53    </application>
+54
+55</manifest>

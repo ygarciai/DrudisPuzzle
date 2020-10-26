@@ -58,6 +58,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 setContentView(R.layout.webview);
 
                 webView = (WebView) this.findViewById(R.id.webviewhtml);
+                webView.setInitialScale(1);
+                webView.getSettings().setJavaScriptEnabled(true);
+                webView.getSettings().setLoadWithOverviewMode(true);
+                webView.getSettings().setUseWideViewPort(true);
+                webView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+                webView.setScrollbarFadingEnabled(false);
                 webView.loadUrl("file:///android_asset/webview/index.html");
 
 
