@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,10 +17,11 @@ public class PartidaFragmentada extends AppCompatActivity {
     private static final int COLUMNS = 3;
     private static final int DIMENSIONS = COLUMNS * COLUMNS;
 
-    private String[] tileList;
-    private GestureDetectGridView mGridView;
-    private int mColumnWidth;
-    private int mColumnHeight;
+    private static String[] tileList;
+    private static GestureDetectGridView mGridView;
+    private static int mColumnWidth;
+    private static int mColumnHeight;
+
 
     @Override
     public void onCreate (Bundle savedInstanceState) {
@@ -48,7 +50,7 @@ public class PartidaFragmentada extends AppCompatActivity {
                     mColumnWidth = displayWidth / COLUMNS;
                     mColumnHeight = requiredHeight / COLUMNS;
 
-                    display();
+                    display(getApplicationContext());
 
                 }
             });
@@ -65,12 +67,12 @@ public class PartidaFragmentada extends AppCompatActivity {
             return result;
         }
 
-        private void display () {
+        private static void display (Context context) {
             ArrayList<Button> buttons = new ArrayList<>();
             Button button;
 
             for (int i = 0; i < tileList.length; i++) {
-                button = new Button(this);
+                button = new Button(context);
 
                 if (tileList[i].equals("0")) {
                     button.setBackgroundResource(R.drawable.golum1);
@@ -113,6 +115,7 @@ public class PartidaFragmentada extends AppCompatActivity {
             }
         }
 
+
         @SuppressLint("WrongViewCast")
         private void init () {
             mGridView = (GestureDetectGridView) findViewById(R.id.fragmentada);
@@ -125,4 +128,43 @@ public class PartidaFragmentada extends AppCompatActivity {
             }
         }
 
+        private static void swap(Context context, int position, int swap) {
+            String newPosition = tileList[position + swap];
+            tileList[position + swap] = tileList[position];
+            tileList[position] = newPosition;
+            display(context);
+
+            if (isSolved()) {
+                Toast.makeText(context, "You Win", Toast.LENGTH_SHORT);
+            }
+        }
+
+    private static void isSolved() {
+        boolean solved = false;
+
+        for (int i = 0, i < tileList.length; i++) {
+            if (tileList[i].equals(String.valueOf(i))) {
+                solved =true;
+            } else {
+                solved = false;
+                break;
+            }
+        }
+        return solved;
     }
+
+    public static void moveTiles (Context context, String direction, int position) {
+            if (position ==0) {
+                if (direction.equals("right")) {
+                    swap(context, position, 1);
+                } else if (direction.equals("down")) {
+                    swap(context, position, COLUMNS);
+                } else {
+                    Toast.makeText(context, "Invalid move", Toast.LENGTH_SHORT).show();
+                }
+            } else swap (context, position, COLUMNS ) ;
+
+            }
+        }
+
+
