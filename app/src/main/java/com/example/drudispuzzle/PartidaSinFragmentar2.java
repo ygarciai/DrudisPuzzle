@@ -13,25 +13,42 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
 import static java.lang.Math.abs;
 
-public class PuzzleActivity extends AppCompatActivity {
+/**
+ * A simple {@link Fragment} subclass.
+ * *Use the {@link *PartidaSinFragmentar2#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class PartidaSinFragmentar2 extends AppCompatActivity {
+
     ArrayList<PuzzlePiece> pieces;
     String mCurrentPhotoPath;
     String mCurrentPhotoUri;
+
+    int nivel;
+    ImageView i1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,25 +56,31 @@ public class PuzzleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_puzzle);
 
+        nivel=1;
+
         final RelativeLayout layout = findViewById(R.id.layout);
         final ImageView imageView = findViewById(R.id.imageView);
 
         Intent intent = getIntent();
         final String assetName = intent.getStringExtra("assetName"); //obtiene la imagen seleccionada por el jugador
 
+        ArrayList<Uri> listaImagenes = (ArrayList<Uri>) getIntent().getSerializableExtra("imagenesSeleccionadasUri");
+
+        inicioPartida(nivel, listaImagenes);
+
         // ejecuta esto después de que la vista fue diseñada para tener todas las dimensiones calculadas
         imageView.post(new Runnable() {
             @Override
             public void run() {
-                if (assetName != null) {
-                    configurar(assetName, imageView); //configura el tamaño de la imagen elegida y el marco de la vista
-                }
+                //if (listaImagenes != null) {
+                    //configurar(assetName, imageView); //configura el tamaño de la imagen elegida y el marco de la vista
+                //}
                 pieces = splitImage(); //divide la imagen en partes
-                //TactilListener tactilListener = new TactilListener(PuzzleActivity.this);
+                TactilListener tactilListener = new TactilListener(PartidaSinFragmentar2.this);
                 // ordena de manera aleatoria las piezas
                 Collections.shuffle(pieces);
                 for (PuzzlePiece piece : pieces) {
-                    //piece.setOnTouchListener(tactilListener);
+                    piece.setOnTouchListener(tactilListener);
                     layout.addView(piece);
                     // randomize position, on the bottom of the screen
                     RelativeLayout.LayoutParams lParams = (RelativeLayout.LayoutParams) piece.getLayoutParams();
@@ -69,14 +92,49 @@ public class PuzzleActivity extends AppCompatActivity {
         });
     }
 
-    private void configurar(String assetName, ImageView imageView) {
+    private void inicioPartida(int nivel, final ArrayList<Uri> listaImagenes) {
+        final FrameLayout layout = findViewById(R.id.layout);
+        if (nivel == 1){
+            i1.setImageURI(listaImagenes.get(0));
+            i1.post(new Runnable() {
+                public void run() {
+                    if (i1 != null) {
+                        configurar(i1,listaImagenes.get(0)); //configura el tamaño de la imagen elegida y el marco de la vista
+                    }
+                    pieces = splitImage(); //divide la imagen en partes
+                    TactilListener tactilListener = new TactilListener(PartidaSinFragmentar2.this);
+                    // ordena de manera aleatoria las piezas
+                    Collections.shuffle(pieces);
+                    for (PuzzlePiece piece : pieces) {
+                        piece.setOnTouchListener(tactilListener);
+                        layout.addView(piece);
+                        // randomize position, on the bottom of the screen
+                        RelativeLayout.LayoutParams lParams = (RelativeLayout.LayoutParams) piece.getLayoutParams();
+                        lParams.leftMargin = new Random().nextInt(layout.getWidth() - piece.pieceWidth);
+                        lParams.topMargin = layout.getHeight() - piece.pieceHeight;
+                        piece.setLayoutParams(lParams);
+                    }
+                }
+            });
+        }else if (nivel==2){
+            i1.setImageURI(listaImagenes.get(1));
+        }else if (nivel==3){
+            i1.setImageURI(listaImagenes.get(2));
+        }else if (nivel==4){
+            i1.setImageURI(listaImagenes.get(3));
+        }else if (nivel==5){
+            i1.setImageURI(listaImagenes.get(4));
+        }
+    }
+
+    private void configurar(ImageView imageView, Uri uri) {
         // obtiene las dimensiones de la vista que sera el marco
         int targetW = imageView.getWidth();
         int targetH = imageView.getHeight();
 
         AssetManager am = getAssets();
         try {
-            InputStream is = am.open("img/" + assetName);
+            InputStream is = am.open(String.valueOf(uri));
             // obtiene las dimensiones del bitmap
             BitmapFactory.Options bmOptions = new BitmapFactory.Options();
             bmOptions.inJustDecodeBounds = true;
@@ -298,6 +356,4 @@ public class PuzzleActivity extends AppCompatActivity {
 
         return true;
     }
-
-
-   }
+}

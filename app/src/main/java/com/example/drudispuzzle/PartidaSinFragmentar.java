@@ -2,23 +2,42 @@ package com.example.drudispuzzle;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.pdf.PdfDocument;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.solver.state.State;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Chronometer;
+import android.widget.FrameLayout;
+import android.widget.GridLayout;
+import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Random;
+
+import static java.lang.StrictMath.abs;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,16 +51,12 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     ImageView i1;
+    int nivel;
 
-    int Nivel;
-    int NumeroPiezas;
-
-    ArrayList<Bitmap>Piezas;
+    public static List<Bitmap> piezas;
+    int numberPieces = 24;
+    int rows, cols;
 
     public PartidaSinFragmentar() {
         // Required empty public constructor
@@ -68,20 +83,70 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_partida_sin_fragmentar);
+        nivel=1;
 
         ArrayList<Uri> listaImagenes = (ArrayList<Uri>) getIntent().getSerializableExtra("imagenesSeleccionadasUri");
-
-        final Chronometer myChronometer = (Chronometer)findViewById(R.id.chronometer);
+        final Chronometer myChronometer = findViewById(R.id.chronometer);
         myChronometer.start();
-        i1=(ImageView) findViewById(R.id.imageView_fondoPantalla);
-        i1.setImageURI(listaImagenes.get(0));
+        i1 = findViewById(R.id.imageView_fondoPantalla);
+        inicioPartida(nivel, listaImagenes);
    }
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_partida_sin_fragmentar, container, false);
+    private void inicioPartida(int nivel, ArrayList<Uri> listaImagenes) {
+        GridLayout layout = (GridLayout) findViewById(R.id.secondLinearLayout);
+        if (nivel == 1){
+            i1.setImageURI(listaImagenes.get(0));
+            splitImage(i1, numberPieces);
+            layout.setColumnCount(cols);
+            for(Bitmap piece : piezas) {
+                ImageView iv = new ImageView(getApplicationContext());
+                iv.setImageBitmap(piece);
+                layout.addView(iv);
+            }
+        }else if (nivel==2){
+            i1.setImageURI(listaImagenes.get(1));
+        }else if (nivel==3){
+            i1.setImageURI(listaImagenes.get(2));
+        }else if (nivel==4){
+            i1.setImageURI(listaImagenes.get(3));
+        }else if (nivel==5){
+            i1.setImageURI(listaImagenes.get(4));
+        }
+
     }
+
+    private void splitImage(ImageView image, int chunkNumbers) {
+        //For height and width of the small image chunks
+        int chunkHeight,chunkWidth;
+
+        //To store all the small image chunks in bitmap format in this list
+        piezas = new ArrayList<>(chunkNumbers);
+
+        //Getting the scaled bitmap of the source image
+        BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
+        Bitmap bitmap = drawable.getBitmap();
+        Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth(), bitmap.getHeight(), true);
+
+        //rows = cols = (int) Math.sqrt(chunkNumbers);
+        rows = 4;
+        cols = 6;
+        chunkHeight = bitmap.getHeight()/rows;
+        chunkWidth = bitmap.getWidth()/cols;
+
+        int yCoord = 0;
+        for(int x=0; x<rows; x++){
+            int xCoord = 0;
+            for(int y=0; y<cols; y++){
+                piezas.add(Bitmap.createBitmap(scaledBitmap, xCoord, yCoord, chunkWidth, chunkHeight));
+                xCoord += chunkWidth;
+            }
+            yCoord += chunkHeight;
+        }
+
+        Collections.shuffle(piezas);
+
+    }
+
 
     @Override
     public void onClick(View v) {

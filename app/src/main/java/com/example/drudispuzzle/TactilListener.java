@@ -14,8 +14,8 @@ public class TactilListener implements View.OnTouchListener {
     private float yDelta;
     private PuzzleActivity activity;
 
-    public TactilListener(PuzzleActivity activity) {
-        this.activity = activity;
+    public TactilListener(PartidaSinFragmentar2 activity) {
+        //this.activity = activity;
     }
 
     @Override
