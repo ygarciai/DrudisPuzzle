@@ -53,11 +53,11 @@ public class PuzzleActivity extends AppCompatActivity {
                     configurar(assetName, imageView); //configura el tamaño de la imagen elegida y el marco de la vista
                 }
                 pieces = splitImage(); //divide la imagen en partes
-                TactilListener tactilListener = new TactilListener(PuzzleActivity.this);
+                //TactilListener tactilListener = new TactilListener(PuzzleActivity.this);
                 // ordena de manera aleatoria las piezas
                 Collections.shuffle(pieces);
                 for (PuzzlePiece piece : pieces) {
-                    piece.setOnTouchListener(tactilListener);
+                    //piece.setOnTouchListener(tactilListener);
                     layout.addView(piece);
                     // randomize position, on the bottom of the screen
                     RelativeLayout.LayoutParams lParams = (RelativeLayout.LayoutParams) piece.getLayoutParams();
