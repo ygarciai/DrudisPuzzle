@@ -75,7 +75,7 @@ public class SeleccionTipoPuzzle  extends AppCompatActivity implements View.OnCl
                 startActivityForResult(intent, 0);
                 break;
             case R.id.button_ImagenesSeg:
-                Intent intent1 = new Intent(view.getContext(), SeleccionTipoPuzzle.class);
+                Intent intent1 = new Intent(view.getContext(), PartidaFragmentada.class);
                 startActivityForResult(intent1, 0);
                 break;
         }
