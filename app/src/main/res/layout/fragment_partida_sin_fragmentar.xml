@@ -30,8 +30,8 @@
 
                 <ImageView
                     android:id="@+id/imageView_fondoPantalla"
-                    android:layout_width="469dp"
-                    android:layout_height="403dp"
+                    android:layout_width="174dp"
+                    android:layout_height="122dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
