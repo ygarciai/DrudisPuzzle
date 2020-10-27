@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">RompeCabezas</string>
+    <string name="app_name">Puzzle</string>
+
     <string name="textoinicio">Bienvenido al juego</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

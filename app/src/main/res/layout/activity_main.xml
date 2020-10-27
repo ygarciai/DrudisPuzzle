@@ -7,6 +7,10 @@
     android:background="#908695"
     tools:context=".MainActivity">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
     <ImageView
         android:id="@+id/logo"
         android:layout_width="240dp"

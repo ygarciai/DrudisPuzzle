@@ -42,9 +42,9 @@ public class ElegirPuzzle extends AppCompatActivity implements View.OnClickListe
         //datos = parametros.getString("nombrejugador");
 
         if(datos!=null){
-            nombre.setText("Hola, "+ datos + "! Elige un Rompecabezas!" );
+            nombre.setText("Hola, "+ datos + "! Elige un Puzzle!" );
         }else{
-            nombre.setText("Hola de nuevo! Elige otro Rompecabezas!" ) ;
+            nombre.setText("Hola de nuevo! Elige otro Puzzle!" ) ;
         }
         Bundle puntaje = this.getIntent().getExtras();
         if(puntaje!=null){
