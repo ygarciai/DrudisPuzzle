@@ -15,6 +15,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.solver.state.State;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.text.Layout;
@@ -52,6 +53,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     private static final String ARG_PARAM2 = "param2";
 
     ImageView i1;
+    ImageView i0;
     int nivel;
 
     public static List<Bitmap> piezas;
@@ -94,14 +96,25 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
 
     private void inicioPartida(int nivel, ArrayList<Uri> listaImagenes) {
         GridLayout layout = (GridLayout) findViewById(R.id.secondLinearLayout);
+        GridLayout layout2 = (GridLayout) findViewById(R.id.thirdLinearLayout);
         if (nivel == 1){
+
             i1.setImageURI(listaImagenes.get(0));
+
+            i0.setImageURI();
+            //BitmapDrawable drawableCuboBlanco = (BitmapDrawable) i0.getDrawable();
+            //Bitmap bitmapCuboBlanco = drawableCuboBlanco.getBitmap();
+
             splitImage(i1, numberPieces);
             layout.setColumnCount(cols);
+            layout2.setColumnCount(cols);
             for(Bitmap piece : piezas) {
                 ImageView iv = new ImageView(getApplicationContext());
+                ImageView cuboVacio = new ImageView(getApplicationContext());
                 iv.setImageBitmap(piece);
                 layout.addView(iv);
+                cuboVacio.setImageBitmap(piece);
+                layout2.addView(cuboVacio);
             }
         }else if (nivel==2){
             i1.setImageURI(listaImagenes.get(1));
