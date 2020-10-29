@@ -2,6 +2,7 @@ package com.example.drudispuzzle;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -55,10 +56,13 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     ImageView i1;
     ImageView i0;
     int nivel;
+    Bitmap bitmapCuboBlanco;
 
     public static List<Bitmap> piezas;
+    public static List<Bitmap> piezasCubo;
     int numberPieces = 24;
     int rows, cols;
+    int chunkHeight,chunkWidth;
 
     public PartidaSinFragmentar() {
         // Required empty public constructor
@@ -97,23 +101,27 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     private void inicioPartida(int nivel, ArrayList<Uri> listaImagenes) {
         GridLayout layout = (GridLayout) findViewById(R.id.secondLinearLayout);
         GridLayout layout2 = (GridLayout) findViewById(R.id.thirdLinearLayout);
-        if (nivel == 1){
 
+        if (nivel == 1){
             i1.setImageURI(listaImagenes.get(0));
 
-            i0.setImageURI();
-            //BitmapDrawable drawableCuboBlanco = (BitmapDrawable) i0.getDrawable();
-            //Bitmap bitmapCuboBlanco = drawableCuboBlanco.getBitmap();
-
             splitImage(i1, numberPieces);
+            //crearCubo(bm, numberPieces);
             layout.setColumnCount(cols);
             layout2.setColumnCount(cols);
+
+            Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.fondoblanco);
+            Bitmap bmCopy = bm.copy(Bitmap.Config.ARGB_8888,true);
+
+            bmCopy.setWidth(chunkWidth);
+            bmCopy.setHeight(chunkHeight);
+
             for(Bitmap piece : piezas) {
                 ImageView iv = new ImageView(getApplicationContext());
                 ImageView cuboVacio = new ImageView(getApplicationContext());
                 iv.setImageBitmap(piece);
+                cuboVacio.setImageBitmap(bmCopy);
                 layout.addView(iv);
-                cuboVacio.setImageBitmap(piece);
                 layout2.addView(cuboVacio);
             }
         }else if (nivel==2){
@@ -129,10 +137,6 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     }
 
     private void splitImage(ImageView image, int chunkNumbers) {
-        //For height and width of the small image chunks
-        int chunkHeight,chunkWidth;
-
-        //To store all the small image chunks in bitmap format in this list
         piezas = new ArrayList<>(chunkNumbers);
 
         //Getting the scaled bitmap of the source image
