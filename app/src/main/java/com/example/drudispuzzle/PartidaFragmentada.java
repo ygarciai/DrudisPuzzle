@@ -139,10 +139,10 @@ public class PartidaFragmentada extends AppCompatActivity {
             }
         }
 
-    private static void isSolved() {
+    private static boolean isSolved() {
         boolean solved = false;
 
-        for (int i = 0, i < tileList.length; i++) {
+        for (int i = 0; i < tileList.length; i++) {
             if (tileList[i].equals(String.valueOf(i))) {
                 solved =true;
             } else {
