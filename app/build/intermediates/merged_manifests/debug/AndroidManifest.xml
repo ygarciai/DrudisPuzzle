@@ -42,6 +42,7 @@
         <activity android:name="com.example.drudispuzzle.ElegirImagenSinFragmentar2" />
         <activity android:name="com.example.drudispuzzle.PartidaSinFragmentar" />
         <activity android:name="com.example.drudispuzzle.PartidaSinFragmentar2" />
+        <activity android:name="com.example.drudispuzzle.PartidaFragmentada" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
