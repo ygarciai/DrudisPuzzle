@@ -53,6 +53,8 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     int level, rows, cols, chunkHeight, chunkWidth;
     ArrayList<Uri> imageList;
 
+
+
     public PartidaSinFragmentar() {
         // Required empty public constructor
     }
@@ -194,6 +196,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                 emptyView.setAlpha((float) 0.1);
                 emptyView.setOnDragListener(this);
                 layout2.addView(emptyView);
+
             }
         } else if (level==6){
 
