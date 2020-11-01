@@ -1,42 +1,32 @@
 package com.example.drudispuzzle;
 
-import android.annotation.SuppressLint;
+import android.content.ClipData;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.graphics.Point;
-import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.pdf.PdfDocument;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.solver.state.State;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import android.text.Layout;
-import android.view.LayoutInflater;
+import android.text.method.Touch;
+import android.util.Log;
+import android.view.DragEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Chronometer;
-import android.widget.FrameLayout;
 import android.widget.GridLayout;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Random;
 
 import static java.lang.StrictMath.abs;
 
@@ -46,23 +36,20 @@ import static java.lang.StrictMath.abs;
  * Use the {@link PartidaSinFragmentar#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PartidaSinFragmentar extends AppCompatActivity implements View.OnClickListener{
+public class PartidaSinFragmentar extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener, View.OnDragListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String LOGCAT = null;
+    private List<Bitmap> pieces;
+    private List<Integer> indexArray;
 
     ImageView i1;
-    ImageView i0;
-    int nivel;
-    Bitmap bitmapCuboBlanco;
 
-    public static List<Bitmap> piezas;
-    public static List<Bitmap> piezasCubo;
-    int numberPieces = 24;
-    int rows, cols;
-    int chunkHeight,chunkWidth;
+    int numberPieces;
+    int level, rows, cols, chunkHeight, chunkWidth;
 
     public PartidaSinFragmentar() {
         // Required empty public constructor
@@ -89,84 +76,146 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_partida_sin_fragmentar);
-        nivel=1;
+        level = 1;
 
-        ArrayList<Uri> listaImagenes = (ArrayList<Uri>) getIntent().getSerializableExtra("imagenesSeleccionadasUri");
+        ArrayList<Uri> imageList = (ArrayList<Uri>) getIntent().getSerializableExtra("imagenesSeleccionadasUri");
         final Chronometer myChronometer = findViewById(R.id.chronometer);
         myChronometer.start();
         i1 = findViewById(R.id.imageView_fondoPantalla);
-        inicioPartida(nivel, listaImagenes);
+        initGame(level, imageList);
    }
 
-    private void inicioPartida(int nivel, ArrayList<Uri> listaImagenes) {
-        GridLayout layout = (GridLayout) findViewById(R.id.secondLinearLayout);
-        GridLayout layout2 = (GridLayout) findViewById(R.id.thirdLinearLayout);
+    private void initGame(int level, ArrayList<Uri> imageList) {
+        GridLayout layout = findViewById(R.id.secondLinearLayout);
+        GridLayout layout2 = findViewById(R.id.thirdLinearLayout);
 
-        if (nivel == 1){
-            i1.setImageURI(listaImagenes.get(0));
+        if (level == 1){
+            i1.setImageURI(imageList.get(0));
 
-            splitImage(i1, numberPieces);
-            //crearCubo(bm, numberPieces);
+            splitImage(i1);
             layout.setColumnCount(cols);
             layout2.setColumnCount(cols);
 
-            Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.fondoblanco);
-            Bitmap bmCopy = bm.copy(Bitmap.Config.ARGB_8888,true);
-
-            bmCopy.setWidth(chunkWidth);
-            bmCopy.setHeight(chunkHeight);
-
-            for(Bitmap piece : piezas) {
+            for(int i = 0; i < indexArray.size(); i++) {
+                Bitmap piece = pieces.get(indexArray.get(i));
                 ImageView iv = new ImageView(getApplicationContext());
-                ImageView cuboVacio = new ImageView(getApplicationContext());
                 iv.setImageBitmap(piece);
-                cuboVacio.setImageBitmap(bmCopy);
+                iv.setOnTouchListener(this);
                 layout.addView(iv);
-                layout2.addView(cuboVacio);
+
+                ImageView emptyView = new ImageView(getApplicationContext());
+                emptyView.setImageBitmap(pieces.get(i));
+                emptyView.setAlpha((float) 0.1);
+                emptyView.setOnDragListener(this);
+                layout2.addView(emptyView);
             }
-        }else if (nivel==2){
-            i1.setImageURI(listaImagenes.get(1));
-        }else if (nivel==3){
-            i1.setImageURI(listaImagenes.get(2));
-        }else if (nivel==4){
-            i1.setImageURI(listaImagenes.get(3));
-        }else if (nivel==5){
-            i1.setImageURI(listaImagenes.get(4));
+        } else if (level==2) {
+            i1.setImageURI(imageList.get(1));
+        } else if (level==3) {
+            i1.setImageURI(imageList.get(2));
+        } else if (level==4) {
+            i1.setImageURI(imageList.get(3));
+        } else if (level==5) {
+            i1.setImageURI(imageList.get(4));
         }
 
     }
 
-    private void splitImage(ImageView image, int chunkNumbers) {
-        piezas = new ArrayList<>(chunkNumbers);
+    private void splitImage(ImageView image) {
+        pieces = new ArrayList<>();
 
-        //Getting the scaled bitmap of the source image
         BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth(), bitmap.getHeight(), true);
 
-        //rows = cols = (int) Math.sqrt(chunkNumbers);
-        rows = 4;
-        cols = 6;
+        rows = 2;
+        cols = 2;
         chunkHeight = bitmap.getHeight()/rows;
         chunkWidth = bitmap.getWidth()/cols;
 
         int yCoord = 0;
-        for(int x=0; x<rows; x++){
+        for(int x = 0; x < rows; x++){
             int xCoord = 0;
-            for(int y=0; y<cols; y++){
-                piezas.add(Bitmap.createBitmap(scaledBitmap, xCoord, yCoord, chunkWidth, chunkHeight));
+            for(int y = 0; y < cols; y++){
+                pieces.add(Bitmap.createBitmap(scaledBitmap, xCoord, yCoord, chunkWidth, chunkHeight));
                 xCoord += chunkWidth;
             }
             yCoord += chunkHeight;
         }
 
-        Collections.shuffle(piezas);
+        int count = 0;
+        indexArray = new ArrayList<>();
+        for(Bitmap piece : pieces) {
+            indexArray.add(count);
+            count++;
+        }
 
+        Collections.shuffle(indexArray);
+        numberPieces = pieces.size();
     }
 
+    private Bitmap emptyChunk() {
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.fondoblanco);
+        Bitmap bmCopy = Bitmap.createScaledBitmap(bitmap, chunkWidth, chunkHeight, false);
+        bmCopy.setWidth(chunkWidth);
+        bmCopy.setHeight(chunkHeight);
+        return bmCopy;
+    }
 
     @Override
-    public void onClick(View v) {
-
+    public void onClick(View view) {
+        ImageView imageView = (ImageView) view;
+        Bitmap bitmap = emptyChunk();
+        imageView.setImageBitmap(bitmap);
     }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+            View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
+            view.startDragAndDrop(null, shadowBuilder, view, 0);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean onDrag(View view, DragEvent dragEvent) {
+        int action = dragEvent.getAction();
+        switch (action) {
+            case DragEvent.ACTION_DRAG_STARTED:
+                Log.d(LOGCAT, "Drag event started");
+                break;
+            case DragEvent.ACTION_DRAG_ENTERED:
+                Log.d(LOGCAT, "Drag event entered into " + view.toString());
+                break;
+            case DragEvent.ACTION_DRAG_EXITED:
+                Log.d(LOGCAT, "Drag event exited from " + view.toString());
+                break;
+            case DragEvent.ACTION_DROP:
+                Log.d(LOGCAT, "Dropped");
+                View puzzleView = (View) dragEvent.getLocalState();
+                ImageView puzzleImage = (ImageView) puzzleView;
+                ImageView containerImage = (ImageView) view;
+                Bitmap puzzleBitmap = ((BitmapDrawable) puzzleImage.getDrawable()).getBitmap();
+                Bitmap containerBitmap = ((BitmapDrawable) containerImage.getDrawable()).getBitmap();
+                if(puzzleBitmap == containerBitmap) {
+                    puzzleView.setVisibility(View.INVISIBLE);
+                    containerImage.setAlpha((float) 1);
+                    numberPieces--;
+                }
+                if(numberPieces == 0) {
+
+                }
+                break;
+            case DragEvent.ACTION_DRAG_ENDED:
+                Log.d(LOGCAT, "Drag ended");
+                break;
+            default:
+                break;
+        }
+        return true;
+    }
+
 }
