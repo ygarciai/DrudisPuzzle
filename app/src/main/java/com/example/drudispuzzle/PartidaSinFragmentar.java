@@ -47,7 +47,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     private List<Bitmap> pieces;
     private List<Integer> indexArray;
 
-    ImageView i1,i2,i3,i4,i5;
+    ImageView i1;
 
     int numberPieces;
     int level, rows, cols, chunkHeight, chunkWidth;
@@ -195,6 +195,8 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                 emptyView.setOnDragListener(this);
                 layout2.addView(emptyView);
             }
+        } else if (level==6){
+
         }
 
     }
@@ -296,5 +298,4 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
         }
         return true;
     }
-
 }
