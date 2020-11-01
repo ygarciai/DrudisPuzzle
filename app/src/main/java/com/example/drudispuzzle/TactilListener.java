@@ -3,6 +3,7 @@ package com.example.drudispuzzle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridLayout;
 import android.widget.RelativeLayout;
 
 import static java.lang.Math.pow;
@@ -18,6 +19,10 @@ public class TactilListener implements View.OnTouchListener {
         //this.activity = activity;
     }
 
+    public TactilListener() {
+
+    }
+
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
         float x = motionEvent.getRawX();
@@ -30,12 +35,14 @@ public class TactilListener implements View.OnTouchListener {
 
         final double tolerancia = sqrt(pow(view.getWidth(), 2) + pow(view.getHeight(), 2)) / 10;
 
-        PuzzlePiece pieza = (PuzzlePiece) view;
-        if (!pieza.canMove) {
+
+        PuzzlePiece piece = (PuzzlePiece) view;
+        if (!piece.canMove) {
             return true;
         }
 
-        RelativeLayout.LayoutParams lParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
+        //RelativeLayout.LayoutParams lParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
+        GridLayout.LayoutParams lParams = (GridLayout.LayoutParams) view.getLayoutParams();
         switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
             //la pieza sale al frente de las otras cuando se toca, en caso de que quede
             // parcialmente oscurecida por otras piezas, y se envíe a la parte posterior de la pila
@@ -43,7 +50,7 @@ public class TactilListener implements View.OnTouchListener {
             case MotionEvent.ACTION_DOWN:
                 xDelta = x - lParams.leftMargin;
                 yDelta = y - lParams.topMargin;
-                pieza.bringToFront();
+                piece.bringToFront();
                 break;
             case MotionEvent.ACTION_MOVE:
                 lParams.leftMargin = (int) (x - xDelta);
@@ -51,14 +58,14 @@ public class TactilListener implements View.OnTouchListener {
                 view.setLayoutParams(lParams);
                 break;
             case MotionEvent.ACTION_UP:
-                int xDiff = abs(pieza.xCoord - lParams.leftMargin);
-                int yDiff = abs(pieza.yCoord - lParams.topMargin);
+                int xDiff = abs(piece.xCoord - lParams.leftMargin);
+                int yDiff = abs(piece.yCoord - lParams.topMargin);
                 if (xDiff <= tolerancia && yDiff <= tolerancia) {
-                    lParams.leftMargin = pieza.xCoord;
-                    lParams.topMargin = pieza.yCoord;
-                    pieza.setLayoutParams(lParams);
-                    pieza.canMove = false;
-                    enviarAtras(pieza);
+                    lParams.leftMargin = piece.xCoord;
+                    lParams.topMargin = piece.yCoord;
+                    piece.setLayoutParams(lParams);
+                    piece.canMove = false;
+                    enviarAtras(piece);
                     activity.checkGameOver(); //se chequea estado del juego
                 }
                 break;
