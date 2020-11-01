@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
 
 import static java.lang.StrictMath.abs;
 
@@ -46,10 +47,11 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     private List<Bitmap> pieces;
     private List<Integer> indexArray;
 
-    ImageView i1;
+    ImageView i1,i2,i3,i4,i5;
 
     int numberPieces;
     int level, rows, cols, chunkHeight, chunkWidth;
+    ArrayList<Uri> imageList;
 
     public PartidaSinFragmentar() {
         // Required empty public constructor
@@ -78,7 +80,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
         setContentView(R.layout.fragment_partida_sin_fragmentar);
         level = 1;
 
-        ArrayList<Uri> imageList = (ArrayList<Uri>) getIntent().getSerializableExtra("imagenesSeleccionadasUri");
+        //ArrayList<Uri> imageList = (ArrayList<Uri>) getIntent().getSerializableExtra("imagenesSeleccionadasUri");
         final Chronometer myChronometer = findViewById(R.id.chronometer);
         myChronometer.start();
         i1 = findViewById(R.id.imageView_fondoPantalla);
@@ -86,11 +88,14 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
    }
 
     private void initGame(int level, ArrayList<Uri> imageList) {
+        ArrayList<Uri> imageList1 = (ArrayList<Uri>) getIntent().getSerializableExtra("imagenesSeleccionadasUri");
         GridLayout layout = findViewById(R.id.secondLinearLayout);
         GridLayout layout2 = findViewById(R.id.thirdLinearLayout);
+        layout.removeAllViews();
+        layout2.removeAllViews();
 
         if (level == 1){
-            i1.setImageURI(imageList.get(0));
+            i1.setImageURI(imageList1.get(0));
 
             splitImage(i1);
             layout.setColumnCount(cols);
@@ -110,13 +115,86 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                 layout2.addView(emptyView);
             }
         } else if (level==2) {
-            i1.setImageURI(imageList.get(1));
+
+            i1.setImageURI(imageList1.get(1));
+
+            splitImage(i1);
+            layout.setColumnCount(cols);
+            layout2.setColumnCount(cols);
+
+            for(int i = 0; i < indexArray.size(); i++) {
+                Bitmap piece = pieces.get(indexArray.get(i));
+                ImageView iv = new ImageView(getApplicationContext());
+                iv.setImageBitmap(piece);
+                iv.setOnTouchListener(this);
+                layout.addView(iv);
+
+                ImageView emptyView = new ImageView(getApplicationContext());
+                emptyView.setImageBitmap(pieces.get(i));
+                emptyView.setAlpha((float) 0.1);
+                emptyView.setOnDragListener(this);
+                layout2.addView(emptyView);
+            }
+
         } else if (level==3) {
-            i1.setImageURI(imageList.get(2));
+            i1.setImageURI(imageList1.get(2));
+            splitImage(i1);
+            layout.setColumnCount(cols);
+            layout2.setColumnCount(cols);
+
+            for(int i = 0; i < indexArray.size(); i++) {
+                Bitmap piece = pieces.get(indexArray.get(i));
+                ImageView iv = new ImageView(getApplicationContext());
+                iv.setImageBitmap(piece);
+                iv.setOnTouchListener(this);
+                layout.addView(iv);
+
+                ImageView emptyView = new ImageView(getApplicationContext());
+                emptyView.setImageBitmap(pieces.get(i));
+                emptyView.setAlpha((float) 0.1);
+                emptyView.setOnDragListener(this);
+                layout2.addView(emptyView);
+            }
         } else if (level==4) {
-            i1.setImageURI(imageList.get(3));
+            i1.setImageURI(imageList1.get(3));
+
+            splitImage(i1);
+            layout.setColumnCount(cols);
+            layout2.setColumnCount(cols);
+
+            for(int i = 0; i < indexArray.size(); i++) {
+                Bitmap piece = pieces.get(indexArray.get(i));
+                ImageView iv = new ImageView(getApplicationContext());
+                iv.setImageBitmap(piece);
+                iv.setOnTouchListener(this);
+                layout.addView(iv);
+
+                ImageView emptyView = new ImageView(getApplicationContext());
+                emptyView.setImageBitmap(pieces.get(i));
+                emptyView.setAlpha((float) 0.1);
+                emptyView.setOnDragListener(this);
+                layout2.addView(emptyView);
+            }
         } else if (level==5) {
-            i1.setImageURI(imageList.get(4));
+            i1.setImageURI(imageList1.get(4));
+
+            splitImage(i1);
+            layout.setColumnCount(cols);
+            layout2.setColumnCount(cols);
+
+            for(int i = 0; i < indexArray.size(); i++) {
+                Bitmap piece = pieces.get(indexArray.get(i));
+                ImageView iv = new ImageView(getApplicationContext());
+                iv.setImageBitmap(piece);
+                iv.setOnTouchListener(this);
+                layout.addView(iv);
+
+                ImageView emptyView = new ImageView(getApplicationContext());
+                emptyView.setImageBitmap(pieces.get(i));
+                emptyView.setAlpha((float) 0.1);
+                emptyView.setOnDragListener(this);
+                layout2.addView(emptyView);
+            }
         }
 
     }
@@ -206,7 +284,8 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                     numberPieces--;
                 }
                 if(numberPieces == 0) {
-
+                    level=level+1;
+                    initGame(level,imageList);
                 }
                 break;
             case DragEvent.ACTION_DRAG_ENDED:
