@@ -1,11 +1,14 @@
 package com.example.drudispuzzle;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Context;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -72,11 +75,11 @@ public class PartidaFragmentada extends AppCompatActivity {
         }*/
 
     }
-
+ 
     private void setDimensions() {
         ViewTreeObserver vto = mGridView.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
+           @Override
             public void onGlobalLayout() {
                 mGridView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 int displayWidth = mGridView.getMeasuredWidth();
