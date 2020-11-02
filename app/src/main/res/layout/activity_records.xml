@@ -8,14 +8,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/campoTime"
-        android:layout_width="356dp"
-        android:layout_height="355dp"
+        android:layout_width="347dp"
+        android:layout_height="492dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="88dp"
+        android:layout_marginBottom="92dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
@@ -34,38 +33,47 @@
             android:id="@+id/textView3"
             android:layout_width="117dp"
             android:layout_height="32dp"
-            android:text="Insert your Name"
-            tools:layout_editor_absoluteX="113dp"
-            tools:layout_editor_absoluteY="116dp" />
-
-        <EditText
-            android:id="@+id/editTextTime"
-            android:layout_width="115dp"
-            android:layout_height="32dp"
             android:layout_marginTop="32dp"
-            android:ems="10"
-            android:inputType="time"
-            app:layout_constraintTop_toBottomOf="@+id/textView5"
-            tools:layout_editor_absoluteX="113dp" />
+            android:text="Insert your Name"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            tools:layout_editor_absoluteX="112dp" />
 
         <EditText
             android:id="@+id/campoName"
             android:layout_width="117dp"
             android:layout_height="36dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="24dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Name"
             app:layout_constraintTop_toBottomOf="@+id/textView3"
-            tools:layout_editor_absoluteX="113dp" />
+            tools:layout_editor_absoluteX="112dp" />
 
         <TextView
             android:id="@+id/textView5"
             android:layout_width="117dp"
             android:layout_height="28dp"
             android:layout_marginTop="32dp"
-            android:text="Your time is"
+            android:text="Your time:"
             app:layout_constraintTop_toBottomOf="@+id/campoName"
-            tools:layout_editor_absoluteX="114dp" />
+            tools:layout_editor_absoluteX="112dp" />
+
+        <TextView
+            android:id="@+id/ViewCrono"
+            android:layout_width="104dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView5"
+            tools:layout_editor_absoluteX="119dp" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Button"
+            app:layout_constraintTop_toBottomOf="@+id/ViewCrono"
+            tools:layout_editor_absoluteX="128dp" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

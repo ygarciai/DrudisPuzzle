@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 
+import java.io.StringBufferInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -196,9 +197,19 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                 emptyView.setAlpha((float) 0.1);
                 emptyView.setOnDragListener(this);
                 layout2.addView(emptyView);
-
             }
+
         } else if (level==6){
+
+            Chronometer myChronometer = findViewById(R.id.chronometer);
+            myChronometer.stop();
+
+
+            String tiempo = myChronometer.getText().toString();
+            
+
+            setContentView(R.layout.activity_records);
+
 
         }
 

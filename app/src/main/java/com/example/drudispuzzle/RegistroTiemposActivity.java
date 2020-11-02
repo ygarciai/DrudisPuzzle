@@ -29,7 +29,7 @@ public class RegistroTiemposActivity extends AppCompatActivity {
     }
 
     public void onClick (View view) {
-       // registroRecords();
+        registroRecords();
         registroRecordsSql();
 
     }
