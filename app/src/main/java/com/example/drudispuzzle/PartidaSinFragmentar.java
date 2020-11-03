@@ -211,8 +211,8 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
         Bitmap bitmap = drawable.getBitmap();
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth(), bitmap.getHeight(), true);
 
-        rows = 2;
-        cols = 2;
+
+
         chunkHeight = bitmap.getHeight()/rows;
         chunkWidth = bitmap.getWidth()/cols;
 

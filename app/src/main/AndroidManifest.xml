@@ -33,6 +33,7 @@
         <activity android:name=".PartidaSinFragmentar"/>
         <activity android:name=".PartidaSinFragmentar2"/>
         <activity android:name=".PartidaFragmentada"/>
+        <activity android:name=".PartidaFragmentada2"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"
