@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.ImageView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,6 +46,8 @@ public class PartidaFragmentada2 extends AppCompatActivity implements View.OnTou
     ImageView i0,i1,i2,i3,i4,i5,i6,i7,i8,i9;
     int rows = 3;
     int cols = 3;
+    private List<Bitmap> pieces;
+    private List<Integer> indexArray;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -117,8 +123,8 @@ public class PartidaFragmentada2 extends AppCompatActivity implements View.OnTou
     }
 
     private void initgame(ImageView i0,ImageView i1,ImageView i2,ImageView i3,ImageView i4,ImageView i5,ImageView i6,ImageView i7,ImageView i8,ImageView i9) {
-        GridLayout layout = findViewById(R.id.secondLinearLayout);
-        GridLayout layout2 = findViewById(R.id.thirdLinearLayout);
+        //GridLayout layout = findViewById(R.id.secondLinearLayout);
+        //GridLayout layout2 = findViewById(R.id.thirdLinearLayout);
 
         BitmapDrawable drawable0 = (BitmapDrawable) i0.getDrawable();
         BitmapDrawable drawable1 = (BitmapDrawable) i1.getDrawable();
@@ -144,66 +150,121 @@ public class PartidaFragmentada2 extends AppCompatActivity implements View.OnTou
         Bitmap bitmap9 = drawable9.getBitmap();
 
         Bitmap scaledBitmap0 = Bitmap.createScaledBitmap(bitmap0, bitmap0.getWidth(), bitmap0.getHeight(), true);
-        Bitmap scaledBitmap1 = Bitmap.createScaledBitmap(bitmap1, bitmap1.getWidth(), bitmap1.getHeight(), true);
-        Bitmap scaledBitmap2 = Bitmap.createScaledBitmap(bitmap2, bitmap2.getWidth(), bitmap2.getHeight(), true);
-        Bitmap scaledBitmap3 = Bitmap.createScaledBitmap(bitmap3, bitmap3.getWidth(), bitmap3.getHeight(), true);
-        Bitmap scaledBitmap4 = Bitmap.createScaledBitmap(bitmap4, bitmap4.getWidth(), bitmap4.getHeight(), true);
-        Bitmap scaledBitmap5 = Bitmap.createScaledBitmap(bitmap5, bitmap5.getWidth(), bitmap5.getHeight(), true);
-        Bitmap scaledBitmap6 = Bitmap.createScaledBitmap(bitmap6, bitmap6.getWidth(), bitmap6.getHeight(), true);
-        Bitmap scaledBitmap7 = Bitmap.createScaledBitmap(bitmap7, bitmap7.getWidth(), bitmap7.getHeight(), true);
-        Bitmap scaledBitmap8 = Bitmap.createScaledBitmap(bitmap8, bitmap8.getWidth(), bitmap8.getHeight(), true);
-        Bitmap scaledBitmap9 = Bitmap.createScaledBitmap(bitmap9, bitmap9.getWidth(), bitmap9.getHeight(), true);
+        Bitmap scaledBitmap1 = Bitmap.createScaledBitmap(bitmap1, 100, 100, true);
+        Bitmap scaledBitmap2 = Bitmap.createScaledBitmap(bitmap2, 100, 100, true);
+        Bitmap scaledBitmap3 = Bitmap.createScaledBitmap(bitmap3, 100, 100, true);
+        Bitmap scaledBitmap4 = Bitmap.createScaledBitmap(bitmap4, 100, 100, true);
+        Bitmap scaledBitmap5 = Bitmap.createScaledBitmap(bitmap5, 100, 100, true);
+        Bitmap scaledBitmap6 = Bitmap.createScaledBitmap(bitmap6, 100, 100, true);
+        Bitmap scaledBitmap7 = Bitmap.createScaledBitmap(bitmap7, 100, 100, true);
+        Bitmap scaledBitmap8 = Bitmap.createScaledBitmap(bitmap8, 100, 100, true);
+        Bitmap scaledBitmap9 = Bitmap.createScaledBitmap(bitmap9, 100, 100, true);
 
 
-        ImageView ii1 = new ImageView(getApplicationContext());
-        ImageView ii2 = new ImageView(getApplicationContext());
-        ImageView ii3 = new ImageView(getApplicationContext());
-        ImageView ii4 = new ImageView(getApplicationContext());
-        ImageView ii5 = new ImageView(getApplicationContext());
-        ImageView ii6 = new ImageView(getApplicationContext());
-        ImageView ii7 = new ImageView(getApplicationContext());
-        ImageView ii8 = new ImageView(getApplicationContext());
-        ImageView ii9 = new ImageView(getApplicationContext());
+        //ImageView ii1 = new ImageView(getApplicationContext());
+        //ImageView ii2 = new ImageView(getApplicationContext());
+        //ImageView ii3 = new ImageView(getApplicationContext());
+        //ImageView ii4 = new ImageView(getApplicationContext());
+        //ImageView ii5 = new ImageView(getApplicationContext());
+        //ImageView ii6 = new ImageView(getApplicationContext());
+        //ImageView ii7 = new ImageView(getApplicationContext());
+        //ImageView ii8 = new ImageView(getApplicationContext());
+        //ImageView ii9 = new ImageView(getApplicationContext());
 
-        ImageView iv = new ImageView(getApplicationContext());
+        //ImageView iv = new ImageView(getApplicationContext());
 
-        iv.setImageBitmap(scaledBitmap1);
-        layout.addView(iv);
-
-
-        iv.setImageBitmap(scaledBitmap2);
-        iv.setOnTouchListener(this);        //layout.addView(iv);
+        //iv.setImageBitmap(scaledBitmap1);
+        //layout.addView(iv);
 
 
-        //layout.setColumnCount(cols);
-
-
-        ii1.setImageBitmap(scaledBitmap1);
-        layout.addView(ii1);
-        ii2.setImageBitmap(scaledBitmap2);
-        layout.addView(ii2);
-        ii3.setImageBitmap(scaledBitmap3);
-        layout.addView(ii3);
-        ii4.setImageBitmap(scaledBitmap4);
-        layout.addView(ii4);
-        ii5.setImageBitmap(scaledBitmap5);
-        layout.addView(ii5);
-        ii6.setImageBitmap(scaledBitmap6);
-        layout.addView(ii6);
-        ii7.setImageBitmap(scaledBitmap7);
-        layout.addView(ii7);
-        ii8.setImageBitmap(scaledBitmap8);
-        layout.addView(ii8);
-        ii9.setImageBitmap(scaledBitmap9);
-        layout.addView(ii9);
+        //iv.setImageBitmap(scaledBitmap2);
+        //iv.setOnTouchListener(this);        //layout.addView(iv);
 
 
 
-        ImageView emptyView = new ImageView(getApplicationContext());
-        emptyView.setImageBitmap(scaledBitmap0);
-        emptyView.setAlpha((float) 0.1);
-        emptyView.setOnDragListener(this);
-        layout2.addView(emptyView);
+
+
+        //ii1.setImageBitmap(scaledBitmap1);
+        //layout.addView(ii1);
+        //ii2.setImageBitmap(scaledBitmap2);
+        //layout.addView(ii2);
+        //ii3.setImageBitmap(scaledBitmap3);
+        //layout.addView(ii3);
+        //ii4.setImageBitmap(scaledBitmap4);
+        //layout.addView(ii4);
+        //ii5.setImageBitmap(scaledBitmap5);
+        //layout.addView(ii5);
+        //ii6.setImageBitmap(scaledBitmap6);
+        //layout.addView(ii6);
+        //ii7.setImageBitmap(scaledBitmap7);
+        //layout.addView(ii7);
+        //ii8.setImageBitmap(scaledBitmap8);
+        //layout.addView(ii8);
+        //ii9.setImageBitmap(scaledBitmap9);
+        //layout.addView(ii9);
+
+
+
+        //ImageView emptyView = new ImageView(getApplicationContext());
+        //emptyView.setImageBitmap(scaledBitmap0);
+        //emptyView.setAlpha((float) 0.1);
+        //emptyView.setOnDragListener(this);
+        //layout2.addView(emptyView);
+
+        ArrayList<Uri> imageList1 = (ArrayList<Uri>) getIntent().getSerializableExtra("imagenesSeleccionadasUri");
+        GridLayout layout = findViewById(R.id.secondLinearLayout);
+        GridLayout layout2 = findViewById(R.id.thirdLinearLayout);
+        layout.removeAllViews();
+        layout.setColumnCount(cols);
+        layout.setRowCount(rows);
+
+        layout2.removeAllViews();
+        layout2.setColumnCount(cols);
+        layout2.setRowCount(rows);
+
+
+        //inicializarListaImagenes;
+        List<Drawable> listaPiezas = new ArrayList<>();
+        pieces = new ArrayList<>();
+        listaPiezas.add(drawable1);
+        listaPiezas.add(drawable2);
+        listaPiezas.add(drawable3);
+        listaPiezas.add(drawable4);
+        listaPiezas.add(drawable5);
+        listaPiezas.add(drawable6);
+        listaPiezas.add(drawable7);
+        listaPiezas.add(drawable8);
+        listaPiezas.add(drawable9);
+        pieces.add(scaledBitmap1);
+        pieces.add(scaledBitmap2);
+        pieces.add(scaledBitmap3);
+        pieces.add(scaledBitmap4);
+        pieces.add(scaledBitmap5);
+        pieces.add(scaledBitmap6);
+        pieces.add(scaledBitmap7);
+        pieces.add(scaledBitmap8);
+        pieces.add(scaledBitmap9);
+
+        int count = 0;
+        indexArray = new ArrayList<>();
+        for(Bitmap piece : pieces) {
+            indexArray.add(count);
+            count++;
+        }
+
+        for(int i = 0; i < indexArray.size(); i++) {
+            Bitmap piece = pieces.get(indexArray.get(i));
+            ImageView iv = new ImageView(getApplicationContext());
+            iv.setImageBitmap(piece);
+            iv.setOnTouchListener(this);
+            layout.addView(iv);
+
+            ImageView emptyView = new ImageView(getApplicationContext());
+            emptyView.setImageBitmap(pieces.get(i));
+            emptyView.setAlpha((float) 0.1);
+            emptyView.setOnDragListener(this);
+            layout2.addView(emptyView);
+        }
 
 
 

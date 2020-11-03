@@ -103,6 +103,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
             layout.setColumnCount(cols);
             layout2.setColumnCount(cols);
 
+
             for(int i = 0; i < indexArray.size(); i++) {
                 Bitmap piece = pieces.get(indexArray.get(i));
                 ImageView iv = new ImageView(getApplicationContext());
