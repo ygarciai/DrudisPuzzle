@@ -1,5 +1,6 @@
 package com.example.drudispuzzle;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -22,6 +23,7 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -48,6 +50,7 @@ public class PartidaFragmentada2 extends AppCompatActivity implements View.OnTou
     int cols = 3;
     private List<Bitmap> pieces;
     private List<Integer> indexArray;
+    int numberPieces=9;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -251,7 +254,7 @@ public class PartidaFragmentada2 extends AppCompatActivity implements View.OnTou
             indexArray.add(count);
             count++;
         }
-
+        Collections.shuffle(indexArray);
         for(int i = 0; i < indexArray.size(); i++) {
             Bitmap piece = pieces.get(indexArray.get(i));
             ImageView iv = new ImageView(getApplicationContext());
@@ -264,6 +267,7 @@ public class PartidaFragmentada2 extends AppCompatActivity implements View.OnTou
             emptyView.setAlpha((float) 0.1);
             emptyView.setOnDragListener(this);
             layout2.addView(emptyView);
+
         }
 
 
@@ -283,7 +287,6 @@ public class PartidaFragmentada2 extends AppCompatActivity implements View.OnTou
     @Override
     public boolean onDrag(View view, DragEvent dragEvent) {
         int action = dragEvent.getAction();
-        int numberPieces=9;
         switch (action) {
             case DragEvent.ACTION_DRAG_STARTED:
                 Log.d(LOGCAT, "Drag event started");
@@ -307,6 +310,8 @@ public class PartidaFragmentada2 extends AppCompatActivity implements View.OnTou
                     numberPieces--;
                 }
                 if(numberPieces == 0) {
+                    Intent intent1 = new Intent(view.getContext(), SelectionActivity.class);
+                    startActivityForResult(intent1, 0);
                 }
                 break;
             case DragEvent.ACTION_DRAG_ENDED:
