@@ -91,8 +91,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.botoninicio:
                 Intent intent = new Intent(view.getContext(), SelectionActivity.class);
                 startActivityForResult(intent, 0);
-
-
                 break;
         }
 
