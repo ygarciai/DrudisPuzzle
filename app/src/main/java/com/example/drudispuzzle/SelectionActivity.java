@@ -89,6 +89,5 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
                 startActivityForResult(intent3, 0);
                 break;
         }
-
     }
 }

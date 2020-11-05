@@ -1,14 +1,13 @@
 package com.example.drudispuzzle;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.content.Context;
 
-import android.os.Build;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
-import android.widget.RelativeLayout;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class PartidaFragmentada extends AppCompatActivity {
+    ImageView ifondo;
     private static final int COLUMNS = 3;
     private static final int DIMENSIONS = COLUMNS * COLUMNS;
 
@@ -42,14 +42,19 @@ public class PartidaFragmentada extends AppCompatActivity {
     }
 
     private void init() {
-        mGridView = this.<GestureDetectGridView>findViewById(R.id.parent);
+
+        int drawableResourceId = this.getResources().getIdentifier("gollumentero", "drawable", this.getPackageName());
+        ifondo = (ImageView) findViewById(R.id.imageView_fondoPantalla2);
+        Drawable res = getResources().getDrawable(drawableResourceId);
+        ifondo.setImageResource(drawableResourceId);
+        //mGridView = this.<GestureDetectGridView>findViewById(R.id.parent);
        // mGridView.setNumColumns(COLUMNS);
 
-        tileList = new String[DIMENSIONS];
-        for (int i = 0; i < DIMENSIONS; i++) {
-            tileList[i] = String.valueOf(i);
+        //tileList = new String[DIMENSIONS];
+        //for (int i = 0; i < DIMENSIONS; i++) {
+        //    tileList[i] = String.valueOf(i);
 
-        }
+        //}
     }
 
     private void scramble() {
@@ -75,11 +80,12 @@ public class PartidaFragmentada extends AppCompatActivity {
         }*/
 
     }
- 
+
     private void setDimensions() {
+        mGridView = this.<GestureDetectGridView>findViewById(R.id.imageView_fondoPantalla2);
         ViewTreeObserver vto = mGridView.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-           @Override
+            @Override
             public void onGlobalLayout() {
                 mGridView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 int displayWidth = mGridView.getMeasuredWidth();
