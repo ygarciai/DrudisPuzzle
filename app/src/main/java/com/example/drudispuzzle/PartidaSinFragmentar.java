@@ -119,7 +119,6 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                 layout2.addView(emptyView);
             }
         } else if (level==2) {
-
             i1.setImageURI(imageList1.get(1));
 
             splitImage(i1);
