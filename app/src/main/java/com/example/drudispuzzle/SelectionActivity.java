@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.drudispuzzle.utilidades.ListaPersonasRecycler;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link SelectionActivity#newInstance} factory method to
@@ -77,7 +79,7 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
                 startActivityForResult(intent, 0);
                 break;
             case R.id.button_ranking:
-                Intent intent1 = new Intent(view.getContext(), Ranking.class);
+                Intent intent1 = new Intent(view.getContext(), ListaPersonasRecycler.class);
                 startActivityForResult(intent1, 0);
                 break;
             case R.id.button_Multiplayer:

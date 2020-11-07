@@ -17,11 +17,17 @@ import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+//import com.example.drudispuzzle.utilidades.RegistroUsuariosActivity;
+
+import com.example.drudispuzzle.utilidades.RegistroUsuariosActivity;
+import com.example.drudispuzzle.utilidades.Utilidades;
 
 import java.io.StringBufferInputStream;
 import java.util.ArrayList;
@@ -51,8 +57,12 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     ImageView i1;
 
     int numberPieces;
-    int level, rows=2, cols=2, chunkHeight, chunkWidth;
+    int level, rows=1, cols=1, chunkHeight, chunkWidth;
+    boolean acabado=false;
     ArrayList<Uri> imageList;
+    RegistroUsuariosActivity Registro;
+    ConexionSQLiteHelper Inicializar;
+
 
 
 
@@ -81,8 +91,9 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_partida_sin_fragmentar);
+        Registro=new RegistroUsuariosActivity();
         level = 1;
-
+        Inicializar=new ConexionSQLiteHelper(getApplicationContext(),"bd_usuarios",null,1);
         //ArrayList<Uri> imageList = (ArrayList<Uri>) getIntent().getSerializableExtra("imagenesSeleccionadasUri");
         final Chronometer myChronometer = findViewById(R.id.chronometer);
         myChronometer.start();
@@ -96,6 +107,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
         GridLayout layout2 = findViewById(R.id.thirdLinearLayout);
         layout.removeAllViews();
         layout2.removeAllViews();
+
 
         if (level == 1){
             i1.setImageURI(imageList1.get(0));
@@ -119,6 +131,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                 layout2.addView(emptyView);
             }
         } else if (level==2) {
+
             i1.setImageURI(imageList1.get(1));
 
             splitImage(i1);
@@ -140,10 +153,14 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
             }
 
         } else if (level==3) {
+
+
+
             i1.setImageURI(imageList1.get(2));
             splitImage(i1);
             layout.setColumnCount(cols);
             layout2.setColumnCount(cols);
+
 
             for(int i = 0; i < indexArray.size(); i++) {
                 Bitmap piece = pieces.get(indexArray.get(i));
@@ -159,6 +176,8 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                 layout2.addView(emptyView);
             }
         } else if (level==4) {
+
+
             i1.setImageURI(imageList1.get(3));
 
             splitImage(i1);
@@ -179,6 +198,9 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                 layout2.addView(emptyView);
             }
         } else if (level==5) {
+
+
+
             i1.setImageURI(imageList1.get(4));
 
             splitImage(i1);
@@ -200,7 +222,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
             }
 
         } else if (level==6){
-
+            acabado=true;
             Chronometer myChronometer = findViewById(R.id.chronometer);
             myChronometer.stop();
 
@@ -209,6 +231,10 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
             
 
             setContentView(R.layout._activity_registro_usuarios);
+            Button btnGuardar = (Button) findViewById(R.id.btnRegistro);
+            btnGuardar.setOnClickListener(this);
+            TextView chronometro = (TextView)findViewById(R.id.campoTimee);
+            chronometro.setText(tiempo);
 
 
         }
@@ -258,9 +284,18 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View view) {
-        ImageView imageView = (ImageView) view;
-        Bitmap bitmap = emptyChunk();
-        imageView.setImageBitmap(bitmap);
+        if (acabado=false){
+            ImageView imageView = (ImageView) view;
+            Bitmap bitmap = emptyChunk();
+            imageView.setImageBitmap(bitmap);
+        }
+        switch (view.getId()) {
+            case R.id.btnRegistro:
+                //Inicializar.onCreate(getContentResolver());
+                Registro.registrarUsuarios();
+                break;
+        }
+
     }
 
     @Override

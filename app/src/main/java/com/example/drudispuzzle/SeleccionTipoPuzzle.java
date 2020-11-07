@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.drudispuzzle.utilidades.Utilidades;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link SeleccionTipoPuzzle#newInstance} factory method to
@@ -65,6 +67,7 @@ public class SeleccionTipoPuzzle  extends AppCompatActivity implements View.OnCl
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_seleccion_tipo_puzzle, container, false);
+
     }
 
     @Override
@@ -80,4 +83,5 @@ public class SeleccionTipoPuzzle  extends AppCompatActivity implements View.OnCl
                 break;
         }
     }
+
 }
