@@ -51,7 +51,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     ImageView i1;
 
     int numberPieces;
-    int level, rows, cols, chunkHeight, chunkWidth;
+    int level, rows=2, cols=2, chunkHeight, chunkWidth;
     ArrayList<Uri> imageList;
 
 
@@ -209,7 +209,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
             String tiempo = myChronometer.getText().toString();
             
 
-            setContentView(R.layout.activity_records);
+            setContentView(R.layout._activity_registro_usuarios);
 
 
         }
