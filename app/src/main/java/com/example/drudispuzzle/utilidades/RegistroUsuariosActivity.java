@@ -52,10 +52,9 @@ public class RegistroUsuariosActivity extends AppCompatActivity {
 
 
     public void registrarUsuarios() {
+
         ConexionSQLiteHelper conn=new ConexionSQLiteHelper(this,"bd_usuarios",null,1);
         SQLiteDatabase db=conn.getWritableDatabase();
-
-
 
         ContentValues values=new ContentValues();
         values.put(Utilidades.CAMPO_NAME, campoNoombre.getText().toString());
