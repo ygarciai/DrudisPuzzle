@@ -1,13 +1,23 @@
 package com.example.drudispuzzle;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.drudispuzzle.adaptadores.ListaPersonasAdapter;
+import com.example.drudispuzzle.entidades.Usuario;
+import com.example.drudispuzzle.utilidades.Utilidades;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +34,10 @@ public class Ranking extends AppCompatActivity {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    ArrayList<Usuario> listaUsuario;
+    RecyclerView recyclerViewUsuarios;
+    ConexionSQLiteHelper conn;
 
     public Ranking() {
         // Required empty public constructor
@@ -49,6 +63,19 @@ public class Ranking extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout._activity_lista_personas_recycler);
+
+        conn=new ConexionSQLiteHelper(getApplicationContext(),"bd_usuarios",null,1);
+
+        listaUsuario=new ArrayList<>();
+
+        recyclerViewUsuarios= (RecyclerView) findViewById(R.id.recyclerJugadores);
+        recyclerViewUsuarios.setLayoutManager(new LinearLayoutManager(this));
+
+        consultarListaPersonas();
+
+        ListaPersonasAdapter adapter=new ListaPersonasAdapter(listaUsuario);
+        recyclerViewUsuarios.setAdapter(adapter);
     }
 
 
@@ -56,5 +83,21 @@ public class Ranking extends AppCompatActivity {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_ranking, container, false);
+    }
+
+    private void consultarListaPersonas() {
+        SQLiteDatabase db=conn.getReadableDatabase();
+
+        Usuario usuario=null;
+
+        Cursor cursor=db.rawQuery("SELECT * FROM "+ Utilidades.TABLA_PLAYER,null);
+
+        while (cursor.moveToNext()){
+            usuario=new Usuario();
+            usuario.setP(cursor.getString(0));
+            usuario.setT(cursor.getString(1));
+
+            listaUsuario.add(usuario);
+        }
     }
 }

@@ -1,6 +1,9 @@
 package com.example.drudispuzzle;
 
 import android.content.ClipData;
+import android.content.ContentValues;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -23,11 +26,14 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 //import com.example.drudispuzzle.utilidades.RegistroUsuariosActivity;
 
 import com.example.drudispuzzle.utilidades.RegistroUsuariosActivity;
 import com.example.drudispuzzle.utilidades.Utilidades;
+
+import org.w3c.dom.Text;
 
 import java.io.StringBufferInputStream;
 import java.util.ArrayList;
@@ -62,6 +68,11 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     ArrayList<Uri> imageList;
     RegistroUsuariosActivity Registro;
     ConexionSQLiteHelper Inicializar;
+    Utilidades utilidades;
+    Chronometer myChronometer;
+    String tiempo;
+    String nombre;
+    TextView nombreIntroducido;
 
 
 
@@ -94,8 +105,11 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
         Registro=new RegistroUsuariosActivity();
         level = 1;
         Inicializar=new ConexionSQLiteHelper(getApplicationContext(),"bd_usuarios",null,1);
+        utilidades=new Utilidades();
+        nombreIntroducido=findViewById(R.id.campoNamee);
         //ArrayList<Uri> imageList = (ArrayList<Uri>) getIntent().getSerializableExtra("imagenesSeleccionadasUri");
         final Chronometer myChronometer = findViewById(R.id.chronometer);
+
         myChronometer.start();
         i1 = findViewById(R.id.imageView_fondoPantalla);
         initGame(level, imageList);
@@ -223,19 +237,19 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
 
         } else if (level==6){
             acabado=true;
-            Chronometer myChronometer = findViewById(R.id.chronometer);
+            myChronometer = findViewById(R.id.chronometer);
             myChronometer.stop();
 
 
-            String tiempo = myChronometer.getText().toString();
+            tiempo = myChronometer.getText().toString();
             
 
             setContentView(R.layout._activity_registro_usuarios);
             Button btnGuardar = (Button) findViewById(R.id.btnRegistro);
-            btnGuardar.setOnClickListener(this);
             TextView chronometro = (TextView)findViewById(R.id.campoTimee);
             chronometro.setText(tiempo);
 
+            btnGuardar.setOnClickListener(this);
 
         }
 
@@ -284,6 +298,8 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View view) {
+        //nombre=nombreIntroducido.getText().toString();
+        nombreIntroducido=findViewById(R.id.campoNamee);
         if (acabado=false){
             ImageView imageView = (ImageView) view;
             Bitmap bitmap = emptyChunk();
@@ -292,8 +308,22 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
         switch (view.getId()) {
             case R.id.btnRegistro:
                 //Inicializar.onCreate(getContentResolver());
-                Registro.registrarUsuarios();
+                ContentValues values=new ContentValues();
+
+                com.example.drudispuzzle.utilidades.ConexionSQLiteHelper conn=new com.example.drudispuzzle.utilidades.ConexionSQLiteHelper(this,"bd_usuarios",null,1);
+                SQLiteDatabase db=conn.getWritableDatabase();
+
+                //db.execSQL(Utilidades.CREAR_TABLA_PLAYER);
+
+                values.put(Utilidades.CAMPO_NAME, nombreIntroducido.getText().toString());
+                values.put(Utilidades.CAMPO_TIME, tiempo);
+                Long idResultante=db.insert(Utilidades.TABLA_PLAYER,Utilidades.CAMPO_NAME,values);
+                Toast.makeText(getApplicationContext(),"Nombre Registro: "+idResultante,Toast.LENGTH_SHORT).show();
+                db.close();
+                Intent intent = new Intent(view.getContext(), SelectionActivity.class);
+                startActivityForResult(intent, 0);
                 break;
+
         }
 
     }
