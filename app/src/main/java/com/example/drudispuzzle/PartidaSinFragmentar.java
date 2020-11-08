@@ -1,6 +1,7 @@
 package com.example.drudispuzzle;
 
 import android.content.ClipData;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -62,9 +64,6 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     ArrayList<Uri> imageList;
     RegistroUsuariosActivity Registro;
     ConexionSQLiteHelper Inicializar;
-
-
-
 
     public PartidaSinFragmentar() {
         // Required empty public constructor
@@ -235,7 +234,6 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
             btnGuardar.setOnClickListener(this);
             TextView chronometro = (TextView)findViewById(R.id.campoTimee);
             chronometro.setText(tiempo);
-
 
         }
 
