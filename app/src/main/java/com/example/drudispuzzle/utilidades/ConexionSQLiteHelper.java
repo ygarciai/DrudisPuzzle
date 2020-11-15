@@ -8,7 +8,7 @@ import android.os.Build;
 
 public class ConexionSQLiteHelper extends SQLiteOpenHelper {
 
-    //añado
+
     private static final String CREAR_TABLA_PLAYER = "CREATE TABLE player (name TEXT, time TEXT)";
     private static final String DB_NAME = "player.sqlite";
     private static final int DB_VERSION = 1;
