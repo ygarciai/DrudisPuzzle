@@ -254,11 +254,6 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
 
             btnGuardar.setOnClickListener(this);
 
-            //añado para el calendario
-            Intent intent = new Intent(Intent.ACTION_INSERT);
-            intent.setData(CalendarContract.Events.CONTENT_URI);
-            intent.putExtra(CalendarContract.Events.TITLE, chronometro.getText().toString());
-
         }
 
     }

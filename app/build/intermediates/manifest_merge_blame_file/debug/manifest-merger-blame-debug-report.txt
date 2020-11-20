@@ -24,7 +24,7 @@
 14-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:9:22-70
 15
 16    <application
-16-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:11:5-50:19
+16-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:11:5-52:19
 17        android:allowBackup="true"
 17-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:12:9-35
 18        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -101,23 +101,26 @@
 49        <activity android:name="com.example.drudispuzzle.utilidades.ListaPersonasRecycler" />
 49-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:40:9-69
 49-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:40:19-67
-50
-51        <provider
-52            android:name="androidx.core.content.FileProvider"
-52-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:42:13-62
-53            android:authorities="com.example.drudispuzzle.fileprovider"
-53-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:43:13-64
-54            android:exported="false"
-54-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:44:13-37
-55            android:grantUriPermissions="true" >
-55-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:45:13-47
-56            <meta-data
-56-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:46:13-48:54
-57                android:name="android.support.FILE_PROVIDER_PATHS"
-57-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:47:17-67
-58                android:resource="@xml/file_paths" />
-58-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:48:17-51
-59        </provider>
-60    </application>
-61
-62</manifest>
+50        <activity android:name="com.example.drudispuzzle.CalendarioPuntuacion" />
+50-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:41:9-57
+50-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:41:19-55
+51
+52        <provider
+53            android:name="androidx.core.content.FileProvider"
+53-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:44:13-62
+54            android:authorities="com.example.drudispuzzle.fileprovider"
+54-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:45:13-64
+55            android:exported="false"
+55-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:46:13-37
+56            android:grantUriPermissions="true" >
+56-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:47:13-47
+57            <meta-data
+57-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:48:13-50:54
+58                android:name="android.support.FILE_PROVIDER_PATHS"
+58-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:49:17-67
+59                android:resource="@xml/file_paths" />
+59-->C:\Users\cervi\AndroidStudioProjects\DrudisPuzzle\app\src\main\AndroidManifest.xml:50:17-51
+60        </provider>
+61    </application>
+62
+63</manifest>

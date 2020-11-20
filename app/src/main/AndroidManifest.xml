@@ -38,6 +38,8 @@
         <activity android:name=".PartidaFragmentada"/>
         <activity android:name=".PartidaFragmentada2"/>
         <activity android:name=".utilidades.ListaPersonasRecycler"/>
+        <activity android:name=".CalendarioPuntuacion"/>
+        
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
