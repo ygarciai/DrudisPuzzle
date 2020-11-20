@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.drudispuzzle.utilidades.ListaPersonasRecycler;
-
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link SelectionActivity#newInstance} factory method to
@@ -57,11 +55,13 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
         Button btnPlay = (Button) findViewById(R.id.button_inicioPartida);
         Button btnRank = (Button) findViewById(R.id.button_ranking);
         Button btnMult = (Button) findViewById(R.id.button_Multiplayer);
-        Button btnFoto = (Button) findViewById(R.id.button_tomarFoto);
+        Button btnFoto = (Button) findViewById(R.id.button2);
+        Button btn3= findViewById(R.id.button2);
         btnPlay.setOnClickListener(this);
         btnRank.setOnClickListener(this);
         btnMult.setOnClickListener(this);
         btnFoto.setOnClickListener(this);
+        btn3.setOnClickListener(this);
     }
 
 
@@ -79,17 +79,18 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
                 startActivityForResult(intent, 0);
                 break;
             case R.id.button_ranking:
-                Intent intent1 = new Intent(view.getContext(), ListaPersonasRecycler.class);
+                Intent intent1 = new Intent(view.getContext(), Ranking.class);
                 startActivityForResult(intent1, 0);
                 break;
             case R.id.button_Multiplayer:
                 Intent intent2 = new Intent(view.getContext(), Multiplayer.class);
                 startActivityForResult(intent2, 0);
                 break;
-            case R.id.button_tomarFoto:
+            case R.id.button2:
                 Intent intent3 = new Intent(view.getContext(), TomarFoto.class);
                 startActivityForResult(intent3, 0);
                 break;
+
         }
     }
 }

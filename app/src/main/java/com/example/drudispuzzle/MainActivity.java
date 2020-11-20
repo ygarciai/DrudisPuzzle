@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         Button btn = (Button) findViewById(R.id.botoninicio);
         Button btn2= findViewById(R.id.salir);
+
         btn.setOnClickListener(this);
         btn2.setOnClickListener(this);
 
@@ -94,6 +95,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.botoninicio:
                 Intent intent = new Intent(view.getContext(), SelectionActivity.class);
                 startActivityForResult(intent, 0);
+
+
+
                 break;
         }
 
