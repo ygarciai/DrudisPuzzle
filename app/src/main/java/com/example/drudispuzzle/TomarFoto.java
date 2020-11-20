@@ -53,8 +53,7 @@ public class TomarFoto extends AppCompatActivity {
                 values = new ContentValues();
                 values.put(MediaStore.Images.Media.TITLE, "Fotos");
                 values.put(MediaStore.Images.Media.DESCRIPTION, "Foto sacada " + System.currentTimeMillis());
-                imageUri = getContentResolver().insert(
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+                imageUri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
                 startActivityForResult(intent, PICTURE_RESULT);
