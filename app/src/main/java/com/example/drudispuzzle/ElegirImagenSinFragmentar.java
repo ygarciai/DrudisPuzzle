@@ -1,24 +1,34 @@
 package com.example.drudispuzzle;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -34,6 +44,14 @@ public class ElegirImagenSinFragmentar extends AppCompatActivity implements View
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private static final String TAG = "TomarFoto";
+    private ContentValues values;
+    private Uri imageUri;
+    private static final int PICTURE_RESULT = 122 ;
+    private Bitmap thumbnail;
+    String imageurl;
+    boolean escamara=false;
+
     ImageView imagen1;
     Boolean image1Set;
     ImageView imagen2;
@@ -47,6 +65,8 @@ public class ElegirImagenSinFragmentar extends AppCompatActivity implements View
     ArrayList<ImageView> imagenesSeleccionadas;
     ArrayList<Bitmap> imagenesSeleccionadasBitmap;
     ArrayList<Uri> imagenesSeleccionadasUri;
+
+    private Button myButtonFoto;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -87,6 +107,10 @@ public class ElegirImagenSinFragmentar extends AppCompatActivity implements View
         buttonImagen.setOnClickListener(this);
         buttonEmpezar.setOnClickListener(this);
         buttonEmpezar.setEnabled(false);
+
+        myButtonFoto = (Button)findViewById(R.id.button_FotoCamara);
+        myButtonFoto.setOnClickListener(this);
+
         imagen1= (ImageView) findViewById(R.id.imagenSeleccionada);
         imagenesSeleccionadas.add(imagen1);
 
@@ -127,16 +151,33 @@ public class ElegirImagenSinFragmentar extends AppCompatActivity implements View
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.button_SeleccionarImagen:
                 cargarimagen();
                 break;
             case R.id.button_empezarPartidaSinFragmentar:
+                escamara=false;
                 Intent intent = new Intent(view.getContext(), PartidaSinFragmentar.class);
                 intent.putExtra("imagenesSeleccionadasUri", imagenesSeleccionadasUri);
                 startActivityForResult(intent, 0);
-        }
+                break;
+            case R.id.button_FotoCamara:
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    //Check permissions for Android 6.0+
+                    if (!checkExternalStoragePermission()) {
+                        return;
+                    }
+                    escamara=true;
+                    values = new ContentValues();
+                    values.put(MediaStore.Images.Media.TITLE, "Fotos");
+                    values.put(MediaStore.Images.Media.DESCRIPTION, "Foto sacada " + System.currentTimeMillis());
+                    imageUri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+                    Intent intent2 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    intent2.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                    startActivityForResult(intent2, PICTURE_RESULT);
+                }
 
+        }
     }
 
     private void cargarimagen() {
@@ -148,50 +189,121 @@ public class ElegirImagenSinFragmentar extends AppCompatActivity implements View
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode==RESULT_OK && !image1Set){
-            Uri path=data.getData();
-            imagen1.setImageURI(path);
-            image1Set = true;
-            BitmapDrawable drawable = (BitmapDrawable) imagen1.getDrawable();
-            Bitmap bitmap = drawable.getBitmap();
-            imagenesSeleccionadasBitmap.add(bitmap);
-            imagenesSeleccionadasUri.add(path);
-        } else if (resultCode==RESULT_OK && !image2Set){
-            Uri path=data.getData();
-            imagen2.setImageURI(path);
-            image2Set = true;
-            BitmapDrawable drawable1 = (BitmapDrawable) imagen2.getDrawable();
-            Bitmap bitmap1 = drawable1.getBitmap();
-            imagenesSeleccionadasBitmap.add(bitmap1);
-            imagenesSeleccionadasUri.add(path);
-        }else if (resultCode==RESULT_OK && !image3Set){
-            Uri path=data.getData();
-            imagen3.setImageURI(path);
-            image3Set = true;
-            BitmapDrawable drawable2 = (BitmapDrawable) imagen3.getDrawable();
-            Bitmap bitmap2 = drawable2.getBitmap();
-            imagenesSeleccionadasBitmap.add(bitmap2);
-            imagenesSeleccionadasUri.add(path);
-        }else if (resultCode==RESULT_OK && !image4Set){
-            Uri path=data.getData();
-            imagen4.setImageURI(path);
-            image4Set = true;
-            BitmapDrawable drawable3 = (BitmapDrawable) imagen4.getDrawable();
-            Bitmap bitmap3 = drawable3.getBitmap();
-            imagenesSeleccionadasBitmap.add(bitmap3);
-            imagenesSeleccionadasUri.add(path);
-        }else if (resultCode==RESULT_OK && !image5Set){
-            Uri path=data.getData();
-            imagen5.setImageURI(path);
-            image5Set = true;
+        if ((resultCode==RESULT_OK && !image1Set) || (escamara==true && !image1Set)){
+            if (escamara == false) {
+                Uri path=data.getData();
+                imagen1.setImageURI(path);
+                image1Set = true;
+                BitmapDrawable drawable = (BitmapDrawable) imagen1.getDrawable();
+                Bitmap bitmap = drawable.getBitmap();
+                imagenesSeleccionadasBitmap.add(bitmap);
+                imagenesSeleccionadasUri.add(path);
+            }else{
+                try {
+                    thumbnail = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+                    imagen1.setImageBitmap(thumbnail);
+                    imageurl = getRealPathFromURI(imageUri);
+                    escamara=false;
+                    image1Set = true;
+                    imagenesSeleccionadasBitmap.add(thumbnail);
+                    imagenesSeleccionadasUri.add(imageUri);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        } else if ((resultCode==RESULT_OK && !image2Set) || (escamara==true && !image2Set)){
+            if (escamara == false) {
+                Uri path = data.getData();
+                imagen2.setImageURI(path);
+                image2Set = true;
+                BitmapDrawable drawable1 = (BitmapDrawable) imagen2.getDrawable();
+                Bitmap bitmap1 = drawable1.getBitmap();
+                imagenesSeleccionadasBitmap.add(bitmap1);
+                imagenesSeleccionadasUri.add(path);
+            }else{
+                image2Set = true;
+                try {
+                    thumbnail = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+                    imagen2.setImageBitmap(thumbnail);
+                    imageurl = getRealPathFromURI(imageUri);
+                    escamara=false;
+                    imagenesSeleccionadasBitmap.add(thumbnail);
+                    imagenesSeleccionadasUri.add(imageUri);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }else if ((resultCode==RESULT_OK && !image3Set) || (escamara==true && !image3Set)){
+            if (escamara == false) {
+                Uri path = data.getData();
+                imagen3.setImageURI(path);
+                image3Set = true;
+                BitmapDrawable drawable2 = (BitmapDrawable) imagen3.getDrawable();
+                Bitmap bitmap2 = drawable2.getBitmap();
+                imagenesSeleccionadasBitmap.add(bitmap2);
+                imagenesSeleccionadasUri.add(path);
+            }else{
+                image3Set = true;
+                try {
+                    thumbnail = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+                    imagen3.setImageBitmap(thumbnail);
+                    imageurl = getRealPathFromURI(imageUri);
+                    escamara=false;
+                    imagenesSeleccionadasBitmap.add(thumbnail);
+                    imagenesSeleccionadasUri.add(imageUri);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }else if ((resultCode==RESULT_OK && !image4Set) || (escamara==true && !image4Set)){
+            if (escamara == false) {
+                Uri path=data.getData();
+                imagen4.setImageURI(path);
+                image4Set = true;
+                BitmapDrawable drawable3 = (BitmapDrawable) imagen4.getDrawable();
+                Bitmap bitmap3 = drawable3.getBitmap();
+                imagenesSeleccionadasBitmap.add(bitmap3);
+                imagenesSeleccionadasUri.add(path);
+            }else{
+                image4Set = true;
+                try {
+                    thumbnail = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+                    imagen4.setImageBitmap(thumbnail);
+                    imageurl = getRealPathFromURI(imageUri);
+                    escamara=false;
+                    imagenesSeleccionadasBitmap.add(thumbnail);
+                    imagenesSeleccionadasUri.add(imageUri);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }else if ((resultCode==RESULT_OK && !image5Set)|| (escamara==true && !image5Set)){
+            if (escamara == false) {
+                Uri path = data.getData();
+                imagen5.setImageURI(path);
+                image5Set = true;
+                BitmapDrawable drawable4 = (BitmapDrawable) imagen5.getDrawable();
+                Bitmap bitmap4 = drawable4.getBitmap();
+                imagenesSeleccionadasBitmap.add(bitmap4);
+                imagenesSeleccionadasUri.add(path);
+            }else{
+                image5Set = true;
+                try {
+                    thumbnail = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+                    imagen5.setImageBitmap(thumbnail);
+                    imageurl = getRealPathFromURI(imageUri);
+                    escamara=false;
+                    imagenesSeleccionadasBitmap.add(thumbnail);
+                    imagenesSeleccionadasUri.add(imageUri);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
             Button buttonImagen2 = (Button) findViewById(R.id.button_SeleccionarImagen);
             buttonImagen2.setEnabled(false);
             Button buttonEmpezar = (Button) findViewById(R.id.button_empezarPartidaSinFragmentar);
-            buttonEmpezar.setEnabled(true);        BitmapDrawable drawable4 = (BitmapDrawable) imagen5.getDrawable();
-            Bitmap bitmap4 = drawable4.getBitmap();
-            imagenesSeleccionadasBitmap.add(bitmap4);
-            imagenesSeleccionadasUri.add(path);
-
+            buttonEmpezar.setEnabled(true);
         }
     }
     private void cargarimagen1() {
@@ -200,4 +312,24 @@ public class ElegirImagenSinFragmentar extends AppCompatActivity implements View
         startActivityForResult(intent.createChooser(intent, "Seleccion la Aplicacion"),10);
     }
 
+    private boolean checkExternalStoragePermission() {
+        int permissionCheck = ContextCompat.checkSelfPermission(
+                this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+            Log.i(TAG, "Permiso no garantizado");
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 225);
+        } else {
+            Log.i(TAG, "No tienes permiso");
+            return true;
+        }
+
+        return false;
+    }
+    public String getRealPathFromURI(Uri contentUri) {
+        String[] proj = { MediaStore.Images.Media.DATA };
+        Cursor cursor = managedQuery(contentUri, proj, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
 }
