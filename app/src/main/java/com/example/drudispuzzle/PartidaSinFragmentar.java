@@ -29,7 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//import com.example.drudispuzzle.utilidades.RegistroUsuariosActivity;
+
 
 import com.example.drudispuzzle.utilidades.RegistroUsuariosActivity;
 import com.example.drudispuzzle.utilidades.Utilidades;
@@ -62,6 +62,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     private List<Integer> indexArray;
 
     ImageView i1;
+    ImageView i1red;
 
     int numberPieces;
     int level, rows=2, cols=2, chunkHeight, chunkWidth;
@@ -127,6 +128,12 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
         if (level == 1){
             i1.setImageURI(imageList1.get(0));
 
+            BitmapDrawable drawable = (BitmapDrawable) i1.getDrawable();
+            Bitmap bitmap = drawable.getBitmap();
+            Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 250, 250, true);
+            i1.setImageBitmap(scaledBitmap);
+
+
             splitImage(i1);
             layout.setColumnCount(cols);
             layout2.setColumnCount(cols);
@@ -139,17 +146,24 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                 iv.setOnTouchListener(this);
                 layout.addView(iv);
 
+
                 ImageView emptyView = new ImageView(getApplicationContext());
                 emptyView.setImageBitmap(pieces.get(i));
                 emptyView.setAlpha((float) 0.1);
                 emptyView.setOnDragListener(this);
                 layout2.addView(emptyView);
+
             }
         } else if (level==2) {
             cols = cols + 1;
 
             i1.setImageURI(imageList1.get(1));
 
+            BitmapDrawable drawable = (BitmapDrawable) i1.getDrawable();
+            Bitmap bitmap = drawable.getBitmap();
+            Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 250, 250, true);
+            i1.setImageBitmap(scaledBitmap);
+
             splitImage(i1);
             layout.setColumnCount(cols);
             layout2.setColumnCount(cols);
@@ -166,6 +180,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                 emptyView.setAlpha((float) 0.1);
                 emptyView.setOnDragListener(this);
                 layout2.addView(emptyView);
+
             }
 
         } else if (level==3) {
@@ -173,7 +188,17 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
             rows = rows +1;
 
             i1.setImageURI(imageList1.get(2));
+
+            BitmapDrawable drawable = (BitmapDrawable) i1.getDrawable();
+            Bitmap bitmap = drawable.getBitmap();
+            Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 250, 250, true);
+
+            i1.setImageBitmap(scaledBitmap);
+
             splitImage(i1);
+
+
+
             layout.setColumnCount(cols);
             layout2.setColumnCount(cols);
 
@@ -181,6 +206,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
             for(int i = 0; i < indexArray.size(); i++) {
                 Bitmap piece = pieces.get(indexArray.get(i));
                 ImageView iv = new ImageView(getApplicationContext());
+
                 iv.setImageBitmap(piece);
                 iv.setOnTouchListener(this);
                 layout.addView(iv);
@@ -190,12 +216,20 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                 emptyView.setAlpha((float) 0.1);
                 emptyView.setOnDragListener(this);
                 layout2.addView(emptyView);
+
+
             }
         } else if (level==4) {
             cols = cols + 1;
 
 
+
             i1.setImageURI(imageList1.get(3));
+
+            BitmapDrawable drawable = (BitmapDrawable) i1.getDrawable();
+            Bitmap bitmap = drawable.getBitmap();
+            Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 250, 250, true);
+            i1.setImageBitmap(scaledBitmap);
 
             splitImage(i1);
             layout.setColumnCount(cols);
@@ -207,6 +241,8 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                 iv.setImageBitmap(piece);
                 iv.setOnTouchListener(this);
                 layout.addView(iv);
+
+
 
                 ImageView emptyView = new ImageView(getApplicationContext());
                 emptyView.setImageBitmap(pieces.get(i));
@@ -220,6 +256,11 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
 
             i1.setImageURI(imageList1.get(4));
 
+            BitmapDrawable drawable = (BitmapDrawable) i1.getDrawable();
+            Bitmap bitmap = drawable.getBitmap();
+            Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 250, 250, true);
+            i1.setImageBitmap(scaledBitmap);
+
             splitImage(i1);
             layout.setColumnCount(cols);
             layout2.setColumnCount(cols);
@@ -236,6 +277,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                 emptyView.setAlpha((float) 0.1);
                 emptyView.setOnDragListener(this);
                 layout2.addView(emptyView);
+
             }
 
         } else if (level==6){
@@ -264,7 +306,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
         BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth(), bitmap.getHeight(), true);
-
+        //Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 400, 640, true);
 
 
         chunkHeight = bitmap.getHeight()/rows;
