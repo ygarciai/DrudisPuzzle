@@ -82,7 +82,7 @@ public class Ranking extends AppCompatActivity {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ranking, container, false);
+        return inflater.inflate(R.layout._activity_lista_personas_recycler, container, false);
     }
 
     private void consultarListaPersonas() {

@@ -63,7 +63,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     ImageView i1;
 
     int numberPieces;
-    int level, rows=1, cols=1, chunkHeight, chunkWidth;
+    int level, rows=2, cols=2, chunkHeight, chunkWidth;
     boolean acabado=false;
     ArrayList<Uri> imageList;
     RegistroUsuariosActivity Registro;
@@ -145,6 +145,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                 layout2.addView(emptyView);
             }
         } else if (level==2) {
+            cols = cols + 1;
 
             i1.setImageURI(imageList1.get(1));
 
@@ -168,7 +169,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
 
         } else if (level==3) {
 
-
+            rows = rows +1;
 
             i1.setImageURI(imageList1.get(2));
             splitImage(i1);
@@ -190,6 +191,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                 layout2.addView(emptyView);
             }
         } else if (level==4) {
+            cols = cols + 1;
 
 
             i1.setImageURI(imageList1.get(3));
@@ -213,7 +215,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
             }
         } else if (level==5) {
 
-
+            rows = rows +1;
 
             i1.setImageURI(imageList1.get(4));
 
