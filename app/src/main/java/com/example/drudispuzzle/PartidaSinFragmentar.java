@@ -14,6 +14,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.provider.CalendarContract;
 import android.text.method.Touch;
 import android.util.Log;
 import android.view.DragEvent;
@@ -252,6 +253,11 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
             chronometro.setText(tiempo);
 
             btnGuardar.setOnClickListener(this);
+
+            //añado para el calendario
+            Intent intent = new Intent(Intent.ACTION_INSERT);
+            intent.setData(CalendarContract.Events.CONTENT_URI);
+            intent.putExtra(CalendarContract.Events.TITLE, chronometro.getText().toString());
 
         }
 
