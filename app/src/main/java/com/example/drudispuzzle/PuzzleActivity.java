@@ -14,6 +14,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -57,7 +58,8 @@ public class PuzzleActivity extends AppCompatActivity {
                 // ordena de manera aleatoria las piezas
                 Collections.shuffle(pieces);
                 for (PuzzlePiece piece : pieces) {
-                    //piece.setOnTouchListener(tactilListener);
+                    View.OnTouchListener tactilListener = null;
+                    piece.setOnTouchListener(tactilListener);
                     layout.addView(piece);
                     // randomize position, on the bottom of the screen
                     RelativeLayout.LayoutParams lParams = (RelativeLayout.LayoutParams) piece.getLayoutParams();

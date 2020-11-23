@@ -2,14 +2,17 @@ package com.example.drudispuzzle;
 
 import android.content.ClipData;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -36,6 +39,7 @@ import com.example.drudispuzzle.utilidades.Utilidades;
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
 import java.io.StringBufferInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -76,6 +80,13 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     String nombre;
     TextView nombreIntroducido;
 
+    //añado
+    static boolean reproduciendo=false;
+    public MediaPlayer mp2 = null;
+    public MediaPlayer mp3 = null;
+    private ContentValues values;
+    Uri SoundUri;
+
 
 
 
@@ -112,9 +123,18 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
         //ArrayList<Uri> imageList = (ArrayList<Uri>) getIntent().getSerializableExtra("imagenesSeleccionadasUri");
         final Chronometer myChronometer = findViewById(R.id.chronometer);
 
+        //añado
+        mp2 = new MediaPlayer();
+        mp2 = MediaPlayer.create(this, R.raw.beep);
+        mp3 = new MediaPlayer();
+        mp3 = MediaPlayer.create(this, R.raw.aplausos);
+
+
+
         myChronometer.start();
         i1 = findViewById(R.id.imageView_fondoPantalla);
         initGame(level, imageList);
+
    }
 
     private void initGame(int level, ArrayList<Uri> imageList) {
@@ -152,7 +172,8 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                 emptyView.setAlpha((float) 0.1);
                 emptyView.setOnDragListener(this);
                 layout2.addView(emptyView);
-
+                mp2.start();
+                reproduciendo=true;
             }
         } else if (level==2) {
             //cols = cols + 1;
@@ -180,7 +201,8 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                 emptyView.setAlpha((float) 0.1);
                 emptyView.setOnDragListener(this);
                 layout2.addView(emptyView);
-
+                mp2.start();
+                reproduciendo=true;
             }
 
         } else if (level==3) {
@@ -196,8 +218,6 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
             i1.setImageBitmap(scaledBitmap);
 
             splitImage(i1);
-
-
 
             layout.setColumnCount(cols);
             layout2.setColumnCount(cols);
@@ -216,14 +236,13 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                 emptyView.setAlpha((float) 0.1);
                 emptyView.setOnDragListener(this);
                 layout2.addView(emptyView);
-
+                mp2.start();
+                reproduciendo=true;
 
             }
+
         } else if (level==4) {
             //cols = cols + 1;
-
-
-
             i1.setImageURI(imageList1.get(3));
 
             BitmapDrawable drawable = (BitmapDrawable) i1.getDrawable();
@@ -249,7 +268,10 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                 emptyView.setAlpha((float) 0.1);
                 emptyView.setOnDragListener(this);
                 layout2.addView(emptyView);
+                mp2.start();
+                reproduciendo=true;
             }
+
         } else if (level==5) {
 
             //rows = rows +1;
@@ -277,6 +299,8 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                 emptyView.setAlpha((float) 0.1);
                 emptyView.setOnDragListener(this);
                 layout2.addView(emptyView);
+                mp2.start();
+                reproduciendo=true;
 
             }
 
@@ -295,6 +319,8 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
             chronometro.setText(tiempo);
 
             btnGuardar.setOnClickListener(this);
+            mp3.start();
+            reproduciendo=true;
 
         }
 
@@ -421,5 +447,62 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                 break;
         }
         return true;
+    }
+
+    //añado onActivityResult y play
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode == RESULT_OK && requestCode == 10) {
+            Uri uriSound = data.getData();
+            play(this, uriSound);
+        }else{
+            reproduciendo=false;
+        }
+    }
+
+    private void play(Context context, Uri uri) {
+
+        try {
+            mp2.stop();
+            mp2 = new MediaPlayer();
+            mp2.setDataSource(context, uri);
+            mp2.prepare();
+            mp2.start();
+            reproduciendo=true;
+        } catch (IllegalArgumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (SecurityException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalStateException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        try {
+            mp3.stop();
+            mp3 = new MediaPlayer();
+            mp3.setDataSource(context, uri);
+            mp3.prepare();
+            mp3.start();
+            reproduciendo=true;
+        } catch (IllegalArgumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (SecurityException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalStateException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 }
