@@ -155,7 +155,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
 
             }
         } else if (level==2) {
-            cols = cols + 1;
+            //cols = cols + 1;
 
             i1.setImageURI(imageList1.get(1));
 
@@ -185,7 +185,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
 
         } else if (level==3) {
 
-            rows = rows +1;
+            //rows = rows +1;
 
             i1.setImageURI(imageList1.get(2));
 
@@ -220,7 +220,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
 
             }
         } else if (level==4) {
-            cols = cols + 1;
+            //cols = cols + 1;
 
 
 
@@ -252,7 +252,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
             }
         } else if (level==5) {
 
-            rows = rows +1;
+            //rows = rows +1;
 
             i1.setImageURI(imageList1.get(4));
 

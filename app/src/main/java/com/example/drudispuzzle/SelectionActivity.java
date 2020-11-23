@@ -1,15 +1,23 @@
 package com.example.drudispuzzle;
 
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import java.io.IOException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,6 +34,11 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    static boolean reproduciendo=false;
+    public MediaPlayer mp = null;
+    public MediaPlayer mp1 = null;
+    private ContentValues values;
+    Uri SoundUri;
 
     public SelectionActivity() {
         // Required empty public constructor
@@ -51,17 +64,33 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //mp1=new MediaPlayer();
+        mp=new MediaPlayer();
+        mp = MediaPlayer.create(this, R.raw.jazzopedie);
+
         setContentView(R.layout.fragment_selection_activity);
         Button btnPlay = (Button) findViewById(R.id.button_inicioPartida);
         Button btnRank = (Button) findViewById(R.id.button_ranking);
         Button btnMult = (Button) findViewById(R.id.button_Multiplayer);
         Button btnFoto = (Button) findViewById(R.id.button2);
         Button btn3= findViewById(R.id.button2);
+        Button sonidoOn=(Button)findViewById(R.id.sonidoEncendido);
+        Button sonidoOff=(Button)findViewById(R.id.sonidoApagado);
+        Button seleccionMusica=(Button)findViewById(R.id.button_seleccionMusica);
+
         btnPlay.setOnClickListener(this);
         btnRank.setOnClickListener(this);
         btnMult.setOnClickListener(this);
         btnFoto.setOnClickListener(this);
         btn3.setOnClickListener(this);
+        sonidoOn.setOnClickListener(this);
+        sonidoOff.setOnClickListener(this);
+        seleccionMusica.setOnClickListener(this);
+        if(!reproduciendo) {
+            mp.setLooping(true);
+            mp.start();
+            reproduciendo = true;
+        }
     }
 
 
@@ -90,7 +119,60 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
                 Intent intent3 = new Intent(view.getContext(), TomarFoto.class);
                 startActivityForResult(intent3, 0);
                 break;
+            case R.id.sonidoEncendido: //comienza la reproduccion
+                if(!reproduciendo) {//verifica que ya no se este reproduciendo
+                    mp.setLooping(true);
+                    mp.start();
+                    reproduciendo=true;
+                }
+                break;
+            case R.id.sonidoApagado:    //detiene la reproduccion
+                if(reproduciendo) {
+                    mp.pause();
+                    mp.setLooping(false);
+                    reproduciendo=false;
+                }
+                break;
+            case R.id.button_seleccionMusica:
+                Intent intent5 = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent5, 10);
+                reproduciendo=true;
+        }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if(resultCode == RESULT_OK && requestCode == 10) {
+            Uri uriSound = data.getData();
+            play(this, uriSound);
+        }else{
+            reproduciendo=false;
+        }
+    }
+
+    private void play(Context context, Uri uri) {
+
+        try {
+            mp.stop();
+            mp = new MediaPlayer();
+            mp.setDataSource(context, uri);
+            mp.prepare();
+            mp.setLooping(true);
+            mp.start();
+            reproduciendo=true;
+        } catch (IllegalArgumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (SecurityException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalStateException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
     }
 }
