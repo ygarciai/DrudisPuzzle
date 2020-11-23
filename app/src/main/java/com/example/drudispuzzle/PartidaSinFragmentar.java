@@ -84,6 +84,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     static boolean reproduciendo=false;
     public MediaPlayer mp2 = null;
     public MediaPlayer mp3 = null;
+    public MediaPlayer mp4 = null;
     private ContentValues values;
     Uri SoundUri;
 
@@ -128,6 +129,8 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
         mp2 = MediaPlayer.create(this, R.raw.beep);
         mp3 = new MediaPlayer();
         mp3 = MediaPlayer.create(this, R.raw.aplausos);
+        mp4 = new MediaPlayer();
+        mp4 = MediaPlayer.create(this, R.raw.piecesong);
 
 
 
@@ -434,6 +437,8 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                     puzzleView.setVisibility(View.INVISIBLE);
                     containerImage.setAlpha((float) 1);
                     numberPieces--;
+                    mp4.start();
+                    reproduciendo=true;
                 }
                 if(numberPieces == 0) {
                     level=level+1;
@@ -490,6 +495,26 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
             mp3.setDataSource(context, uri);
             mp3.prepare();
             mp3.start();
+            reproduciendo=true;
+        } catch (IllegalArgumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (SecurityException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalStateException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        try {
+            mp4.stop();
+            mp4 = new MediaPlayer();
+            mp4.setDataSource(context, uri);
+            mp4.prepare();
+            mp4.start();
             reproduciendo=true;
         } catch (IllegalArgumentException e) {
             // TODO Auto-generated catch block

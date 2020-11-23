@@ -1,14 +1,18 @@
 package com.example.drudispuzzle;
 
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -22,6 +26,7 @@ import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -51,6 +56,13 @@ public class PartidaFragmentada2 extends AppCompatActivity implements View.OnTou
     private List<Bitmap> pieces;
     private List<Integer> indexArray;
     int numberPieces=9;
+
+
+    //añado
+    static boolean reproduciendo=false;
+    public MediaPlayer mp = null;
+    private ContentValues values;
+    Uri SoundUri;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -87,6 +99,9 @@ public class PartidaFragmentada2 extends AppCompatActivity implements View.OnTou
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_partida_fragmentada2);
+
+        mp=new MediaPlayer();
+        mp = MediaPlayer.create(this, R.raw.piecesong);
 
         ImageView i0 = new ImageView(this);
         ImageView i1 = new ImageView(this);
@@ -162,57 +177,6 @@ public class PartidaFragmentada2 extends AppCompatActivity implements View.OnTou
         Bitmap scaledBitmap7 = Bitmap.createScaledBitmap(bitmap7, 100, 100, true);
         Bitmap scaledBitmap8 = Bitmap.createScaledBitmap(bitmap8, 100, 100, true);
         Bitmap scaledBitmap9 = Bitmap.createScaledBitmap(bitmap9, 100, 100, true);
-
-
-        //ImageView ii1 = new ImageView(getApplicationContext());
-        //ImageView ii2 = new ImageView(getApplicationContext());
-        //ImageView ii3 = new ImageView(getApplicationContext());
-        //ImageView ii4 = new ImageView(getApplicationContext());
-        //ImageView ii5 = new ImageView(getApplicationContext());
-        //ImageView ii6 = new ImageView(getApplicationContext());
-        //ImageView ii7 = new ImageView(getApplicationContext());
-        //ImageView ii8 = new ImageView(getApplicationContext());
-        //ImageView ii9 = new ImageView(getApplicationContext());
-
-        //ImageView iv = new ImageView(getApplicationContext());
-
-        //iv.setImageBitmap(scaledBitmap1);
-        //layout.addView(iv);
-
-
-        //iv.setImageBitmap(scaledBitmap2);
-        //iv.setOnTouchListener(this);        //layout.addView(iv);
-
-
-
-
-
-        //ii1.setImageBitmap(scaledBitmap1);
-        //layout.addView(ii1);
-        //ii2.setImageBitmap(scaledBitmap2);
-        //layout.addView(ii2);
-        //ii3.setImageBitmap(scaledBitmap3);
-        //layout.addView(ii3);
-        //ii4.setImageBitmap(scaledBitmap4);
-        //layout.addView(ii4);
-        //ii5.setImageBitmap(scaledBitmap5);
-        //layout.addView(ii5);
-        //ii6.setImageBitmap(scaledBitmap6);
-        //layout.addView(ii6);
-        //ii7.setImageBitmap(scaledBitmap7);
-        //layout.addView(ii7);
-        //ii8.setImageBitmap(scaledBitmap8);
-        //layout.addView(ii8);
-        //ii9.setImageBitmap(scaledBitmap9);
-        //layout.addView(ii9);
-
-
-
-        //ImageView emptyView = new ImageView(getApplicationContext());
-        //emptyView.setImageBitmap(scaledBitmap0);
-        //emptyView.setAlpha((float) 0.1);
-        //emptyView.setOnDragListener(this);
-        //layout2.addView(emptyView);
 
         ArrayList<Uri> imageList1 = (ArrayList<Uri>) getIntent().getSerializableExtra("imagenesSeleccionadasUri");
         GridLayout layout = findViewById(R.id.secondLinearLayout);
@@ -308,6 +272,8 @@ public class PartidaFragmentada2 extends AppCompatActivity implements View.OnTou
                     puzzleView.setVisibility(View.INVISIBLE);
                     containerImage.setAlpha((float) 1);
                     numberPieces--;
+                    mp.start();
+                    reproduciendo=true;
                 }
                 if(numberPieces == 0) {
                     Intent intent1 = new Intent(view.getContext(), SelectionActivity.class);
@@ -316,10 +282,12 @@ public class PartidaFragmentada2 extends AppCompatActivity implements View.OnTou
                 break;
             case DragEvent.ACTION_DRAG_ENDED:
                 Log.d(LOGCAT, "Drag ended");
+
                 break;
             default:
                 break;
         }
+
         return true;
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -327,4 +295,43 @@ public class PartidaFragmentada2 extends AppCompatActivity implements View.OnTou
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_partida_fragmentada2, container, false);
     }
+
+    //añado onActi y play
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode == RESULT_OK && requestCode == 10) {
+            Uri uriSound = data.getData();
+            play(this, uriSound);
+        }else{
+            reproduciendo=false;
+        }
+    }
+
+    private void play(Context context, Uri uri) {
+
+        try {
+            mp.stop();
+            mp = new MediaPlayer();
+            mp.setDataSource(context, uri);
+            mp.prepare();
+            mp.setLooping(true);
+            mp.start();
+            reproduciendo=true;
+        } catch (IllegalArgumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (SecurityException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalStateException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
 }
