@@ -36,6 +36,7 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
     private String mParam2;
     static boolean reproduciendo=false;
     public MediaPlayer mp = null;
+    public MediaPlayer mp1 = null;
     private ContentValues values;
     Uri SoundUri;
 
@@ -63,7 +64,8 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        //mp1=new MediaPlayer();
+        mp=new MediaPlayer();
         mp = MediaPlayer.create(this, R.raw.jazzopedie);
 
         setContentView(R.layout.fragment_selection_activity);
@@ -126,7 +128,7 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.sonidoApagado:    //detiene la reproduccion
                 if(reproduciendo) {
-                    mp.stop();
+                    mp.pause();
                     mp.setLooping(false);
                     reproduciendo=false;
                 }
@@ -143,9 +145,9 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
 
         if(resultCode == RESULT_OK && requestCode == 10) {
             Uri uriSound = data.getData();
-            mp.stop();
-            MediaPlayer mp = new MediaPlayer();
             play(this, uriSound);
+        }else{
+            reproduciendo=false;
         }
     }
 
@@ -153,7 +155,7 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
 
         try {
             mp.stop();
-            MediaPlayer mp = new MediaPlayer();
+            mp = new MediaPlayer();
             mp.setDataSource(context, uri);
             mp.prepare();
             mp.setLooping(true);
