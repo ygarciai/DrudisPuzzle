@@ -1,5 +1,7 @@
 package com.example.drudispuzzle;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +25,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 
@@ -37,6 +41,9 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class PartidaFragmentada2 extends AppCompatActivity implements View.OnTouchListener, View.OnDragListener {
+
+
+    private AnimatorSet animatorSet;
 
     private static final String LOGCAT = null;
 
@@ -57,8 +64,6 @@ public class PartidaFragmentada2 extends AppCompatActivity implements View.OnTou
     private List<Integer> indexArray;
     int numberPieces=9;
 
-
-    //añado
     static boolean reproduciendo=false;
     public MediaPlayer mp = null;
     private ContentValues values;
@@ -234,8 +239,6 @@ public class PartidaFragmentada2 extends AppCompatActivity implements View.OnTou
 
         }
 
-
-
     }
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -274,10 +277,12 @@ public class PartidaFragmentada2 extends AppCompatActivity implements View.OnTou
                     numberPieces--;
                     mp.start();
                     reproduciendo=true;
+
                 }
                 if(numberPieces == 0) {
                     Intent intent1 = new Intent(view.getContext(), SelectionActivity.class);
                     startActivityForResult(intent1, 0);
+
                 }
                 break;
             case DragEvent.ACTION_DRAG_ENDED:
@@ -287,9 +292,9 @@ public class PartidaFragmentada2 extends AppCompatActivity implements View.OnTou
             default:
                 break;
         }
-
         return true;
     }
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment

@@ -1,5 +1,7 @@
 package com.example.drudispuzzle;
 
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
 import android.content.ClipData;
 import android.content.ContentValues;
 import android.content.Context;
@@ -16,14 +18,21 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.CalendarContract;
+import android.text.Layout;
 import android.text.method.Touch;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.GridLayout;
@@ -116,6 +125,8 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_partida_sin_fragmentar);
+
+
         Registro=new RegistroUsuariosActivity();
         level = 1;
         Inicializar=new ConexionSQLiteHelper(getApplicationContext(),"bd_usuarios",null,1);
@@ -177,6 +188,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                 layout2.addView(emptyView);
                 mp2.start();
                 reproduciendo=true;
+
             }
         } else if (level==2) {
             //cols = cols + 1;
