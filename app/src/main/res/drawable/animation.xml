@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="true">
+    <item android:drawable="@drawable/golum1" android:duration="1000" />
+    <item android:drawable="@drawable/golum2" android:duration="1000" />
+    <item android:drawable="@drawable/golum3" android:duration="1000" />
+    <item android:drawable="@drawable/golum4" android:duration="1000" />
+    <item android:drawable="@drawable/golum5" android:duration="1000" />
+    <item android:drawable="@drawable/golum6" android:duration="1000" />
+    <item android:drawable="@drawable/golum7" android:duration="1000" />
+    <item android:drawable="@drawable/golum8" android:duration="1000" />
+    <item android:drawable="@drawable/golum9" android:duration="1000" />
+    <item android:drawable="@drawable/gollumentero" android:duration="2000" />
+</animation-list>
