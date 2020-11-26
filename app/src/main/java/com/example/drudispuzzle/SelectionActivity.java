@@ -53,9 +53,9 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
     private boolean mFocusGranted, mFocusChanged;
     int result=0;
 
+
     public static boolean  encambioMusica=false;
     public static boolean  enBack=false;
-
     public SelectionActivity() {
         // Required empty public constructor
     }

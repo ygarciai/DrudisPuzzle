@@ -26,7 +26,6 @@ public class ApplicationLifecycleHandler implements Application.ActivityLifecycl
 
     @Override
     public void onActivityResumed(Activity activity) {
-
         if(isInBackground){
             Log.d(TAG, "app went to foreground");
             try {
