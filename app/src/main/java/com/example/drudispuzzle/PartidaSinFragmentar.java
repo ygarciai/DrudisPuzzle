@@ -98,7 +98,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     public MediaPlayer mp4 = null;
     private ContentValues values;
     Uri SoundUri;
-    private View Popup;
+
 
 
     public PartidaSinFragmentar() {
@@ -327,26 +327,27 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
 
             tiempo = myChronometer.getText().toString();
 
-
-            //añado
-            View Popup = layout.findViewById(R.id.Popup);
-            //Popup.getVisibility();
-            Popup.bringToFront();
-
-            Animation animation = null;
-            Popup.startAnimation(animation);
-            Chronometer chronometer = null;// = PartidaSinFragmentar.findViewById(R.id.chronometer);
-            final Animation animationChronometer = AnimationUtils.loadAnimation(
-                    getParent(),
-                    R.anim.item_animation
-            );
-            chronometer.startAnimation(animationChronometer);
-            //fin añadido
-
+          /* Esto funciona
             setContentView(R.layout._activity_registro_usuarios);
             Button btnGuardar = (Button) findViewById(R.id.btnRegistro);
             TextView chronometro = (TextView)findViewById(R.id.campoTimee);
+            chronometro.setText(tiempo);*/
+
+            // Animacion Funciona
+            setContentView(R.layout._activity_registro_usuarios);
+            RelativeLayout VentanaUp = (RelativeLayout) findViewById(R.id.VentanaUp);
+            Animation itemAnimation = AnimationUtils.loadAnimation(this,R.anim.item_animation);
+            VentanaUp.startAnimation(itemAnimation);
+            //añado extra animacion
+           // Animation itemAnimation1 = AnimationUtils.loadAnimation(this, R.anim.item_animation2);
+           // VentanaUp.findViewById(TextSuccess)startAnimation(itemAnimation1);
+
+            //fin extra animacion
+            Button btnGuardar = (Button) findViewById(R.id.btnRegistro);
+            TextView chronometro = (TextView)findViewById(R.id.campoTimee);
             chronometro.setText(tiempo);
+
+            //fin añadido
 
             btnGuardar.setOnClickListener(this);
             mp3.start();

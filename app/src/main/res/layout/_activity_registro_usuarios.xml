@@ -35,4 +35,53 @@
         android:layout_marginTop="30dp"
         android:onClick="onClick"/>
 
+    /*añado*/
+    <RelativeLayout
+        android:id="@+id/VentanaUp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginVertical="100dp"
+        android:layout_marginHorizontal="50dp"
+        android:background="@color/colorAccent"
+        android:padding="16dp"
+        android:visibility="invisible">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+                <ImageView
+                    android:id="@+id/name"
+                    android:maxWidth="@android:dimen/thumbnail_width"/>
+                android:src="@mipmap/name"
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_marginTop="40dp"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/textSucces"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Good Work!!!"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#FFFFFF"
+                    android:textSize="30sp" />
+
+
+            </TableRow>
+
+        </TableLayout>
+
+
+    </RelativeLayout>
+
 </LinearLayout>
