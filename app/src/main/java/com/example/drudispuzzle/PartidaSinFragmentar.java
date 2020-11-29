@@ -17,6 +17,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -38,6 +39,7 @@ import android.widget.Chronometer;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -96,8 +98,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     public MediaPlayer mp4 = null;
     private ContentValues values;
     Uri SoundUri;
-
-
+    private View Popup;
 
 
     public PartidaSinFragmentar() {
@@ -324,9 +325,23 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
             myChronometer = findViewById(R.id.chronometer);
             myChronometer.stop();
 
-
             tiempo = myChronometer.getText().toString();
-            
+
+
+            //añado
+            View Popup = layout.findViewById(R.id.Popup);
+            //Popup.getVisibility();
+            Popup.bringToFront();
+
+            Animation animation = null;
+            Popup.startAnimation(animation);
+            Chronometer chronometer = null;// = PartidaSinFragmentar.findViewById(R.id.chronometer);
+            final Animation animationChronometer = AnimationUtils.loadAnimation(
+                    getParent(),
+                    R.anim.item_animation
+            );
+            chronometer.startAnimation(animationChronometer);
+            //fin añadido
 
             setContentView(R.layout._activity_registro_usuarios);
             Button btnGuardar = (Button) findViewById(R.id.btnRegistro);
@@ -336,6 +351,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
             btnGuardar.setOnClickListener(this);
             mp3.start();
             reproduciendo=true;
+
 
         }
 
