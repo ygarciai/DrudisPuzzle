@@ -3,6 +3,7 @@ package com.example.drudispuzzle;
 import android.content.Intent;
 import android.content.res.loader.AssetsProvider;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;

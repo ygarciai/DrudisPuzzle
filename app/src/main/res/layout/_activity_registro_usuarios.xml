@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_registro_usuarios"
     android:layout_width="match_parent"
@@ -44,7 +45,7 @@
         android:layout_marginHorizontal="50dp"
         android:background="@color/colorAccent"
         android:padding="16dp"
-        android:visibility="invisible">
+        android:visibility="visible">
 
         <TableLayout
             android:layout_width="match_parent"
@@ -63,14 +64,15 @@
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="38dp"
+                android:layout_height="261dp"
                 android:layout_marginTop="40dp"
+                android:layout_weight="20"
                 android:gravity="center">
 
                 <TextView
                     android:id="@+id/textSucces"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="240dp"
                     android:text="Good Work!!!"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="#FFFFFF"
@@ -80,6 +82,8 @@
             </TableRow>
 
         </TableLayout>
+
+
 
 
     </RelativeLayout>

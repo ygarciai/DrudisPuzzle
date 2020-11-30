@@ -3,10 +3,23 @@
     android:fillAfter="true">
 
     <alpha
-        android:duration="5000"
+        android:duration="2000"
         android:fromAlpha="0.0"
         android:interpolator="@android:anim/accelerate_interpolator"
-        android:toAlpha="1.0"/>
+        android:toAlpha="1.0"
+        android:repeatMode="reverse"
+        android:repeatCount="infinite"/>
+    <rotate
+        android:duration="2000"
+        android:fromDegrees="0"
+        android:interpolator="@android:anim/linear_interpolator"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:startOffset="4000"
+        android:toDegrees="360"
+        android:repeatMode="reverse"
+        android:repeatCount="infinite"
+        />
 
 
 </set>
