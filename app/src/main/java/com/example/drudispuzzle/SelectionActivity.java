@@ -49,7 +49,6 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
     AudioManager audioManager,mAudioManager;
     AudioManager.OnAudioFocusChangeListener audioListener;
     private AudioManager.OnAudioFocusChangeListener mOnAudioFocusChangeListener;
-    private AudioFocusChangeListenerImpl mAudioFocusChangeListener;
     private boolean mFocusGranted, mFocusChanged;
     int result=0;
 
@@ -80,9 +79,6 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //mp1=new MediaPlayer();
-        //mp = new MediaPlayer();
-        //mp = MediaPlayer.create(this, R.raw.jazzopedie);
 
         setContentView(R.layout.fragment_selection_activity);
         Button btnPlay = (Button) findViewById(R.id.button_inicioPartida);
@@ -108,52 +104,6 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
         registerComponentCallbacks(handler);
 
         }
-
-
-
-
-
-    private class AudioFocusChangeListenerImpl implements AudioManager.OnAudioFocusChangeListener {
-        @Override
-        public void onAudioFocusChange(int focusChange) {
-            switch (focusChange) {
-                case AudioManager.AUDIOFOCUS_GAIN:
-                    ApplicationLifecycleHandler.mp1.start();
-                    break;
-                case AudioManager.AUDIOFOCUS_LOSS:
-                    ApplicationLifecycleHandler.mp1.pause();
-                    break;
-                case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
-                    ApplicationLifecycleHandler.mp1.pause();
-                    break;
-                case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
-                    ApplicationLifecycleHandler.mp1.pause();
-                    break;
-            }
-        }
-    }
-
-
-    private final PhoneStateListener mPhoneListener=new PhoneStateListener(){
-        public void onCallStateChanged(int state, String incomingNumber) {
-            super.onCallStateChanged(state, incomingNumber);
-            // Call receive state
-            try {
-                switch (state) {
-                    case TelephonyManager.CALL_STATE_RINGING:
-                        ApplicationLifecycleHandler.mp1.pause();
-                        break;
-                    case TelephonyManager.CALL_STATE_OFFHOOK:
-                        break;
-                    case TelephonyManager.CALL_STATE_IDLE:
-                        ApplicationLifecycleHandler.mp1.start();
-                        break;
-                    default:
-                }
-            } catch (Exception e) {
-            }
-        }
-    };
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

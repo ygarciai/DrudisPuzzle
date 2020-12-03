@@ -40,7 +40,7 @@ public class TomarFoto extends AppCompatActivity {
         registerActivityLifecycleCallbacks(handler);
         registerComponentCallbacks(handler);
 
-        
+
         myImageView = (ImageView)findViewById(R.id.myImageView);
         myButton = (Button)findViewById(R.id.myButton);
         myButton.setOnClickListener(new View.OnClickListener() {
