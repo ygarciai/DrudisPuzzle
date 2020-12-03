@@ -6,6 +6,7 @@ import android.content.ClipData;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -44,7 +45,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-
+import com.example.drudispuzzle.entidades.Usuario;
 import com.example.drudispuzzle.utilidades.RegistroUsuariosActivity;
 import com.example.drudispuzzle.utilidades.Utilidades;
 
@@ -75,6 +76,8 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     private static final String LOGCAT = null;
     private List<Bitmap> pieces;
     private List<Integer> indexArray;
+
+    ArrayList<Usuario> listaUsuariosRecordos;
 
     ImageView i1;
     ImageView i1red;
@@ -412,6 +415,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
         }
         switch (view.getId()) {
             case R.id.btnRegistro:
+                
                 //Inicializar.onCreate(getContentResolver());
                 ContentValues values=new ContentValues();
 
@@ -419,6 +423,13 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                 SQLiteDatabase db=conn.getWritableDatabase();
 
                 //db.execSQL(Utilidades.CREAR_TABLA_PLAYER);
+
+                //PROBEMOS A RECUPERAR TODA LA ARRAY D JUGADORES
+                listaUsuariosRecordos=new ArrayList<>();
+
+                recuperarListaPersonas();
+
+
 
                 values.put(Utilidades.CAMPO_NAME, nombreIntroducido.getText().toString());
                 values.put(Utilidades.CAMPO_TIME, tiempo);
@@ -431,6 +442,25 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
 
         }
 
+    }
+
+    private void recuperarListaPersonas() {
+
+        com.example.drudispuzzle.utilidades.ConexionSQLiteHelper conn=new com.example.drudispuzzle.utilidades.ConexionSQLiteHelper(this,"bd_usuarios",null,1);
+
+        SQLiteDatabase db=conn.getReadableDatabase();
+
+        Usuario usuario=null;
+
+        Cursor cursor=db.rawQuery("SELECT * FROM "+ Utilidades.TABLA_PLAYER,null);
+
+        while (cursor.moveToNext()){
+            usuario=new Usuario();
+            usuario.setP(cursor.getString(0));
+            usuario.setT(cursor.getString(1));
+
+            listaUsuariosRecordos.add(usuario);
+        }
     }
 
     @Override
