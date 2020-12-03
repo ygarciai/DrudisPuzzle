@@ -234,6 +234,10 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
     }
 
     private void play(Context context, Uri uri) {
+        //añado
+        Intent i = new Intent(this, MyServiceMusica.class);
+        startService(i);
+        //fin
 
         try {
             mp.stop();
@@ -257,4 +261,5 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
             e.printStackTrace();
         }
     }
+
 }

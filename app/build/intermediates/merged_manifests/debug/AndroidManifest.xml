@@ -26,6 +26,11 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/Theme.AppCompat.NoActionBar" >
+        <service
+            android:name="com.example.drudispuzzle.MyServiceMusica"
+            android:enabled="true"
+            android:exported="true" />
+
         <activity
             android:name="com.example.drudispuzzle.MainActivity"
             android:screenOrientation="portrait" >
