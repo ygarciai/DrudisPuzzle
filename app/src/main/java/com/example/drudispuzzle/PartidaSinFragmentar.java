@@ -77,7 +77,9 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     private List<Bitmap> pieces;
     private List<Integer> indexArray;
 
-    ArrayList<Usuario> listaUsuariosRecordos;
+    public ArrayList<Usuario> listaUsuariosRecordos;
+    String Maximoactual="";
+
 
     ImageView i1;
     ImageView i1red;
@@ -149,6 +151,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
         mp4 = new MediaPlayer();
         mp4 = MediaPlayer.create(this, R.raw.piecesong);
 
+        listaUsuariosRecordos=new ArrayList<>();
 
 
         myChronometer.start();
@@ -425,9 +428,9 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                 //db.execSQL(Utilidades.CREAR_TABLA_PLAYER);
 
                 //PROBEMOS A RECUPERAR TODA LA ARRAY D JUGADORES
-                listaUsuariosRecordos=new ArrayList<>();
 
                 recuperarListaPersonas();
+                recuperarminimotiempo();
 
 
 
@@ -454,6 +457,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
 
         Cursor cursor=db.rawQuery("SELECT * FROM "+ Utilidades.TABLA_PLAYER,null);
 
+
         while (cursor.moveToNext()){
             usuario=new Usuario();
             usuario.setP(cursor.getString(0));
@@ -461,6 +465,19 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
 
             listaUsuariosRecordos.add(usuario);
         }
+
+    }
+
+    private void recuperarminimotiempo() {
+
+        for (int y=0;y<listaUsuariosRecordos.size();y++){
+            Maximoactual="";
+            listaUsuariosRecordos.get(y).getT();
+           // if (Maximoactual<listaUsuariosRecordos.get(y).getT()){
+           //     Maximoactual=listaUsuariosRecordos.get(y).getT();
+           // }
+        }
+
     }
 
     @Override
