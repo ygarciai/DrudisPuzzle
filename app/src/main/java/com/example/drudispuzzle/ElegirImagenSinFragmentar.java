@@ -99,6 +99,10 @@ public class ElegirImagenSinFragmentar extends AppCompatActivity implements View
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_elegir_imagen_sin_fragmentar);
+        ApplicationLifecycleHandler handler = new ApplicationLifecycleHandler();
+        registerActivityLifecycleCallbacks(handler);
+        registerComponentCallbacks(handler);
+
         imagenesSeleccionadas = new ArrayList<ImageView>();
         imagenesSeleccionadasBitmap = new ArrayList<Bitmap>();
         imagenesSeleccionadasUri = new ArrayList<Uri>();

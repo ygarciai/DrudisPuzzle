@@ -3,7 +3,9 @@ package com.example.drudispuzzle;
 import android.app.Activity;
 import android.app.Application;
 import android.content.ComponentCallbacks2;
+import android.content.Context;
 import android.content.res.Configuration;
+import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -15,6 +17,8 @@ public class ApplicationLifecycleHandler implements Application.ActivityLifecycl
 
     private static final String TAG = ApplicationLifecycleHandler.class.getSimpleName();
     private static boolean isInBackground = false;
+    public static MediaPlayer mp1 = null;
+    public static boolean repro=false;
 
     @Override
     public void onActivityCreated(Activity activity, Bundle bundle) {
@@ -22,65 +26,63 @@ public class ApplicationLifecycleHandler implements Application.ActivityLifecycl
 
     @Override
     public void onActivityStarted(Activity activity) {
+        if (!repro){
+            mp1 = new MediaPlayer();
+            mp1 = MediaPlayer.create(activity,R.raw.jazzopedie);
+            mp1.setLooping(true);
+            mp1.start();
+            repro=true;
+        }
+
     }
 
     @Override
     public void onActivityResumed(Activity activity) {
-        if(isInBackground){
-            Log.d(TAG, "app went to foreground");
-            try {
-                if(SelectionActivity.enBack){
-                    SelectionActivity.mp.prepare();
-                    SelectionActivity.mp.start();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        if(isInBackground) {
             isInBackground = false;
-            SelectionActivity.enBack=false;
+            ApplicationLifecycleHandler.mp1.start();
+            Log.d(TAG, "app went to foreground");
         }
     }
 
     @Override
     public void onActivityPaused(Activity activity) {
-        SelectionActivity.mp.pause();
+        //SelectionActivity.mp.pause();
+        Log.d(TAG, "app went to background");
     }
 
     @Override
     public void onActivityStopped(Activity activity) {
-        SelectionActivity.mp.stop();
+        //SelectionActivity.mp.stop();
+        Log.d(TAG, "app went to background");
     }
 
     @Override
     public void onActivitySaveInstanceState(Activity activity, Bundle bundle) {
+        Log.d(TAG, "app went to background");
     }
 
     @Override
     public void onActivityDestroyed(Activity activity) {
+        Log.d(TAG, "app went to background");
     }
 
     @Override
     public void onConfigurationChanged(Configuration configuration) {
+        Log.d(TAG, "app went to background");
     }
 
     @Override
     public void onLowMemory() {
+        Log.d(TAG, "app went to background");
     }
 
     @Override
     public void onTrimMemory(int i) {
         if(i == ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN){
             Log.d(TAG, "app went to background");
-            if (SelectionActivity.encambioMusica) {
-                SelectionActivity.mp.pause();
-                SelectionActivity.enBack=true;
-                SelectionActivity.encambioMusica=false;
-            }else{
-                isInBackground = true;
-            }
-
-
-
+            isInBackground = true;
+            ApplicationLifecycleHandler.mp1.pause();
         }
     }
 }

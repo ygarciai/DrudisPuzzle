@@ -28,6 +28,9 @@ public class ElegirPuzzle extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.elegir_puzzle);
+        ApplicationLifecycleHandler handler = new ApplicationLifecycleHandler();
+        registerActivityLifecycleCallbacks(handler);
+        registerComponentCallbacks(handler);
 
         Button sonidoOn=(Button)findViewById(R.id.sonidoOn);
         Button sonidoOff=(Button)findViewById(R.id.sonidoOff);

@@ -55,7 +55,7 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
 
 
     public static boolean  encambioMusica=false;
-    public static boolean  enBack=false;
+    public static boolean  enBack=true;
     public SelectionActivity() {
         // Required empty public constructor
     }
@@ -81,8 +81,8 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //mp1=new MediaPlayer();
-        mp = new MediaPlayer();
-        mp = MediaPlayer.create(this, R.raw.jazzopedie);
+        //mp = new MediaPlayer();
+        //mp = MediaPlayer.create(this, R.raw.jazzopedie);
 
         setContentView(R.layout.fragment_selection_activity);
         Button btnPlay = (Button) findViewById(R.id.button_inicioPartida);
@@ -102,57 +102,37 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
         sonidoOn.setOnClickListener(this);
         sonidoOff.setOnClickListener(this);
         seleccionMusica.setOnClickListener(this);
-        if (!reproduciendo) {
-            mp.setLooping(true);
-            mp.start();
-            reproduciendo = true;
-        }
-        TelephonyManager mTelephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        mTelephonyManager.listen(mPhoneListener, PhoneStateListener.LISTEN_CALL_STATE);
-
-        mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-        mAudioFocusChangeListener = new AudioFocusChangeListenerImpl();
-
-        result = mAudioManager.requestAudioFocus(mAudioFocusChangeListener,
-                AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
-        switch (result) {
-            case AudioManager.AUDIOFOCUS_REQUEST_GRANTED:
-                mFocusGranted = true;
-                break;
-            case AudioManager.AUDIOFOCUS_REQUEST_FAILED:
-                mFocusGranted = false;
-                break;
-        }
 
         ApplicationLifecycleHandler handler = new ApplicationLifecycleHandler();
         registerActivityLifecycleCallbacks(handler);
         registerComponentCallbacks(handler);
-    }
+
+        }
+
+
 
 
 
     private class AudioFocusChangeListenerImpl implements AudioManager.OnAudioFocusChangeListener {
         @Override
         public void onAudioFocusChange(int focusChange) {
-            mFocusChanged = true;
-            //Log.i(TAG, "Focus changed");
-
             switch (focusChange) {
                 case AudioManager.AUDIOFOCUS_GAIN:
-                    mp.start();
+                    ApplicationLifecycleHandler.mp1.start();
                     break;
                 case AudioManager.AUDIOFOCUS_LOSS:
-                    mp.pause();
+                    ApplicationLifecycleHandler.mp1.pause();
                     break;
                 case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
-                    mp.pause();
+                    ApplicationLifecycleHandler.mp1.pause();
                     break;
                 case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
-                    mp.pause();
+                    ApplicationLifecycleHandler.mp1.pause();
                     break;
             }
         }
     }
+
 
     private final PhoneStateListener mPhoneListener=new PhoneStateListener(){
         public void onCallStateChanged(int state, String incomingNumber) {
@@ -161,12 +141,12 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
             try {
                 switch (state) {
                     case TelephonyManager.CALL_STATE_RINGING:
-                        mp.pause();
+                        ApplicationLifecycleHandler.mp1.pause();
                         break;
                     case TelephonyManager.CALL_STATE_OFFHOOK:
                         break;
                     case TelephonyManager.CALL_STATE_IDLE:
-                        mp.start();
+                        ApplicationLifecycleHandler.mp1.start();
                         break;
                     default:
                 }
@@ -197,20 +177,20 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.button2:
                 Intent intent3 = new Intent(view.getContext(), TomarFoto.class);
-                startActivityForResult(intent3, 0);
+                //startActivityForResult(intent3, 0);
                 break;
             case R.id.sonidoEncendido: //comienza la reproduccion
-                if(!reproduciendo) {//verifica que ya no se este reproduciendo
-                    mp.setLooping(true);
-                    mp.start();
-                    reproduciendo=true;
+                if(!ApplicationLifecycleHandler.repro) {//verifica que ya no se este reproduciendo
+                    ApplicationLifecycleHandler.mp1.setLooping(true);
+                    ApplicationLifecycleHandler.mp1.start();
+                    ApplicationLifecycleHandler.repro=true;
                 }
                 break;
             case R.id.sonidoApagado:    //detiene la reproduccion
-                if(reproduciendo) {
-                    mp.pause();
-                    mp.setLooping(false);
-                    reproduciendo=false;
+                if(ApplicationLifecycleHandler.repro) {
+                    ApplicationLifecycleHandler.mp1.pause();
+                    ApplicationLifecycleHandler.mp1.setLooping(false);
+                    ApplicationLifecycleHandler.repro=false;
                 }
                 break;
             case R.id.button_seleccionMusica:
@@ -240,12 +220,12 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
         //fin
 
         try {
-            mp.stop();
-            mp = new MediaPlayer();
-            mp.setDataSource(context, uri);
-            mp.prepare();
-            mp.setLooping(true);
-            mp.start();
+            ApplicationLifecycleHandler.mp1.stop();
+            ApplicationLifecycleHandler.mp1 = new MediaPlayer();
+            ApplicationLifecycleHandler.mp1.setDataSource(context, uri);
+            ApplicationLifecycleHandler.mp1.prepare();
+            ApplicationLifecycleHandler.mp1.setLooping(true);
+            ApplicationLifecycleHandler.mp1.start();
             reproduciendo=true;
         } catch (IllegalArgumentException e) {
             // TODO Auto-generated catch block

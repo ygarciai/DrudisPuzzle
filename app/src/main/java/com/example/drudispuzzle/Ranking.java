@@ -65,6 +65,11 @@ public class Ranking extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout._activity_lista_personas_recycler);
 
+        ApplicationLifecycleHandler handler = new ApplicationLifecycleHandler();
+        registerActivityLifecycleCallbacks(handler);
+        registerComponentCallbacks(handler);
+
+
         conn=new ConexionSQLiteHelper(getApplicationContext(),"bd_usuarios",null,1);
 
         listaUsuario=new ArrayList<>();

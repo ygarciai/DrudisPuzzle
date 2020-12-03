@@ -104,6 +104,10 @@ public class PartidaFragmentada2 extends AppCompatActivity implements View.OnTou
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_partida_fragmentada2);
+        ApplicationLifecycleHandler handler = new ApplicationLifecycleHandler();
+        registerActivityLifecycleCallbacks(handler);
+        registerComponentCallbacks(handler);
+
 
         mp=new MediaPlayer();
         mp = MediaPlayer.create(this, R.raw.piecesong);
