@@ -1,5 +1,7 @@
 package com.example.drudispuzzle;
 
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
@@ -13,11 +15,15 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.IOException;
@@ -33,6 +39,12 @@ public class PuzzleActivity extends AppCompatActivity {
     String mCurrentPhotoPath;
     String mCurrentPhotoUri;
 
+    static boolean reproduciendo=false;
+    public MediaPlayer mp = null;
+    //public MediaPlayer mp1 = null;
+    private ContentValues values;
+    Uri SoundUri;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -45,6 +57,9 @@ public class PuzzleActivity extends AppCompatActivity {
         ApplicationLifecycleHandler handler = new ApplicationLifecycleHandler();
         registerActivityLifecycleCallbacks(handler);
         registerComponentCallbacks(handler);
+        
+        mp=new MediaPlayer();
+        mp = MediaPlayer.create(this, R.raw.piecesong);
 
 
         Intent intent = getIntent();
@@ -62,7 +77,8 @@ public class PuzzleActivity extends AppCompatActivity {
                 // ordena de manera aleatoria las piezas
                 Collections.shuffle(pieces);
                 for (PuzzlePiece piece : pieces) {
-                    //piece.setOnTouchListener(tactilListener);
+                    View.OnTouchListener tactilListener = null;
+                    piece.setOnTouchListener(tactilListener);
                     layout.addView(piece);
                     // randomize position, on the bottom of the screen
                     RelativeLayout.LayoutParams lParams = (RelativeLayout.LayoutParams) piece.getLayoutParams();
@@ -105,6 +121,7 @@ public class PuzzleActivity extends AppCompatActivity {
             e.printStackTrace();
             Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
         }
+
     }
 
     private ArrayList<PuzzlePiece> splitImage() {
@@ -304,5 +321,41 @@ public class PuzzleActivity extends AppCompatActivity {
         return true;
     }
 
+    //añado onActi.. y play
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if(resultCode == RESULT_OK && requestCode == 10) {
+            Uri uriSound = data.getData();
+            play(this, uriSound);
+        }else{
+            reproduciendo=false;
+        }
+    }
+
+    private void play(Context context, Uri uri) {
+
+        try {
+            mp.stop();
+            mp = new MediaPlayer();
+            mp.setDataSource(context, uri);
+            mp.prepare();
+            mp.setLooping(true);
+            mp.start();
+            reproduciendo=true;
+        } catch (IllegalArgumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (SecurityException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalStateException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
    }

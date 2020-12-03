@@ -1,5 +1,7 @@
 package com.example.drudispuzzle;
 
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
@@ -13,15 +15,21 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
+import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -49,6 +57,7 @@ public class PartidaSinFragmentar2 extends AppCompatActivity {
 
     int nivel;
     ImageView i1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +101,7 @@ public class PartidaSinFragmentar2 extends AppCompatActivity {
                     lParams.leftMargin = new Random().nextInt(layout.getWidth() - piece.pieceWidth);
                     lParams.topMargin = layout.getHeight() - piece.pieceHeight;
                     piece.setLayoutParams(lParams);
+
                 }
             }
         });
@@ -361,4 +371,5 @@ public class PartidaSinFragmentar2 extends AppCompatActivity {
 
         return true;
     }
+
 }

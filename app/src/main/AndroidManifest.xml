@@ -2,11 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.drudispuzzle">
 
-
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -15,31 +16,36 @@
         android:roundIcon="@mipmap/ic_druidas"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
+        <service
+            android:name=".MyServiceMusica"
+            android:enabled="true"
+            android:exported="true"></service>
 
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ElegirPuzzle"  />
+        <activity android:name=".ElegirPuzzle" />
         <activity android:name=".PuzzleActivity" />
         <activity android:name=".SelectionActivity" />
         <activity android:name=".Ranking" />
         <activity android:name=".Multiplayer" />
         <activity android:name=".TomarFoto" />
         <activity android:name=".SeleccionTipoPuzzle" />
-        <activity android:name=".ElegirImagenSinFragmentar"/>
-        <activity android:name=".ElegirImagenSinFragmentar2"/>
-        <activity android:name=".PartidaSinFragmentar"/>
-        <activity android:name=".PartidaSinFragmentar2"/>
-        <activity android:name=".PartidaFragmentada"/>
-        <activity android:name=".PartidaFragmentada2"/>
-        <activity android:name=".utilidades.ListaPersonasRecycler"/>
-        <activity android:name=".CalendarioPuntuacion"/>
-        
+        <activity android:name=".ElegirImagenSinFragmentar" />
+        <activity android:name=".ElegirImagenSinFragmentar2" />
+        <activity android:name=".PartidaSinFragmentar" />
+        <activity android:name=".PartidaSinFragmentar2" />
+        <activity android:name=".PartidaFragmentada" />
+        <activity android:name=".PartidaFragmentada2" />
+        <activity android:name=".utilidades.ListaPersonasRecycler" />
+        <activity android:name=".CalendarioPuntuacion" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
@@ -50,6 +56,5 @@
                 android:resource="@xml/file_paths" />
         </provider>
     </application>
-
 
 </manifest>
