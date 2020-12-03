@@ -58,6 +58,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private static final String LOGCAT = null;
+    private String CAMPO_TIME;
     private List<Bitmap> pieces;
     private List<Integer> indexArray;
 
@@ -374,8 +375,77 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                 break;
 
         }
+//añadido
+        switch (view.getId()){
+            case R.id.btnRegistro:
+                ArrayList<Integer> listadoTiempos= new ArrayList<>();
+                ContentValues values = new ContentValues();
+                com.example.drudispuzzle.utilidades.ConexionSQLiteHelper conn = new com.example.drudispuzzle.utilidades.ConexionSQLiteHelper(this, "bd_usuarios", null, 1);
+                SQLiteDatabase db = conn.getWritableDatabase();
+
+                char ti1 = tiempo.charAt(0);
+                char ti2 = tiempo.charAt(1);
+                char ti3 =  tiempo.charAt(3);
+                char ti4 = tiempo.charAt(4);
+
+                int tiempoencadena = ti1+ti2+ti3+ti4;
+
+                int tiempoencadenaentero = Integer.valueOf(tiempoencadena);
+
+                listadoTiempos.add(tiempoencadenaentero);
+
+                int min = listadoTiempos.get(0);
+
+                for (int i = 0; i < listadoTiempos.size(); i++) {
+
+                    if (listadoTiempos.get(i) < min) {
+
+                        Intent intent = new Intent(Intent.ACTION_INSERT)
+                                .setData(CalendarContract.Events.CONTENT_URI)
+
+                                .putExtra(CalendarContract.Events.TITLE, "HAS LOGRADO RECORD CON: " + tiempo)
+                                .putExtra(CalendarContract.Events.DESCRIPTION, "")
+                                .putExtra(CalendarContract.Events.EVENT_LOCATION, "")
+                                .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY)
+                                .putExtra(Intent.EXTRA_EMAIL, "");
+                        values.put(Utilidades.CAMPO_NAME, nombreIntroducido.getText().toString());
+                        values.put(CAMPO_TIME, tiempo);
+                        Long idResultante = db.insert(Utilidades.TABLA_PLAYER, Utilidades.CAMPO_NAME, values);
+
+                        startActivityForResult(intent, 0);
+
+                        min = listadoTiempos.get(i);
+
+                    } else {
+                        Intent intent = new Intent(Intent.ACTION_INSERT)
+                                .setData(CalendarContract.Events.CONTENT_URI)
+
+                                .putExtra(CalendarContract.Events.TITLE, "Tiempo logrado: " + tiempo)
+                                .putExtra(CalendarContract.Events.DESCRIPTION, "")
+                                .putExtra(CalendarContract.Events.EVENT_LOCATION, "")
+                                .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY)
+                                .putExtra(Intent.EXTRA_EMAIL, "");
+                        values.put(Utilidades.CAMPO_NAME, nombreIntroducido.getText().toString());
+                        values.put(CAMPO_TIME, tiempo);
+                        Long idResultante = db.insert(Utilidades.TABLA_PLAYER, Utilidades.CAMPO_NAME, values);
+                        // Toast.makeText(getApplicationContext(), "Nombre Registro: " + idResultante, Toast.LENGTH_SHORT).show();
+                        startActivityForResult(intent, 0);
+
+                    }
+                    db.close();
+
+                    break;
+                }
+
+
+                break;
+            default:
+
+        }
 
     }
+
+    //fin
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
