@@ -49,6 +49,10 @@ public class Multiplayer extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ApplicationLifecycleHandler handler = new ApplicationLifecycleHandler();
+        registerActivityLifecycleCallbacks(handler);
+        registerComponentCallbacks(handler);
+
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

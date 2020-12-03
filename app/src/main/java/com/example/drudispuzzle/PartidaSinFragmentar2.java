@@ -56,6 +56,11 @@ public class PartidaSinFragmentar2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_puzzle);
 
+        ApplicationLifecycleHandler handler = new ApplicationLifecycleHandler();
+        registerActivityLifecycleCallbacks(handler);
+        registerComponentCallbacks(handler);
+
+
         nivel=1;
 
         final RelativeLayout layout = findViewById(R.id.layout);

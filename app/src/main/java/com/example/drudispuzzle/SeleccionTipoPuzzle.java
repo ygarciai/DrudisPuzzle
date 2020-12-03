@@ -56,6 +56,10 @@ public class SeleccionTipoPuzzle  extends AppCompatActivity implements View.OnCl
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_seleccion_tipo_puzzle);
+        ApplicationLifecycleHandler handler = new ApplicationLifecycleHandler();
+        registerActivityLifecycleCallbacks(handler);
+        registerComponentCallbacks(handler);
+
 
         Button btn = (Button) findViewById(R.id.button_Imagenes);
         Button btn1 = (Button) findViewById(R.id.button_ImagenesSeg);

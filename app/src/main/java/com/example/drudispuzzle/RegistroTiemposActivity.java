@@ -21,6 +21,11 @@ public class RegistroTiemposActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_records);
 
+        ApplicationLifecycleHandler handler = new ApplicationLifecycleHandler();
+        registerActivityLifecycleCallbacks(handler);
+        registerComponentCallbacks(handler);
+
+
 
         campoName= (EditText) findViewById(R.id.campoName);
         // no es EditText pues sera el tiempo del contador

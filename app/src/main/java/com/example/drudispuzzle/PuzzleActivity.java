@@ -42,6 +42,11 @@ public class PuzzleActivity extends AppCompatActivity {
         final RelativeLayout layout = findViewById(R.id.layout);
         final ImageView imageView = findViewById(R.id.imageView);
 
+        ApplicationLifecycleHandler handler = new ApplicationLifecycleHandler();
+        registerActivityLifecycleCallbacks(handler);
+        registerComponentCallbacks(handler);
+
+
         Intent intent = getIntent();
         final String assetName = intent.getStringExtra("assetName"); //obtiene la imagen seleccionada por el jugador
 

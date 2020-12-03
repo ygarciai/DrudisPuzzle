@@ -87,6 +87,10 @@ public class PartidaFragmentada2 extends AppCompatActivity implements View.OnTou
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_partida_fragmentada2);
+        ApplicationLifecycleHandler handler = new ApplicationLifecycleHandler();
+        registerActivityLifecycleCallbacks(handler);
+        registerComponentCallbacks(handler);
+
 
         ImageView i0 = new ImageView(this);
         ImageView i1 = new ImageView(this);

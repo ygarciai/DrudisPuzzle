@@ -24,6 +24,9 @@ public class CalendarioPuntuacion extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout._activity_registro_usuarios);
+        ApplicationLifecycleHandler handler = new ApplicationLifecycleHandler();
+        registerActivityLifecycleCallbacks(handler);
+        registerComponentCallbacks(handler);
 
         NAME = findViewById(R.id.campoNamee);
         TIME = findViewById(R.id.campoTimee);

@@ -36,6 +36,11 @@ public class TomarFoto extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_tomar_foto);
 
+        ApplicationLifecycleHandler handler = new ApplicationLifecycleHandler();
+        registerActivityLifecycleCallbacks(handler);
+        registerComponentCallbacks(handler);
+
+        
         myImageView = (ImageView)findViewById(R.id.myImageView);
         myButton = (Button)findViewById(R.id.myButton);
         myButton.setOnClickListener(new View.OnClickListener() {

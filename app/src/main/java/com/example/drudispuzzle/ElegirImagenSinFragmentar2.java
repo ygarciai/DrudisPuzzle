@@ -55,6 +55,9 @@ public class ElegirImagenSinFragmentar2 extends AppCompatActivity implements Vie
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_elegir_imagen_sin_fragmentar2);
+        ApplicationLifecycleHandler handler = new ApplicationLifecycleHandler();
+        registerActivityLifecycleCallbacks(handler);
+        registerComponentCallbacks(handler);
 
         AssetManager am = getAssets();
         try {

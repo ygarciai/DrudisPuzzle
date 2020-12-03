@@ -104,6 +104,10 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_partida_sin_fragmentar);
+        ApplicationLifecycleHandler handler = new ApplicationLifecycleHandler();
+        registerActivityLifecycleCallbacks(handler);
+        registerComponentCallbacks(handler);
+
         Registro=new RegistroUsuariosActivity();
         level = 1;
         Inicializar=new ConexionSQLiteHelper(getApplicationContext(),"bd_usuarios",null,1);
