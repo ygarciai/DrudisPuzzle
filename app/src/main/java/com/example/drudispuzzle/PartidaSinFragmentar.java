@@ -53,9 +53,12 @@ import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.io.StringBufferInputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 
@@ -96,6 +99,8 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     String nombre;
     TextView nombreIntroducido;
 
+     public boolean superarecord=false;
+
     //añado
     static boolean reproduciendo=false;
     public MediaPlayer mp2 = null;
@@ -131,6 +136,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_partida_sin_fragmentar);
+        superarecord=false;
         ApplicationLifecycleHandler handler = new ApplicationLifecycleHandler();
         registerActivityLifecycleCallbacks(handler);
         registerComponentCallbacks(handler);
@@ -430,9 +436,22 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                 //PROBEMOS A RECUPERAR TODA LA ARRAY D JUGADORES
 
                 recuperarListaPersonas();
-                recuperarminimotiempo();
+                try {
+                    recuperarminimotiempo();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                if (superarecord){
+                    Intent intent1 = new Intent(Intent.ACTION_INSERT)
+                            .setData(CalendarContract.Events.CONTENT_URI)
 
-
+                            .putExtra(CalendarContract.Events.TITLE, "HAS LOGRADO RECORD CON: " + tiempo)
+                            .putExtra(CalendarContract.Events.DESCRIPTION, "Yuju!")
+                            .putExtra(CalendarContract.Events.EVENT_LOCATION, "")
+                            .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY)
+                            .putExtra(Intent.EXTRA_EMAIL, "");
+                    startActivityForResult(intent1, 0);
+                }
 
                 values.put(Utilidades.CAMPO_NAME, nombreIntroducido.getText().toString());
                 values.put(Utilidades.CAMPO_TIME, tiempo);
@@ -468,16 +487,34 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
 
     }
 
-    private void recuperarminimotiempo() {
+    private void recuperarminimotiempo() throws ParseException {
+
+        String currentString =tiempo;
+        String[] separated = currentString.split(":");
+        Integer Minutos=0;
+        Integer Segundos=0;
+        Minutos=Integer.valueOf(separated[0]);
+        Segundos=Integer.valueOf(separated[1]);
+        Integer TotalSegundos=(Minutos*60)+Segundos;
+
+        Integer ScoreMinimoAlmacenado=999999;
 
         for (int y=0;y<listaUsuariosRecordos.size();y++){
-            Maximoactual="";
-            listaUsuariosRecordos.get(y).getT();
-           // if (Maximoactual<listaUsuariosRecordos.get(y).getT()){
-           //     Maximoactual=listaUsuariosRecordos.get(y).getT();
-           // }
+            String ScoreActual=listaUsuariosRecordos.get(y).getT();
+            String[] separated1 = ScoreActual.split(":");
+            Integer MinutosScore=0;
+            Integer SegundosScore=0;
+            MinutosScore=Integer.valueOf(separated1[0]);
+            SegundosScore=Integer.valueOf(separated1[1]);
+            Integer TotalSegundosScore=(MinutosScore*60)+(SegundosScore);
+            if(TotalSegundosScore<ScoreMinimoAlmacenado){
+                ScoreMinimoAlmacenado=TotalSegundosScore;
+            }
         }
-
+        if (TotalSegundos<ScoreMinimoAlmacenado){
+            Maximoactual=tiempo;
+            superarecord=true;
+        }
     }
 
     @Override
