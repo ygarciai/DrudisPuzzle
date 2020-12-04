@@ -6,6 +6,7 @@ import android.content.ClipData;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -44,7 +45,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-
+import com.example.drudispuzzle.entidades.Usuario;
 import com.example.drudispuzzle.utilidades.RegistroUsuariosActivity;
 import com.example.drudispuzzle.utilidades.Utilidades;
 
@@ -52,9 +53,12 @@ import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.io.StringBufferInputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 
@@ -76,6 +80,10 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     private List<Bitmap> pieces;
     private List<Integer> indexArray;
 
+    public ArrayList<Usuario> listaUsuariosRecordos;
+    String Maximoactual="";
+
+
     ImageView i1;
     ImageView i1red;
 
@@ -90,6 +98,8 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     String tiempo;
     String nombre;
     TextView nombreIntroducido;
+
+     public boolean superarecord=false;
 
     //añado
     static boolean reproduciendo=false;
@@ -126,6 +136,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_partida_sin_fragmentar);
+        superarecord=false;
         ApplicationLifecycleHandler handler = new ApplicationLifecycleHandler();
         registerActivityLifecycleCallbacks(handler);
         registerComponentCallbacks(handler);
@@ -146,6 +157,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
         mp4 = new MediaPlayer();
         mp4 = MediaPlayer.create(this, R.raw.piecesong);
 
+        listaUsuariosRecordos=new ArrayList<>();
 
 
         myChronometer.start();
@@ -412,6 +424,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
         }
         switch (view.getId()) {
             case R.id.btnRegistro:
+                
                 //Inicializar.onCreate(getContentResolver());
                 ContentValues values=new ContentValues();
 
@@ -419,6 +432,26 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                 SQLiteDatabase db=conn.getWritableDatabase();
 
                 //db.execSQL(Utilidades.CREAR_TABLA_PLAYER);
+
+                //PROBEMOS A RECUPERAR TODA LA ARRAY D JUGADORES
+
+                recuperarListaPersonas();
+                try {
+                    recuperarminimotiempo();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                if (superarecord){
+                    Intent intent1 = new Intent(Intent.ACTION_INSERT)
+                            .setData(CalendarContract.Events.CONTENT_URI)
+
+                            .putExtra(CalendarContract.Events.TITLE, "HAS LOGRADO RECORD CON: " + tiempo)
+                            .putExtra(CalendarContract.Events.DESCRIPTION, "Yuju!")
+                            .putExtra(CalendarContract.Events.EVENT_LOCATION, "")
+                            .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY)
+                            .putExtra(Intent.EXTRA_EMAIL, "");
+                    startActivityForResult(intent1, 0);
+                }
 
                 values.put(Utilidades.CAMPO_NAME, nombreIntroducido.getText().toString());
                 values.put(Utilidades.CAMPO_TIME, tiempo);
@@ -431,6 +464,57 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
 
         }
 
+    }
+
+    private void recuperarListaPersonas() {
+
+        com.example.drudispuzzle.utilidades.ConexionSQLiteHelper conn=new com.example.drudispuzzle.utilidades.ConexionSQLiteHelper(this,"bd_usuarios",null,1);
+
+        SQLiteDatabase db=conn.getReadableDatabase();
+
+        Usuario usuario=null;
+
+        Cursor cursor=db.rawQuery("SELECT * FROM "+ Utilidades.TABLA_PLAYER,null);
+
+
+        while (cursor.moveToNext()){
+            usuario=new Usuario();
+            usuario.setP(cursor.getString(0));
+            usuario.setT(cursor.getString(1));
+
+            listaUsuariosRecordos.add(usuario);
+        }
+
+    }
+
+    private void recuperarminimotiempo() throws ParseException {
+
+        String currentString =tiempo;
+        String[] separated = currentString.split(":");
+        Integer Minutos=0;
+        Integer Segundos=0;
+        Minutos=Integer.valueOf(separated[0]);
+        Segundos=Integer.valueOf(separated[1]);
+        Integer TotalSegundos=(Minutos*60)+Segundos;
+
+        Integer ScoreMinimoAlmacenado=999999;
+
+        for (int y=0;y<listaUsuariosRecordos.size();y++){
+            String ScoreActual=listaUsuariosRecordos.get(y).getT();
+            String[] separated1 = ScoreActual.split(":");
+            Integer MinutosScore=0;
+            Integer SegundosScore=0;
+            MinutosScore=Integer.valueOf(separated1[0]);
+            SegundosScore=Integer.valueOf(separated1[1]);
+            Integer TotalSegundosScore=(MinutosScore*60)+(SegundosScore);
+            if(TotalSegundosScore<ScoreMinimoAlmacenado){
+                ScoreMinimoAlmacenado=TotalSegundosScore;
+            }
+        }
+        if (TotalSegundos<ScoreMinimoAlmacenado){
+            Maximoactual=tiempo;
+            superarecord=true;
+        }
     }
 
     @Override
