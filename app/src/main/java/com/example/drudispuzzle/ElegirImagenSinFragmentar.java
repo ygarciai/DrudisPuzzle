@@ -2,11 +2,14 @@ package com.example.drudispuzzle;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -20,6 +23,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,10 +31,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Array;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -68,6 +87,9 @@ public class ElegirImagenSinFragmentar extends AppCompatActivity implements View
 
     private Button myButtonFoto;
 
+    public StorageReference mStorageRef;
+
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -99,6 +121,10 @@ public class ElegirImagenSinFragmentar extends AppCompatActivity implements View
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_elegir_imagen_sin_fragmentar);
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         ApplicationLifecycleHandler handler = new ApplicationLifecycleHandler();
         registerActivityLifecycleCallbacks(handler);
         registerComponentCallbacks(handler);
@@ -106,11 +132,13 @@ public class ElegirImagenSinFragmentar extends AppCompatActivity implements View
         imagenesSeleccionadas = new ArrayList<ImageView>();
         imagenesSeleccionadasBitmap = new ArrayList<Bitmap>();
         imagenesSeleccionadasUri = new ArrayList<Uri>();
+
         Button buttonImagen = (Button) findViewById(R.id.button_SeleccionarImagen);
         Button buttonEmpezar = (Button) findViewById(R.id.button_empezarPartidaSinFragmentar);
         buttonImagen.setOnClickListener(this);
         buttonEmpezar.setOnClickListener(this);
         buttonEmpezar.setEnabled(false);
+
 
         myButtonFoto = (Button)findViewById(R.id.button_FotoCamara);
         myButtonFoto.setOnClickListener(this);
@@ -143,9 +171,57 @@ public class ElegirImagenSinFragmentar extends AppCompatActivity implements View
         image5Set = false;
         imagenesSeleccionadas.add(imagen5);
 
+        mStorageRef = FirebaseStorage.getInstance().getReference();
+
+        try {
+            cargarimagenesFirebase();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
+    private void cargarimagenesFirebase() throws IOException {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference().child("images");
+
+        int numero = (int) (Math.random() * 10) + 1;
+        String imagenaleatoria=String.valueOf(numero);
+        imagenaleatoria=imagenaleatoria+".jpg";
+        Log.d(TAG,imagenaleatoria);
+
+
+        storageRef.child("1.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                // Got the download URL for 'users/me/profile.png'
+                //debug.log()
+                InputStream in=null;
+                Log.d(TAG, "Encuentra URI");
+                String uriString;
+                uriString=uri.toString();
+                try {
+                    in = new URL(uriString).openStream();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Log.d(TAG, "Encuentra URI2");
+                Bitmap mIcon11 = BitmapFactory.decodeStream(in);
+                imagenesSeleccionadasBitmap.add(mIcon11);
+                imagenesSeleccionadasUri.add(uri);
+                imagen1.setImageBitmap(mIcon11);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+                Log.d(TAG, "No Encuentra URI");
+            }
+        });
+
+    }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
