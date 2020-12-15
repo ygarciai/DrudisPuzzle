@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,9 +26,19 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.net.URL;
+import java.security.PublicKey;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private FirebaseAuth mAuth;
+
     EditText nombre;
     WebView webView;
     ApplicationLifecycleHandler controleventos;
@@ -39,20 +50,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private boolean mFocusGranted, mFocusChanged;
     int result=0;
 
+    public String email,password;
+    public EditText editUser,editPassword;
+    public static final String TAG = "MyActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button btn = (Button) findViewById(R.id.botoninicio);
         Button btn2= findViewById(R.id.salir);
+        Button btnLoguear= findViewById(R.id.btn_Logueo);
+        Button btnCrear= findViewById(R.id.btn_Crear);
         controleventos=new ApplicationLifecycleHandler();
 
         controleventos.onActivityStarted(this);
+
+        mAuth = FirebaseAuth.getInstance();
+        editUser =  (EditText) findViewById(R.id.editTextUsuario);
+        editPassword =  (EditText) findViewById(R.id.editTextPassword);
+
 
 
 
         btn.setOnClickListener(this);
         btn2.setOnClickListener(this);
+        btnLoguear.setOnClickListener(this);
+        btnCrear.setOnClickListener(this);
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -186,7 +210,67 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(view.getContext(), SelectionActivity.class);
                 startActivityForResult(intent, 0);
                 break;
+            case R.id.btn_Logueo:
+                email=(String) editUser.getText().toString();
+                password=(String) editPassword.getText().toString();
+                mAuth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d(TAG, "signInWithEmail:success");
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    updateUI(user);
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                    Toast.makeText(MainActivity.this, "Authentication failed.",
+                                            Toast.LENGTH_SHORT).show();
+                                    updateUI(null);
+                                }
+
+                                // ...
+                            }
+                        });
+
+            case R.id.btn_Crear:
+
+                email=(String) editUser.getText().toString();
+                password=(String) editPassword.getText().toString();
+
+                mAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d(TAG, "createUserWithEmail:success");
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    updateUI(user);
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                    Toast.makeText(MainActivity.this, "Authentication failed.",
+                                            Toast.LENGTH_SHORT).show();
+                                    updateUI(null);
+                                }
+
+                                // ...
+                            }
+                        });
+
         }
 
     }
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
+    }
+
+    private void updateUI(FirebaseUser currentUser) {
+    }
+
 }
