@@ -201,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(final View view) {
         switch (view.getId()){
             case R.id.salir:
                 finish();
@@ -222,6 +222,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     Log.d(TAG, "signInWithEmail:success");
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     updateUI(user);
+                                    Intent intent = new Intent(view.getContext(), SelectionActivity.class);
+                                    startActivityForResult(intent, 0);
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Log.w(TAG, "signInWithEmail:failure", task.getException());
@@ -229,7 +231,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                             Toast.LENGTH_SHORT).show();
                                     updateUI(null);
                                 }
-
                                 // ...
                             }
                         });
@@ -261,7 +262,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         });
 
         }
-
     }
     public void onStart() {
         super.onStart();
