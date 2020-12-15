@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "470262389355",
+    "project_id": "drudispuzzle",
+    "storage_bucket": "drudispuzzle.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:470262389355:android:179024eb0240fcba896f2e",
+        "android_client_info": {
+          "package_name": "com.example.drudispuzzle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "470262389355-ln3arn72fep47hg21qld497qj4ssfvrc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMYmaqh2rF3k-CZJ-JwvopZdbB9t3R9kU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "470262389355-ln3arn72fep47hg21qld497qj4ssfvrc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
