@@ -15,6 +15,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -48,6 +49,10 @@ import android.widget.Toast;
 import com.example.drudispuzzle.entidades.Usuario;
 import com.example.drudispuzzle.utilidades.RegistroUsuariosActivity;
 import com.example.drudispuzzle.utilidades.Utilidades;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -63,7 +68,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 
 import static java.lang.StrictMath.abs;
@@ -112,6 +119,8 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     public MediaPlayer mp4 = null;
     private ContentValues values;
     Uri SoundUri;
+
+    String TAG;
 
 
 
@@ -475,7 +484,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
 
                 com.example.drudispuzzle.utilidades.ConexionSQLiteHelper conn=new com.example.drudispuzzle.utilidades.ConexionSQLiteHelper(this,"bd_usuarios",null,1);
                 SQLiteDatabase db=conn.getWritableDatabase();
-                
+
                 recuperarListaPersonas();
                 try {
                     recuperarminimotiempo();
@@ -493,12 +502,35 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                             .putExtra(Intent.EXTRA_EMAIL, "");
                     startActivityForResult(intent1, 0);
                 }
-
                 values.put(Utilidades.CAMPO_NAME, nombreIntroducido.getText().toString());
                 values.put(Utilidades.CAMPO_TIME, tiempo);
                 Long idResultante=db.insert(Utilidades.TABLA_PLAYER,Utilidades.CAMPO_NAME,values);
                 Toast.makeText(getApplicationContext(),"Nombre Registro: "+idResultante,Toast.LENGTH_SHORT).show();
                 db.close();
+
+                FirebaseFirestore dbFB = FirebaseFirestore.getInstance();
+
+                // Create a new user with a first, middle, and last name
+                Map<String, Object> user = new HashMap<>();
+                user.put("Nombre",  nombreIntroducido.getText().toString());
+                user.put("Puntuacion", tiempo);
+
+                // Add a new document with a generated ID
+                dbFB.collection("Puntuaciones")
+                        .add(user)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.w(TAG, "Error adding document", e);
+                            }
+                        });
+
                 Intent intent = new Intent(view.getContext(), SelectionActivity.class);
                 startActivityForResult(intent, 0);
                 break;
