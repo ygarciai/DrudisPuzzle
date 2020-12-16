@@ -475,11 +475,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
 
                 com.example.drudispuzzle.utilidades.ConexionSQLiteHelper conn=new com.example.drudispuzzle.utilidades.ConexionSQLiteHelper(this,"bd_usuarios",null,1);
                 SQLiteDatabase db=conn.getWritableDatabase();
-
-                //db.execSQL(Utilidades.CREAR_TABLA_PLAYER);
-
-                //PROBEMOS A RECUPERAR TODA LA ARRAY D JUGADORES
-
+                
                 recuperarListaPersonas();
                 try {
                     recuperarminimotiempo();
