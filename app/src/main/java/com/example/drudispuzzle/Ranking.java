@@ -100,9 +100,7 @@ public class Ranking extends AppCompatActivity {
         recyclerViewUsuarios.setLayoutManager(new LinearLayoutManager(this));
 
         consultarListaPersonas();
-
-        //ListaPersonasAdapter adapter=new ListaPersonasAdapter(listaUsuario);
-        //recyclerViewUsuarios.setAdapter(adapter);
+        
 
         readData(new FirestoreCallback() {
             @Override
