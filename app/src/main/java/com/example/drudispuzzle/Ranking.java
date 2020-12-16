@@ -4,11 +4,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +18,19 @@ import android.view.ViewGroup;
 import com.example.drudispuzzle.adaptadores.ListaPersonasAdapter;
 import com.example.drudispuzzle.entidades.Usuario;
 import com.example.drudispuzzle.utilidades.Utilidades;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,10 +43,16 @@ public class Ranking extends AppCompatActivity {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    String TAG;
+    ArrayList listaUsuarioFinal;
+    ArrayList<Usuario> listaUsuarioFinal2;
+    Usuario usuarioañadir;
+    boolean acabado=false;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    public ListaPersonasAdapter adapter;
 
     ArrayList<Usuario> listaUsuario;
     RecyclerView recyclerViewUsuarios;
@@ -62,6 +81,8 @@ public class Ranking extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        usuarioañadir=new Usuario();
+        listaUsuarioFinal2= new ArrayList<Usuario>();
         super.onCreate(savedInstanceState);
         setContentView(R.layout._activity_lista_personas_recycler);
 
@@ -73,14 +94,80 @@ public class Ranking extends AppCompatActivity {
         conn=new ConexionSQLiteHelper(getApplicationContext(),"bd_usuarios",null,1);
 
         listaUsuario=new ArrayList<>();
+        listaUsuarioFinal=new ArrayList<>();
 
         recyclerViewUsuarios= (RecyclerView) findViewById(R.id.recyclerJugadores);
         recyclerViewUsuarios.setLayoutManager(new LinearLayoutManager(this));
 
         consultarListaPersonas();
 
-        ListaPersonasAdapter adapter=new ListaPersonasAdapter(listaUsuario);
-        recyclerViewUsuarios.setAdapter(adapter);
+        //ListaPersonasAdapter adapter=new ListaPersonasAdapter(listaUsuario);
+        //recyclerViewUsuarios.setAdapter(adapter);
+
+        readData(new FirestoreCallback() {
+            @Override
+            public void onCallback(ArrayList listaUsuarioFinal) {
+                for (int i=0;i<listaUsuarioFinal.size();i++){
+                    usuarioañadir=new Usuario();
+                    HashMap hashmap = (HashMap) listaUsuarioFinal.get(i);
+                    HashMap hashmap1 = (HashMap) listaUsuarioFinal.get(i);
+                    String value = (String) hashmap.get("Puntuacion");
+                    String whatever = value;
+                    String value1=(String) hashmap1.get("Nombre");
+                    String whatever2 = value1;
+                    usuarioañadir.setP(value1);
+                    usuarioañadir.setT(value);
+                    listaUsuarioFinal2.add(usuarioañadir);
+                }
+                ListaPersonasAdapter adapter=new ListaPersonasAdapter(listaUsuarioFinal2);
+                recyclerViewUsuarios.setAdapter(adapter);
+            }
+        });
+
+
+    }
+
+    private void recuperarFirestore() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Puntuaciones").orderBy("Puntuacion").limit(10)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                listaUsuarioFinal.add(document.getData());
+                            }
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+
+    }
+    private void readData(final FirestoreCallback firestoreCallback){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Puntuaciones").orderBy("Puntuacion").limit(10)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                listaUsuarioFinal.add(document.getData());
+                            }
+                            firestoreCallback.onCallback(listaUsuarioFinal);
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+    }
+
+    private interface FirestoreCallback{
+        void onCallback(ArrayList listaUsuarioFinal );
     }
 
 

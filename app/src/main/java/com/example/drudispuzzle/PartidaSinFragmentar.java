@@ -515,6 +515,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                 user.put("Nombre",  nombreIntroducido.getText().toString());
                 user.put("Puntuacion", tiempo);
 
+
                 // Add a new document with a generated ID
                 dbFB.collection("Puntuaciones")
                         .add(user)
