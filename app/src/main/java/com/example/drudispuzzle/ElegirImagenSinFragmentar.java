@@ -49,7 +49,9 @@ import java.io.InputStream;
 import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -83,12 +85,13 @@ public class ElegirImagenSinFragmentar extends AppCompatActivity implements View
     Boolean image5Set;
     ArrayList<ImageView> imagenesSeleccionadas;
     ArrayList<Bitmap> imagenesSeleccionadasBitmap;
-    ArrayList<Uri> imagenesSeleccionadasUri;
+    public ArrayList<Uri> imagenesSeleccionadasUri;
 
     private Button myButtonFoto;
 
     public StorageReference mStorageRef;
-
+    public int i=0;
+    public int contador=0;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -137,11 +140,14 @@ public class ElegirImagenSinFragmentar extends AppCompatActivity implements View
         Button buttonEmpezar = (Button) findViewById(R.id.button_empezarPartidaSinFragmentar);
         buttonImagen.setOnClickListener(this);
         buttonEmpezar.setOnClickListener(this);
-        buttonEmpezar.setEnabled(false);
 
 
         myButtonFoto = (Button)findViewById(R.id.button_FotoCamara);
         myButtonFoto.setOnClickListener(this);
+
+        buttonEmpezar.setEnabled(true);
+        buttonImagen.setEnabled(false);
+        myButtonFoto.setEnabled(false);
 
         imagen1= (ImageView) findViewById(R.id.imagenSeleccionada);
         imagenesSeleccionadas.add(imagen1);
@@ -186,42 +192,76 @@ public class ElegirImagenSinFragmentar extends AppCompatActivity implements View
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference().child("images");
 
-        int numero = (int) (Math.random() * 10) + 1;
-        String imagenaleatoria=String.valueOf(numero);
-        imagenaleatoria=imagenaleatoria+".jpg";
-        Log.d(TAG,imagenaleatoria);
+        //int numero = (int) (Math.random() * 10) + 1;
+        //String imagenaleatoria=String.valueOf(numero);
+        //imagenaleatoria=imagenaleatoria+".jpg";
+        //Log.d(TAG,imagenaleatoria);
 
+        NumeroAleatorios na = new NumeroAleatorios(1,10);
+        for(i = 0; i < 5;i++){
+            String imagenaleatoria=String.valueOf(na.generar());
+            imagenaleatoria=imagenaleatoria+".jpg";
+            storageRef.child(imagenaleatoria).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    InputStream in=null;
+                    //Log.d(TAG, "Encuentra URI");
+                    String uriString;
+                    uriString=uri.toString();
+                    try {
+                        in = new URL(uriString).openStream();
 
-        storageRef.child("1.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                // Got the download URL for 'users/me/profile.png'
-                //debug.log()
-                InputStream in=null;
-                Log.d(TAG, "Encuentra URI");
-                String uriString;
-                uriString=uri.toString();
-                try {
-                    in = new URL(uriString).openStream();
-
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    if (contador==0){
+                        Bitmap mIcon11 = BitmapFactory.decodeStream(in);
+                        imagenesSeleccionadasBitmap.add(mIcon11);
+                        imagenesSeleccionadasUri.add(uri);
+                        imagen1.setImageBitmap(mIcon11);
+                        Log.d(TAG, "Entra");
+                        contador++;
+                    }else if (contador==1){
+                        Bitmap mIcon11 = BitmapFactory.decodeStream(in);
+                        imagenesSeleccionadasBitmap.add(mIcon11);
+                        imagenesSeleccionadasUri.add(uri);
+                        imagen2.setImageBitmap(mIcon11);
+                        Log.d(TAG, "Entra 1");
+                        contador++;
+                    }else if (contador==2){
+                        Bitmap mIcon11 = BitmapFactory.decodeStream(in);
+                        imagenesSeleccionadasBitmap.add(mIcon11);
+                        imagenesSeleccionadasUri.add(uri);
+                        imagen3.setImageBitmap(mIcon11);
+                        Log.d(TAG, "Entra 1");
+                        contador++;
+                    }else if (contador==3){
+                        Bitmap mIcon11 = BitmapFactory.decodeStream(in);
+                        imagenesSeleccionadasBitmap.add(mIcon11);
+                        imagenesSeleccionadasUri.add(uri);
+                        imagen4.setImageBitmap(mIcon11);
+                        Log.d(TAG, "Entra 1");
+                        contador++;
+                    }else if (contador==4){
+                        Bitmap mIcon11 = BitmapFactory.decodeStream(in);
+                        imagenesSeleccionadasBitmap.add(mIcon11);
+                        imagenesSeleccionadasUri.add(uri);
+                        imagen5.setImageBitmap(mIcon11);
+                        Log.d(TAG, "Entra 1");
+                        contador++;
+                    }
                 }
-                Log.d(TAG, "Encuentra URI2");
-                Bitmap mIcon11 = BitmapFactory.decodeStream(in);
-                imagenesSeleccionadasBitmap.add(mIcon11);
-                imagenesSeleccionadasUri.add(uri);
-                imagen1.setImageBitmap(mIcon11);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle any errors
-                Log.d(TAG, "No Encuentra URI");
-            }
-        });
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle any errors
+                    Log.d(TAG, "No Encuentra URI");
+                }
+            });
+        }
 
     }
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
