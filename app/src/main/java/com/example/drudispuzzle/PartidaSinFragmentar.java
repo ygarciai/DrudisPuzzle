@@ -48,11 +48,15 @@ import android.widget.Toast;
 import com.example.drudispuzzle.entidades.Usuario;
 import com.example.drudispuzzle.utilidades.RegistroUsuariosActivity;
 import com.example.drudispuzzle.utilidades.Utilidades;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import org.w3c.dom.Text;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringBufferInputStream;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -172,14 +176,23 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
         GridLayout layout2 = findViewById(R.id.thirdLinearLayout);
         layout.removeAllViews();
         layout2.removeAllViews();
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference().child("images");
 
+        InputStream in=null;
 
         if (level == 1){
             i1.setImageURI(imageList1.get(0));
-
-            BitmapDrawable drawable = (BitmapDrawable) i1.getDrawable();
-            Bitmap bitmap = drawable.getBitmap();
-            Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 250, 250, true);
+            try {
+                in = new URL((imageList1.get(0).toString())).openStream();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Bitmap mIcon11 = BitmapFactory.decodeStream(in);
+            Bitmap scaledBitmap = Bitmap.createScaledBitmap(mIcon11, 250, 250, true);
+            //BitmapDrawable drawable = (BitmapDrawable) i1.getDrawable();
+            //Bitmap bitmap = drawable.getBitmap();
+            //Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 250, 250, true);
             i1.setImageBitmap(scaledBitmap);
 
 
@@ -210,9 +223,17 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
 
             i1.setImageURI(imageList1.get(1));
 
-            BitmapDrawable drawable = (BitmapDrawable) i1.getDrawable();
-            Bitmap bitmap = drawable.getBitmap();
-            Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 250, 250, true);
+            try {
+                in = new URL((imageList1.get(1).toString())).openStream();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Bitmap mIcon11 = BitmapFactory.decodeStream(in);
+            Bitmap scaledBitmap = Bitmap.createScaledBitmap(mIcon11, 250, 250, true);
+
+            //BitmapDrawable drawable = (BitmapDrawable) i1.getDrawable();
+            //Bitmap bitmap = drawable.getBitmap();
+            //Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 250, 250, true);
             i1.setImageBitmap(scaledBitmap);
 
             splitImage(i1);
@@ -241,9 +262,17 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
 
             i1.setImageURI(imageList1.get(2));
 
-            BitmapDrawable drawable = (BitmapDrawable) i1.getDrawable();
-            Bitmap bitmap = drawable.getBitmap();
-            Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 250, 250, true);
+            try {
+                in = new URL((imageList1.get(2).toString())).openStream();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Bitmap mIcon11 = BitmapFactory.decodeStream(in);
+            Bitmap scaledBitmap = Bitmap.createScaledBitmap(mIcon11, 250, 250, true);
+
+            //BitmapDrawable drawable = (BitmapDrawable) i1.getDrawable();
+            //Bitmap bitmap = drawable.getBitmap();
+            //Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 250, 250, true);
 
             i1.setImageBitmap(scaledBitmap);
 
@@ -275,9 +304,17 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
             //cols = cols + 1;
             i1.setImageURI(imageList1.get(3));
 
-            BitmapDrawable drawable = (BitmapDrawable) i1.getDrawable();
-            Bitmap bitmap = drawable.getBitmap();
-            Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 250, 250, true);
+            try {
+                in = new URL((imageList1.get(3).toString())).openStream();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Bitmap mIcon11 = BitmapFactory.decodeStream(in);
+            Bitmap scaledBitmap = Bitmap.createScaledBitmap(mIcon11, 250, 250, true);
+
+            //BitmapDrawable drawable = (BitmapDrawable) i1.getDrawable();
+            //Bitmap bitmap = drawable.getBitmap();
+            //Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 250, 250, true);
             i1.setImageBitmap(scaledBitmap);
 
             splitImage(i1);
@@ -308,9 +345,17 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
 
             i1.setImageURI(imageList1.get(4));
 
-            BitmapDrawable drawable = (BitmapDrawable) i1.getDrawable();
-            Bitmap bitmap = drawable.getBitmap();
-            Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 250, 250, true);
+            try {
+                in = new URL((imageList1.get(4).toString())).openStream();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            Bitmap mIcon11 = BitmapFactory.decodeStream(in);
+            Bitmap scaledBitmap = Bitmap.createScaledBitmap(mIcon11, 250, 250, true);
+            //BitmapDrawable drawable = (BitmapDrawable) i1.getDrawable();
+            //Bitmap bitmap = drawable.getBitmap();
+            //Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 250, 250, true);
             i1.setImageBitmap(scaledBitmap);
 
             splitImage(i1);
@@ -430,11 +475,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
 
                 com.example.drudispuzzle.utilidades.ConexionSQLiteHelper conn=new com.example.drudispuzzle.utilidades.ConexionSQLiteHelper(this,"bd_usuarios",null,1);
                 SQLiteDatabase db=conn.getWritableDatabase();
-
-                //db.execSQL(Utilidades.CREAR_TABLA_PLAYER);
-
-                //PROBEMOS A RECUPERAR TODA LA ARRAY D JUGADORES
-
+                
                 recuperarListaPersonas();
                 try {
                     recuperarminimotiempo();
