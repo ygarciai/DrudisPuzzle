@@ -13,6 +13,9 @@ import android.widget.Button;
 
 import com.example.drudispuzzle.utilidades.Utilidades;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link SeleccionTipoPuzzle#newInstance} factory method to
@@ -29,7 +32,8 @@ public class SeleccionTipoPuzzle  extends AppCompatActivity implements View.OnCl
     private String mParam1;
     private String mParam2;
 
-
+    @BindView(R.id.button_Imagenes) Button btn;
+    @BindView(R.id.button_ImagenesSeg) Button btn1;
 
     public SeleccionTipoPuzzle() {
         // Required empty public constructor
@@ -56,13 +60,11 @@ public class SeleccionTipoPuzzle  extends AppCompatActivity implements View.OnCl
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_seleccion_tipo_puzzle);
+        ButterKnife.bind(this);
         ApplicationLifecycleHandler handler = new ApplicationLifecycleHandler();
         registerActivityLifecycleCallbacks(handler);
         registerComponentCallbacks(handler);
 
-
-        Button btn = (Button) findViewById(R.id.button_Imagenes);
-        Button btn1 = (Button) findViewById(R.id.button_ImagenesSeg);
         btn.setOnClickListener(this);
         btn1.setOnClickListener(this);
     }

@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,14 +45,13 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
     static boolean reproduciendo=false;
     public static boolean  encambioMusica=false;
 
-    //@BindView(R.id.button_inicioPartida) Button btnPlay;
-    //@BindView(R.id.button_ranking) Button btnRank;
-    //@BindView(R.id.button_Multiplayer) Button btnMult;
-    //@BindView(R.id.button2) Button btnFoto;
-    //@BindView(R.id.button2) Button btn3;
-    //@BindView(R.id.sonidoEncendido) Button sonidoOn;
-    //@BindView(R.id.sonidoApagado) Button sonidoOff;
-    //@BindView(R.id.button_seleccionMusica) Button seleccionMusica;
+    @BindView(R.id.button_inicioPartida) Button btnPlay;
+    @BindView(R.id.button_ranking) Button btnRank;
+    @BindView(R.id.button_Multiplayer) Button btnMult;
+    @BindView(R.id.button2) Button btnFoto;
+    @BindView(R.id.sonidoEncendido) Button sonidoOn;
+    @BindView(R.id.sonidoApagado) Button sonidoOff;
+    @BindView(R.id.button_seleccionMusica) Button seleccionMusica;
 
     public SelectionActivity() {
         // Required empty public constructor
@@ -79,20 +79,12 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.fragment_selection_activity);
-        Button btnPlay = (Button) findViewById(R.id.button_inicioPartida);
-        Button btnRank = (Button) findViewById(R.id.button_ranking);
-        Button btnMult = (Button) findViewById(R.id.button_Multiplayer);
-        Button btnFoto = (Button) findViewById(R.id.button2);
-        Button btn4 = findViewById(R.id.button2);
-        Button sonidoOn = (Button) findViewById(R.id.sonidoEncendido);
-        Button sonidoOff = (Button) findViewById(R.id.sonidoApagado);
-        Button seleccionMusica = (Button) findViewById(R.id.button_seleccionMusica);
+        ButterKnife.bind(this);
 
         btnPlay.setOnClickListener(this);
         btnRank.setOnClickListener(this);
         btnMult.setOnClickListener(this);
         btnFoto.setOnClickListener(this);
-        btn4.setOnClickListener(this);
         sonidoOn.setOnClickListener(this);
         sonidoOff.setOnClickListener(this);
         seleccionMusica.setOnClickListener(this);

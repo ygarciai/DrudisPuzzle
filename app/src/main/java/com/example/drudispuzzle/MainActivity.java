@@ -81,13 +81,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        //Button btn = (Button) findViewById(R.id.botoninicio);
-        //Button btn2= findViewById(R.id.salir);
-        //Button btnLoguear= findViewById(R.id.btn_Logueo);
-        //Button btnCrear= findViewById(R.id.btn_Crear);
-        //Toolbar toolbar = findViewById(R.id.toolbar);
-        //editUser =  (EditText) findViewById(R.id.editTextUsuario);
-        //editPassword =  (EditText) findViewById(R.id.editTextPassword);
 
         controleventos=new ApplicationLifecycleHandler();
         controleventos.onActivityStarted(this);

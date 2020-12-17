@@ -53,6 +53,9 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ElegirImagenSinFragmentar#newInstance} factory method to
@@ -86,12 +89,13 @@ public class ElegirImagenSinFragmentar extends AppCompatActivity implements View
     ArrayList<ImageView> imagenesSeleccionadas;
     ArrayList<Bitmap> imagenesSeleccionadasBitmap;
     public ArrayList<Uri> imagenesSeleccionadasUri;
-
-    private Button myButtonFoto;
-
     public StorageReference mStorageRef;
     public int i=0;
     public int contador=0;
+
+    @BindView(R.id.button_SeleccionarImagen) Button buttonImagen;
+    @BindView(R.id.button_empezarPartidaSinFragmentar) Button buttonEmpezar;
+    @BindView(R.id.button_FotoCamara) Button myButtonFoto;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -124,6 +128,7 @@ public class ElegirImagenSinFragmentar extends AppCompatActivity implements View
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_elegir_imagen_sin_fragmentar);
+        ButterKnife.bind(this);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -136,42 +141,28 @@ public class ElegirImagenSinFragmentar extends AppCompatActivity implements View
         imagenesSeleccionadasBitmap = new ArrayList<Bitmap>();
         imagenesSeleccionadasUri = new ArrayList<Uri>();
 
-        Button buttonImagen = (Button) findViewById(R.id.button_SeleccionarImagen);
-        Button buttonEmpezar = (Button) findViewById(R.id.button_empezarPartidaSinFragmentar);
         buttonImagen.setOnClickListener(this);
         buttonEmpezar.setOnClickListener(this);
-
-
-        myButtonFoto = (Button)findViewById(R.id.button_FotoCamara);
         myButtonFoto.setOnClickListener(this);
-
         buttonEmpezar.setEnabled(true);
         buttonImagen.setEnabled(false);
         myButtonFoto.setEnabled(false);
 
         imagen1= (ImageView) findViewById(R.id.imagenSeleccionada);
         imagenesSeleccionadas.add(imagen1);
-
-
         image1Set = false;
+
         imagen2= (ImageView) findViewById(R.id.imagenSeleccionada1);
         image2Set = false;
         imagenesSeleccionadas.add(imagen2);
-
-
 
         imagen3= (ImageView) findViewById(R.id.imagenSeleccionada2);
         image3Set = false;
         imagenesSeleccionadas.add(imagen3);
 
-
-
         imagen4= (ImageView) findViewById(R.id.imagenSeleccionada3);
         image4Set = false;
         imagenesSeleccionadas.add(imagen4);
-
-
-
 
         imagen5= (ImageView) findViewById(R.id.imagenSeleccionada4);
         image5Set = false;
@@ -191,11 +182,6 @@ public class ElegirImagenSinFragmentar extends AppCompatActivity implements View
     private void cargarimagenesFirebase() throws IOException {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference().child("images");
-
-        //int numero = (int) (Math.random() * 10) + 1;
-        //String imagenaleatoria=String.valueOf(numero);
-        //imagenaleatoria=imagenaleatoria+".jpg";
-        //Log.d(TAG,imagenaleatoria);
 
         NumeroAleatorios na = new NumeroAleatorios(1,10);
         for(i = 0; i < 5;i++){

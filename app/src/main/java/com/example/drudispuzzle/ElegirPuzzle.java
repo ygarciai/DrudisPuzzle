@@ -24,6 +24,8 @@ public class ElegirPuzzle extends AppCompatActivity implements View.OnClickListe
     static boolean reproduciendo=false;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
