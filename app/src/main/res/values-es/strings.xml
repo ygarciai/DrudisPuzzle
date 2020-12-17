@@ -26,4 +26,7 @@
     <string name="NameRanking">Nombre:</string>
     <string name="Help">Ayuda</string>
     <string name="exit">Salir</string>
+    <string name="ImagenesSeg">Imagenes Ya Segmentadas</string>
+    <string name="ImagenessinSeg">Imagenes Sin Segmentar</string>
+    <string name="editTextUsuario">Nombre</string>
 </resources>
