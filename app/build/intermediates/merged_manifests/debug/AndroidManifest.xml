@@ -25,6 +25,7 @@
         android:label="DruidasPuzzle"
         android:roundIcon="@mipmap/ic_druidas"
         android:supportsRtl="true"
+        android:testOnly="true"
         android:theme="@style/Theme.AppCompat.NoActionBar" >
         <service
             android:name="com.example.drudispuzzle.MyServiceMusica"

@@ -17,6 +17,7 @@ INJECTED from C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\m
 INJECTED from C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\main\AndroidManifest.xml:2:1-60:12
 MERGED from [com.google.firebase:firebase-auth:20.0.1] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\9fddfa0db675886ff93add34da0ebced\jetified-firebase-auth-20.0.1\AndroidManifest.xml:17:1-83:12
 MERGED from [com.google.firebase:firebase-firestore:22.0.0] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\2740076feedd5cf04dbc7570105e4ad1\jetified-firebase-firestore-22.0.0\AndroidManifest.xml:2:1-26:12
+MERGED from [com.jakewharton:butterknife:10.2.3] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\ec5f59d1c4cbe2595370cb54fb79fd44\jetified-butterknife-10.2.3\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.navigation:navigation-ui:2.3.0] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\d8ec56a305ac8673d3d77f12d821c086\navigation-ui-2.3.0\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.material:material:1.2.1] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\f8aaae792a30a1f56b0d58cd10f75c0e\material-1.2.1\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.2] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\3725b3dbe0ac9583f6dca74747f3a80c\constraintlayout-2.0.2\AndroidManifest.xml:2:1-11:12
@@ -36,6 +37,7 @@ MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\Usuari
 MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\0d5b206707c1441d0301fd5d8594a068\vectordrawable-animated-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\26e78dcf88732e57fcf3181c061f28b7\vectordrawable-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\bad9b51902a30e33c793c0d30fab732f\jetified-viewpager2-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [com.jakewharton:butterknife-runtime:10.2.3] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\4d5585a8c0e6f3f19ddb6be2498693b0\jetified-butterknife-runtime-10.2.3\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.firebase:firebase-database-collection:17.0.1] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\dd2b390f0bf89e753b1cce6e083d7969\jetified-firebase-database-collection-17.0.1\AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-auth-base:17.0.0] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\b727a442311948b7b5df18a469595fb6\jetified-play-services-auth-base-17.0.0\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.gms:play-services-auth-api-phone:17.4.0] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\be0455ae120138eedb2578cb67fcedf6\jetified-play-services-auth-api-phone-17.4.0\AndroidManifest.xml:2:1-7:12
@@ -262,6 +264,8 @@ MERGED from [com.google.firebase:firebase-auth:20.0.1] C:\Users\Usuario\.gradle\
 MERGED from [com.google.firebase:firebase-auth:20.0.1] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\9fddfa0db675886ff93add34da0ebced\jetified-firebase-auth-20.0.1\AndroidManifest.xml:21:5-44
 MERGED from [com.google.firebase:firebase-firestore:22.0.0] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\2740076feedd5cf04dbc7570105e4ad1\jetified-firebase-firestore-22.0.0\AndroidManifest.xml:7:5-9:41
 MERGED from [com.google.firebase:firebase-firestore:22.0.0] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\2740076feedd5cf04dbc7570105e4ad1\jetified-firebase-firestore-22.0.0\AndroidManifest.xml:7:5-9:41
+MERGED from [com.jakewharton:butterknife:10.2.3] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\ec5f59d1c4cbe2595370cb54fb79fd44\jetified-butterknife-10.2.3\AndroidManifest.xml:5:5-44
+MERGED from [com.jakewharton:butterknife:10.2.3] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\ec5f59d1c4cbe2595370cb54fb79fd44\jetified-butterknife-10.2.3\AndroidManifest.xml:5:5-44
 MERGED from [androidx.navigation:navigation-ui:2.3.0] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\d8ec56a305ac8673d3d77f12d821c086\navigation-ui-2.3.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.navigation:navigation-ui:2.3.0] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\d8ec56a305ac8673d3d77f12d821c086\navigation-ui-2.3.0\AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.android.material:material:1.2.1] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\f8aaae792a30a1f56b0d58cd10f75c0e\material-1.2.1\AndroidManifest.xml:20:5-44
@@ -300,6 +304,8 @@ MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\Usuario\.gra
 MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\26e78dcf88732e57fcf3181c061f28b7\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\bad9b51902a30e33c793c0d30fab732f\jetified-viewpager2-1.0.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\bad9b51902a30e33c793c0d30fab732f\jetified-viewpager2-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [com.jakewharton:butterknife-runtime:10.2.3] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\4d5585a8c0e6f3f19ddb6be2498693b0\jetified-butterknife-runtime-10.2.3\AndroidManifest.xml:5:5-44
+MERGED from [com.jakewharton:butterknife-runtime:10.2.3] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\4d5585a8c0e6f3f19ddb6be2498693b0\jetified-butterknife-runtime-10.2.3\AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-database-collection:17.0.1] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\dd2b390f0bf89e753b1cce6e083d7969\jetified-firebase-database-collection-17.0.1\AndroidManifest.xml:5:5-7:41
 MERGED from [com.google.firebase:firebase-database-collection:17.0.1] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\dd2b390f0bf89e753b1cce6e083d7969\jetified-firebase-database-collection-17.0.1\AndroidManifest.xml:5:5-7:41
 MERGED from [com.google.android.gms:play-services-auth-base:17.0.0] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\b727a442311948b7b5df18a469595fb6\jetified-play-services-auth-base-17.0.0\AndroidManifest.xml:5:5-44

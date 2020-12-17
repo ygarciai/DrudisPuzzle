@@ -40,6 +40,11 @@ import com.google.firebase.auth.FirebaseUser;
 import java.net.URL;
 import java.security.PublicKey;
 
+
+import butterknife.BindView;
+import butterknife.BindViews;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final int RC_SIGN_IN = 0;
@@ -57,26 +62,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int result=0;
 
     public String email,password;
-    public EditText editUser,editPassword;
+
     public static final String TAG = "MyActivity";
     GoogleSignInClient mGoogleSignInClient;
     View vista;
+    @BindView(R.id.salir) Button btn2;
+    @BindView(R.id.botoninicio) Button btn;
+    @BindView(R.id.btn_Logueo) Button btnLoguear;
+    @BindView(R.id.btn_Crear) Button btnCrear;
+    public @BindView(R.id.editTextUsuario) EditText editUser;
+    public @BindView(R.id.editTextPassword) EditText editPassword;
+    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.sign_in_button) Button btn3;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button btn = (Button) findViewById(R.id.botoninicio);
-        Button btn2= findViewById(R.id.salir);
-        Button btnLoguear= findViewById(R.id.btn_Logueo);
-        Button btnCrear= findViewById(R.id.btn_Crear);
+        ButterKnife.bind(this);
+        //Button btn = (Button) findViewById(R.id.botoninicio);
+        //Button btn2= findViewById(R.id.salir);
+        //Button btnLoguear= findViewById(R.id.btn_Logueo);
+        //Button btnCrear= findViewById(R.id.btn_Crear);
+        //Toolbar toolbar = findViewById(R.id.toolbar);
+        //editUser =  (EditText) findViewById(R.id.editTextUsuario);
+        //editPassword =  (EditText) findViewById(R.id.editTextPassword);
+
         controleventos=new ApplicationLifecycleHandler();
-
         controleventos.onActivityStarted(this);
-
         mAuth = FirebaseAuth.getInstance();
-        editUser =  (EditText) findViewById(R.id.editTextUsuario);
-        editPassword =  (EditText) findViewById(R.id.editTextPassword);
+
 
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
@@ -84,17 +101,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .requestEmail()
                 .build();
         // Build a GoogleSignInClient with the options specified by gso.
+
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        findViewById(R.id.sign_in_button).setOnClickListener(this);
 
 
         btn.setOnClickListener(this);
         btn2.setOnClickListener(this);
+        btn3.setOnClickListener(this);
         btnLoguear.setOnClickListener(this);
         btnCrear.setOnClickListener(this);
 
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         if (getIntent().getBooleanExtra("EXIT", false))
