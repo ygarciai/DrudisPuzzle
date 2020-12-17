@@ -27,6 +27,8 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.util.List;
 
+import butterknife.BindView;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link SelectionActivity#newInstance} factory method to
@@ -38,23 +40,19 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
     static boolean reproduciendo=false;
-    public static MediaPlayer mp = null;
-    private ContentValues values;
-    Uri SoundUri;
-    AudioManager audioManager,mAudioManager;
-    AudioManager.OnAudioFocusChangeListener audioListener;
-    private AudioManager.OnAudioFocusChangeListener mOnAudioFocusChangeListener;
-    private boolean mFocusGranted, mFocusChanged;
-    int result=0;
-
-
     public static boolean  encambioMusica=false;
-    public static boolean  enBack=true;
+
+    //@BindView(R.id.button_inicioPartida) Button btnPlay;
+    //@BindView(R.id.button_ranking) Button btnRank;
+    //@BindView(R.id.button_Multiplayer) Button btnMult;
+    //@BindView(R.id.button2) Button btnFoto;
+    //@BindView(R.id.button2) Button btn3;
+    //@BindView(R.id.sonidoEncendido) Button sonidoOn;
+    //@BindView(R.id.sonidoApagado) Button sonidoOff;
+    //@BindView(R.id.button_seleccionMusica) Button seleccionMusica;
+
     public SelectionActivity() {
         // Required empty public constructor
     }
@@ -85,7 +83,7 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
         Button btnRank = (Button) findViewById(R.id.button_ranking);
         Button btnMult = (Button) findViewById(R.id.button_Multiplayer);
         Button btnFoto = (Button) findViewById(R.id.button2);
-        Button btn3 = findViewById(R.id.button2);
+        Button btn4 = findViewById(R.id.button2);
         Button sonidoOn = (Button) findViewById(R.id.sonidoEncendido);
         Button sonidoOff = (Button) findViewById(R.id.sonidoApagado);
         Button seleccionMusica = (Button) findViewById(R.id.button_seleccionMusica);
@@ -94,7 +92,7 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
         btnRank.setOnClickListener(this);
         btnMult.setOnClickListener(this);
         btnFoto.setOnClickListener(this);
-        btn3.setOnClickListener(this);
+        btn4.setOnClickListener(this);
         sonidoOn.setOnClickListener(this);
         sonidoOff.setOnClickListener(this);
         seleccionMusica.setOnClickListener(this);

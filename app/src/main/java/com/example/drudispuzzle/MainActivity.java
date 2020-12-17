@@ -73,7 +73,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public @BindView(R.id.editTextUsuario) EditText editUser;
     public @BindView(R.id.editTextPassword) EditText editPassword;
     @BindView(R.id.toolbar) Toolbar toolbar;
-    @BindView(R.id.sign_in_button) Button btn3;
 
 
 
@@ -104,12 +103,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-
+        findViewById(R.id.sign_in_button).setOnClickListener(this);
         btn.setOnClickListener(this);
         btn2.setOnClickListener(this);
-        btn3.setOnClickListener(this);
         btnLoguear.setOnClickListener(this);
         btnCrear.setOnClickListener(this);
+
+
 
         setSupportActionBar(toolbar);
 
