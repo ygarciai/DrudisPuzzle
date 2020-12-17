@@ -2,11 +2,11 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Exit"
+    <item android:title="@string/exit"
           android:id="@+id/Item2"/>
     <item
         android:id="@+id/item1"
-        android:title="Help"/>
+        android:title="@string/Help"/>
 
 
 </menu>

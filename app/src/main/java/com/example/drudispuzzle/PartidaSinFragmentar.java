@@ -496,7 +496,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                     Intent intent1 = new Intent(Intent.ACTION_INSERT)
                             .setData(CalendarContract.Events.CONTENT_URI)
 
-                            .putExtra(CalendarContract.Events.TITLE, "HAS LOGRADO RECORD CON: " + tiempo)
+                            .putExtra(CalendarContract.Events.TITLE, "HAS LOGRADO RECORD CON:/Has achieved Record With: " + tiempo)
                             .putExtra(CalendarContract.Events.DESCRIPTION, "Yuju!")
                             .putExtra(CalendarContract.Events.EVENT_LOCATION, "")
                             .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY)
@@ -506,7 +506,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                 values.put(Utilidades.CAMPO_NAME, nombreIntroducido.getText().toString());
                 values.put(Utilidades.CAMPO_TIME, tiempo);
                 Long idResultante=db.insert(Utilidades.TABLA_PLAYER,Utilidades.CAMPO_NAME,values);
-                Toast.makeText(getApplicationContext(),"Nombre Registro: "+idResultante,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Nombre Registro:/Name Register: "+idResultante,Toast.LENGTH_SHORT).show();
                 db.close();
 
                 FirebaseFirestore dbFB = FirebaseFirestore.getInstance();
