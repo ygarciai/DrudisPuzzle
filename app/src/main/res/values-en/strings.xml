@@ -24,4 +24,6 @@
     <string name="button_empezarpartidasinfragmentar">Start!</string>
     <string name="TiempoRanking">Time:</string>
     <string name="NameRanking">Name:</string>
+    <string name="Help">Help</string>
+    <string name="exit">Exit</string>
 </resources>

@@ -24,4 +24,6 @@
     <string name="textoRegistroUsuarios">Registrar Puntuacion</string>
     <string name="TiempoRanking">Tiempo:</string>
     <string name="NameRanking">Nombre:</string>
+    <string name="Help">Ayuda</string>
+    <string name="exit">Salir</string>
 </resources>
