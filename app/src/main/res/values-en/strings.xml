@@ -22,4 +22,6 @@
     <string name="campoNamee">Name</string>
     <string name="textoRegistroUsuarios">Save Record</string>
     <string name="button_empezarpartidasinfragmentar">Start!</string>
+    <string name="TiempoRanking">Time:</string>
+    <string name="NameRanking">Name:</string>
 </resources>

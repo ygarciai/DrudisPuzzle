@@ -18,7 +18,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="NAME"
+                android:text="@string/NameRanking"
                 android:textStyle="bold" />
 
             <TextView
@@ -37,7 +37,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="TIME:"
+                android:text="@string/TiempoRanking"
                 android:textStyle="bold" />
 
             <TextView

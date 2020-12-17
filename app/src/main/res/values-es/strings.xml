@@ -22,4 +22,6 @@
     <string name="campoTimee">Tiempo</string>
     <string name="campoNamee">Nombre</string>
     <string name="textoRegistroUsuarios">Registrar Puntuacion</string>
+    <string name="TiempoRanking">Tiempo:</string>
+    <string name="NameRanking">Nombre:</string>
 </resources>
