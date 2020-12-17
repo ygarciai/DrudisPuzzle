@@ -73,6 +73,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 import static java.lang.StrictMath.abs;
 
 
@@ -107,18 +110,21 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
     Utilidades utilidades;
     Chronometer myChronometer;
     String tiempo;
-    String nombre;
-    TextView nombreIntroducido;
 
-     public boolean superarecord=false;
+
+
+    @BindView(R.id.campoNamee) TextView nombreIntroducido;
+    @BindView(R.id.btnRegistro) Button btnGuardar;
+    @BindView(R.id.campoTimee) TextView chronometro;
+
+
+    public boolean superarecord=false;
 
     //añado
     static boolean reproduciendo=false;
     public MediaPlayer mp2 = null;
     public MediaPlayer mp3 = null;
     public MediaPlayer mp4 = null;
-    private ContentValues values;
-    Uri SoundUri;
 
     String TAG;
 
@@ -158,8 +164,9 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
         level = 1;
         Inicializar=new ConexionSQLiteHelper(getApplicationContext(),"bd_usuarios",null,1);
         utilidades=new Utilidades();
-        nombreIntroducido=findViewById(R.id.campoNamee);
-        //ArrayList<Uri> imageList = (ArrayList<Uri>) getIntent().getSerializableExtra("imagenesSeleccionadasUri");
+
+        //nombreIntroducido=findViewById(R.id.campoNamee);
+
         final Chronometer myChronometer = findViewById(R.id.chronometer);
 
         //añado
@@ -186,7 +193,6 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
         layout.removeAllViews();
         layout2.removeAllViews();
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReference().child("images");
 
         InputStream in=null;
 
@@ -200,16 +206,12 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
             }
             Bitmap mIcon11 = BitmapFactory.decodeStream(in);
             Bitmap scaledBitmap = Bitmap.createScaledBitmap(mIcon11, 250, 250, true);
-            //BitmapDrawable drawable = (BitmapDrawable) i1.getDrawable();
-            //Bitmap bitmap = drawable.getBitmap();
-            //Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 250, 250, true);
+
             i1.setImageBitmap(scaledBitmap);
-
-
             splitImage(i1);
+
             layout.setColumnCount(cols);
             layout2.setColumnCount(cols);
-
 
             for(int i = 0; i < indexArray.size(); i++) {
                 Bitmap piece = pieces.get(indexArray.get(i));
@@ -217,7 +219,6 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                 iv.setImageBitmap(piece);
                 iv.setOnTouchListener(this);
                 layout.addView(iv);
-
 
                 ImageView emptyView = new ImageView(getApplicationContext());
                 emptyView.setImageBitmap(pieces.get(i));
@@ -241,9 +242,6 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
             Bitmap mIcon11 = BitmapFactory.decodeStream(in);
             Bitmap scaledBitmap = Bitmap.createScaledBitmap(mIcon11, 250, 250, true);
 
-            //BitmapDrawable drawable = (BitmapDrawable) i1.getDrawable();
-            //Bitmap bitmap = drawable.getBitmap();
-            //Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 250, 250, true);
             i1.setImageBitmap(scaledBitmap);
 
             splitImage(i1);
@@ -279,10 +277,6 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
             }
             Bitmap mIcon11 = BitmapFactory.decodeStream(in);
             Bitmap scaledBitmap = Bitmap.createScaledBitmap(mIcon11, 250, 250, true);
-
-            //BitmapDrawable drawable = (BitmapDrawable) i1.getDrawable();
-            //Bitmap bitmap = drawable.getBitmap();
-            //Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 250, 250, true);
 
             i1.setImageBitmap(scaledBitmap);
 
@@ -322,9 +316,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
             Bitmap mIcon11 = BitmapFactory.decodeStream(in);
             Bitmap scaledBitmap = Bitmap.createScaledBitmap(mIcon11, 250, 250, true);
 
-            //BitmapDrawable drawable = (BitmapDrawable) i1.getDrawable();
-            //Bitmap bitmap = drawable.getBitmap();
-            //Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 250, 250, true);
+
             i1.setImageBitmap(scaledBitmap);
 
             splitImage(i1);
@@ -337,8 +329,6 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                 iv.setImageBitmap(piece);
                 iv.setOnTouchListener(this);
                 layout.addView(iv);
-
-
 
                 ImageView emptyView = new ImageView(getApplicationContext());
                 emptyView.setImageBitmap(pieces.get(i));
@@ -363,9 +353,6 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
 
             Bitmap mIcon11 = BitmapFactory.decodeStream(in);
             Bitmap scaledBitmap = Bitmap.createScaledBitmap(mIcon11, 250, 250, true);
-            //BitmapDrawable drawable = (BitmapDrawable) i1.getDrawable();
-            //Bitmap bitmap = drawable.getBitmap();
-            //Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 250, 250, true);
             i1.setImageBitmap(scaledBitmap);
 
             splitImage(i1);
@@ -391,29 +378,19 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
 
         } else if (level==6){
             acabado=true;
+
             myChronometer = findViewById(R.id.chronometer);
             myChronometer.stop();
 
             tiempo = myChronometer.getText().toString();
 
-          /* Esto funciona
-            setContentView(R.layout._activity_registro_usuarios);
-            Button btnGuardar = (Button) findViewById(R.id.btnRegistro);
-            TextView chronometro = (TextView)findViewById(R.id.campoTimee);
-            chronometro.setText(tiempo);*/
-
             // Animacion Funciona
             setContentView(R.layout._activity_registro_usuarios);
+            ButterKnife.bind(this);
             RelativeLayout VentanaUp = (RelativeLayout) findViewById(R.id.VentanaUp);
             Animation itemAnimation = AnimationUtils.loadAnimation(this,R.anim.item_animation);
             VentanaUp.startAnimation(itemAnimation);
-            //añado extra animacion
-           // Animation itemAnimation1 = AnimationUtils.loadAnimation(this, R.anim.item_animation2);
-           // VentanaUp.findViewById(TextSuccess)startAnimation(itemAnimation1);
 
-            //fin extra animacion
-            Button btnGuardar = (Button) findViewById(R.id.btnRegistro);
-            TextView chronometro = (TextView)findViewById(R.id.campoTimee);
             chronometro.setText(tiempo);
 
             //fin añadido
@@ -433,7 +410,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
         BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth(), bitmap.getHeight(), true);
-        //Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 400, 640, true);
+
 
 
         chunkHeight = bitmap.getHeight()/rows;
@@ -470,8 +447,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View view) {
-        //nombre=nombreIntroducido.getText().toString();
-        nombreIntroducido=findViewById(R.id.campoNamee);
+        //nombreIntroducido=findViewById(R.id.campoNamee);
         if (acabado=false){
             ImageView imageView = (ImageView) view;
             Bitmap bitmap = emptyChunk();
@@ -479,8 +455,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
         }
         switch (view.getId()) {
             case R.id.btnRegistro:
-                
-                //Inicializar.onCreate(getContentResolver());
+
                 ContentValues values=new ContentValues();
 
                 com.example.drudispuzzle.utilidades.ConexionSQLiteHelper conn=new com.example.drudispuzzle.utilidades.ConexionSQLiteHelper(this,"bd_usuarios",null,1);
