@@ -1,2 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="textincio">Welcome to the Game</string>
+    <string name="salir">Exit</string>
+    <string name="text_Usuario">User:</string>
+    <string name="text_Password">Password:</string>
+    <string name="btn_Logueo">LogIn</string>
+    <string name="btn_Crear">Create</string>
+    <string name="sign_in_button">LogIn Google</string>
+    <string name="app_name">PuzzleDroid</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="button_inicioPartida">Start Game</string>
+    <string name="button_tomarFoto">Take Picture</string>
+    <string name="button_ranking">Ranking 10</string>
+    <string name="button_multiplayer">Online</string>
+    <string name="button_seleccionMusica">Choose Music</string>
+    <string name="button_seleccionarimagenes">Choose Pics of Disp</string>
+    <string name="button_fotocamara">Take Picture</string>
+    <string name="textSuccess">Success!</string>
+    <string name="button_Registro">Save</string>
+    <string name="campoTimee">Time</string>
+    <string name="campoNamee">Name</string>
+    <string name="textoRegistroUsuarios">Save Record</string>
+    <string name="button_empezarpartidasinfragmentar">Start!</string>
+</resources>

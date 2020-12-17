@@ -11,7 +11,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="REGISTRO DE USUARIOS"
+        android:text="@string/textoRegistroUsuarios"
         android:textSize="25sp"
         android:textStyle="bold"
         android:layout_marginBottom="30dp"/>
@@ -20,19 +20,19 @@
         android:id="@+id/campoNamee"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="NAME" />
+        android:hint="@string/campoNamee" />
 
     <EditText
         android:id="@+id/campoTimee"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="TIME" />
+        android:hint="@string/campoTimee" />
 
     <Button
         android:id="@+id/btnRegistro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Registrar Usuario"
+        android:text="@string/button_Registro"
         android:layout_marginTop="30dp"
         android:onClick="onClick"/>
 
@@ -73,7 +73,7 @@
                     android:id="@+id/textSucces"
                     android:layout_width="match_parent"
                     android:layout_height="240dp"
-                    android:text="Good Work!!!"
+                    android:text="@string/textSuccess"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="#FFFFFF"
                     android:textSize="30sp" />
