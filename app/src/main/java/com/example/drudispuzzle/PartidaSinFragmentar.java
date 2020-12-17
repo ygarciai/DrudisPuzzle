@@ -190,6 +190,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
 
         InputStream in=null;
 
+
         if (level == 1){
             i1.setImageURI(imageList1.get(0));
             try {
