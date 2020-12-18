@@ -55,6 +55,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.jakewharton.rxbinding3.widget.RxTextView;
 
 import org.w3c.dom.Text;
 
@@ -75,6 +76,8 @@ import java.util.logging.Level;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 
 import static java.lang.StrictMath.abs;
 
@@ -397,6 +400,19 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
             btnGuardar.setOnClickListener(this);
             mp3.start();
             reproduciendo=true;
+
+            Disposable ComprobacionRegistro = RxTextView.textChanges(nombreIntroducido)
+                    .subscribe(new Consumer<CharSequence>() {
+                        @Override
+                        public void accept(CharSequence charSequence) throws  Exception{
+                            //Add your logic to work on the Charsequence
+                            String nombreintroducidocomp = nombreIntroducido.getText().toString();
+                            if (nombreintroducidocomp.length() > 6) {
+                                btnGuardar.setEnabled(true);
+                            }else
+                                btnGuardar.setEnabled(false);
+                        }
+                    });
 
 
         }

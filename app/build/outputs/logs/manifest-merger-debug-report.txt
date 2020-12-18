@@ -18,6 +18,8 @@ INJECTED from C:\Users\Usuario\StudioProjects\PuzzleDroid\DrudisPuzzle\app\src\m
 MERGED from [com.google.firebase:firebase-auth:20.0.1] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\9fddfa0db675886ff93add34da0ebced\jetified-firebase-auth-20.0.1\AndroidManifest.xml:17:1-83:12
 MERGED from [com.google.firebase:firebase-firestore:22.0.0] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\2740076feedd5cf04dbc7570105e4ad1\jetified-firebase-firestore-22.0.0\AndroidManifest.xml:2:1-26:12
 MERGED from [com.jakewharton:butterknife:10.2.3] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\ec5f59d1c4cbe2595370cb54fb79fd44\jetified-butterknife-10.2.3\AndroidManifest.xml:2:1-7:12
+MERGED from [com.jakewharton.rxbinding3:rxbinding:3.0.0-alpha2] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\cbd1b970780f931f27a643b2ae3789bc\jetified-rxbinding-3.0.0-alpha2\AndroidManifest.xml:2:1-7:12
+MERGED from [io.reactivex.rxjava2:rxandroid:2.1.1] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\73c628ed151b04d019eb4527a88b88ee\jetified-rxandroid-2.1.1\AndroidManifest.xml:15:1-20:12
 MERGED from [androidx.navigation:navigation-ui:2.3.0] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\d8ec56a305ac8673d3d77f12d821c086\navigation-ui-2.3.0\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.material:material:1.2.1] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\f8aaae792a30a1f56b0d58cd10f75c0e\material-1.2.1\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.2] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\3725b3dbe0ac9583f6dca74747f3a80c\constraintlayout-2.0.2\AndroidManifest.xml:2:1-11:12
@@ -266,6 +268,10 @@ MERGED from [com.google.firebase:firebase-firestore:22.0.0] C:\Users\Usuario\.gr
 MERGED from [com.google.firebase:firebase-firestore:22.0.0] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\2740076feedd5cf04dbc7570105e4ad1\jetified-firebase-firestore-22.0.0\AndroidManifest.xml:7:5-9:41
 MERGED from [com.jakewharton:butterknife:10.2.3] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\ec5f59d1c4cbe2595370cb54fb79fd44\jetified-butterknife-10.2.3\AndroidManifest.xml:5:5-44
 MERGED from [com.jakewharton:butterknife:10.2.3] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\ec5f59d1c4cbe2595370cb54fb79fd44\jetified-butterknife-10.2.3\AndroidManifest.xml:5:5-44
+MERGED from [com.jakewharton.rxbinding3:rxbinding:3.0.0-alpha2] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\cbd1b970780f931f27a643b2ae3789bc\jetified-rxbinding-3.0.0-alpha2\AndroidManifest.xml:5:5-44
+MERGED from [com.jakewharton.rxbinding3:rxbinding:3.0.0-alpha2] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\cbd1b970780f931f27a643b2ae3789bc\jetified-rxbinding-3.0.0-alpha2\AndroidManifest.xml:5:5-44
+MERGED from [io.reactivex.rxjava2:rxandroid:2.1.1] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\73c628ed151b04d019eb4527a88b88ee\jetified-rxandroid-2.1.1\AndroidManifest.xml:18:5-43
+MERGED from [io.reactivex.rxjava2:rxandroid:2.1.1] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\73c628ed151b04d019eb4527a88b88ee\jetified-rxandroid-2.1.1\AndroidManifest.xml:18:5-43
 MERGED from [androidx.navigation:navigation-ui:2.3.0] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\d8ec56a305ac8673d3d77f12d821c086\navigation-ui-2.3.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.navigation:navigation-ui:2.3.0] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\d8ec56a305ac8673d3d77f12d821c086\navigation-ui-2.3.0\AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.android.material:material:1.2.1] C:\Users\Usuario\.gradle\caches\transforms-2\files-2.1\f8aaae792a30a1f56b0d58cd10f75c0e\material-1.2.1\AndroidManifest.xml:20:5-44
