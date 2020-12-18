@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             btnCrear.setEnabled(true);
                         }else
                             btnLoguear.setEnabled(false);
-                            btnCrear.setEnabled(true);
+                            btnCrear.setEnabled(false);
                     }
                 });
 
