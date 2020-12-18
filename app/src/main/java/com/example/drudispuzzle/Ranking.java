@@ -32,6 +32,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.http.GET;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Ranking#newInstance} factory method to
@@ -103,7 +108,7 @@ public class Ranking extends AppCompatActivity {
         
 
         readData(new FirestoreCallback() {
-            @Override
+           @Override
             public void onCallback(ArrayList listaUsuarioFinal) {
                 for (int i=0;i<listaUsuarioFinal.size();i++){
                     usuarioañadir=new Usuario();
@@ -121,6 +126,7 @@ public class Ranking extends AppCompatActivity {
                 recyclerViewUsuarios.setAdapter(adapter);
             }
         });
+
 
 
     }

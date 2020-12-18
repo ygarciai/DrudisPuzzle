@@ -72,16 +72,6 @@ public class PartidaFragmentada extends AppCompatActivity {
           tileList[index] = tileList[i];
           tileList[i] = temp;
       }
-      /*  int index;
-        String temp;
-        Random random = new Random();
-
-        for (int i = tileList.length - 1; i > 0; i++) {
-            index = random.nextInt(i + 1);
-            temp = tileList[index];
-            tileList[index] = tileList[i];
-            tileList[i] = temp;
-        }*/
 
     }
 

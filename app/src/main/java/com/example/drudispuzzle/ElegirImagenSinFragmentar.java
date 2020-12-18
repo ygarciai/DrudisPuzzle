@@ -144,7 +144,7 @@ public class ElegirImagenSinFragmentar extends AppCompatActivity implements View
         buttonImagen.setOnClickListener(this);
         buttonEmpezar.setOnClickListener(this);
         myButtonFoto.setOnClickListener(this);
-        buttonEmpezar.setEnabled(true);
+        buttonEmpezar.setEnabled(false);
         buttonImagen.setEnabled(false);
         myButtonFoto.setEnabled(false);
 
@@ -235,6 +235,7 @@ public class ElegirImagenSinFragmentar extends AppCompatActivity implements View
                         imagen5.setImageBitmap(mIcon11);
                         Log.d(TAG, "Entra 1");
                         contador++;
+                        buttonEmpezar.setEnabled(true);
                     }
                 }
             }).addOnFailureListener(new OnFailureListener() {

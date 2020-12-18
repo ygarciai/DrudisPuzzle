@@ -7,9 +7,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.provider.ContactsContract;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,6 +25,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import javax.security.cert.CertificateException;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,19 +42,33 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.jakewharton.rxbinding3.widget.RxTextView;
 
+import org.reactivestreams.Subscription;
+
+import java.io.IOException;
 import java.net.URL;
 import java.security.PublicKey;
+import java.util.concurrent.TimeUnit;
+
 
 
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final int RC_SIGN_IN = 0;
     private FirebaseAuth mAuth;
+
+
 
     EditText nombre;
     WebView webView;
@@ -73,7 +93,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public @BindView(R.id.editTextUsuario) EditText editUser;
     public @BindView(R.id.editTextPassword) EditText editPassword;
     @BindView(R.id.toolbar) Toolbar toolbar;
-
 
 
     @Override
@@ -101,7 +120,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn2.setOnClickListener(this);
         btnLoguear.setOnClickListener(this);
         btnCrear.setOnClickListener(this);
-
+        btnLoguear.setEnabled(false);
+        btnCrear.setEnabled(false);
 
 
         setSupportActionBar(toolbar);
@@ -134,9 +154,47 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ApplicationLifecycleHandler handler = new ApplicationLifecycleHandler();
         registerActivityLifecycleCallbacks(handler);
         registerComponentCallbacks(handler);
+        editPassword.addTextChangedListener(new TextWatcher() {
+            public void afterTextChanged(Editable s) {}
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                controlBoton();
+            }
+        });
 
+        editUser.addTextChangedListener(new TextWatcher() {
+            public void afterTextChanged(Editable s) {}
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                controlBoton();
+            }
+        });
 
+    }
 
+    public void controlBoton(){
+        Disposable ComprobacionLogueo = RxTextView.textChanges(editUser)
+                .subscribe(new Consumer<CharSequence>() {
+                    @Override
+                    public void accept(CharSequence charSequence) throws  Exception{
+                        //Add your logic to work on the Charsequence
+                        email = editUser.getText().toString();
+                        password=editPassword.getText().toString();
+                        if ((email.length() > 6) && (password.length()>6)) {
+                            btnLoguear.setEnabled(true);
+                            btnCrear.setEnabled(true);
+                        }else {
+                            btnLoguear.setEnabled(false);
+                            btnCrear.setEnabled(false);
+                        }
+                    }
+                });
     }
 
     private class AudioFocusChangeListenerImpl implements AudioManager.OnAudioFocusChangeListener {
@@ -240,7 +298,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 password = (String) editPassword.getText().toString();
                 mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                            @Override
+                           @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     // Sign in success, update UI with the signed-in user's information
