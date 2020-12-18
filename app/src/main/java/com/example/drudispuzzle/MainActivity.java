@@ -125,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnCrear.setOnClickListener(this);
         btnLoguear.setEnabled(false);
         btnCrear.setEnabled(false);
+        btn.setEnabled(true);
 
 
         setSupportActionBar(toolbar);

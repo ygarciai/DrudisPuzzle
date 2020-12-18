@@ -88,7 +88,7 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
         sonidoOn.setOnClickListener(this);
         sonidoOff.setOnClickListener(this);
         seleccionMusica.setOnClickListener(this);
-        btnPlay.setEnabled(false);
+        btnPlay.setEnabled(true);
         btnFoto.setEnabled(false);
         btnMult.setEnabled(false);
 
