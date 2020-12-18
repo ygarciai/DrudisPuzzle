@@ -413,10 +413,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
                                 btnGuardar.setEnabled(false);
                         }
                     });
-
-
         }
-
     }
 
     private void splitImage(ImageView image) {
