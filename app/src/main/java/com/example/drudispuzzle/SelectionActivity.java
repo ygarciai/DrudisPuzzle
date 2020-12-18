@@ -92,6 +92,7 @@ public class SelectionActivity  extends AppCompatActivity implements View.OnClic
         btnFoto.setEnabled(false);
         btnMult.setEnabled(false);
 
+
         ApplicationLifecycleHandler handler = new ApplicationLifecycleHandler();
         registerActivityLifecycleCallbacks(handler);
         registerComponentCallbacks(handler);
