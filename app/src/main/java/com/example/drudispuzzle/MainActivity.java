@@ -154,7 +154,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ApplicationLifecycleHandler handler = new ApplicationLifecycleHandler();
         registerActivityLifecycleCallbacks(handler);
         registerComponentCallbacks(handler);
+        editPassword.addTextChangedListener(new TextWatcher() {
+            public void afterTextChanged(Editable s) {}
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                controlBoton();
+            }
+        });
 
+        editUser.addTextChangedListener(new TextWatcher() {
+            public void afterTextChanged(Editable s) {}
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                controlBoton();
+            }
+        });
+
+    }
+
+    public void controlBoton(){
         Disposable ComprobacionLogueo = RxTextView.textChanges(editUser)
                 .subscribe(new Consumer<CharSequence>() {
                     @Override
@@ -162,15 +186,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         //Add your logic to work on the Charsequence
                         email = editUser.getText().toString();
                         password=editPassword.getText().toString();
-                        if ((email.length() > 6) && password.length()>6) {
+                        if ((email.length() > 6) && (password.length()>6)) {
                             btnLoguear.setEnabled(true);
                             btnCrear.setEnabled(true);
-                        }else
+                        }else {
                             btnLoguear.setEnabled(false);
                             btnCrear.setEnabled(false);
+                        }
                     }
                 });
-
     }
 
     private class AudioFocusChangeListenerImpl implements AudioManager.OnAudioFocusChangeListener {

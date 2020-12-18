@@ -26,7 +26,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.CalendarContract;
+import android.text.Editable;
 import android.text.Layout;
+import android.text.TextWatcher;
 import android.text.method.Touch;
 import android.util.Log;
 import android.view.DragEvent;
@@ -99,7 +101,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
 
     public ArrayList<Usuario> listaUsuariosRecordos;
     String Maximoactual="";
-
+    String nombreintroducidocomp;
 
     ImageView i1;
     ImageView i1red;
@@ -186,6 +188,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
         myChronometer.start();
         i1 = findViewById(R.id.imageView_fondoPantalla);
         initGame(level, imageList);
+
 
    }
 
@@ -389,6 +392,7 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
             // Animacion Funciona
             setContentView(R.layout._activity_registro_usuarios);
             ButterKnife.bind(this);
+            btnGuardar.setEnabled(false);
             RelativeLayout VentanaUp = (RelativeLayout) findViewById(R.id.VentanaUp);
             Animation itemAnimation = AnimationUtils.loadAnimation(this,R.anim.item_animation);
             VentanaUp.startAnimation(itemAnimation);
@@ -401,21 +405,39 @@ public class PartidaSinFragmentar extends AppCompatActivity implements View.OnCl
             mp3.start();
             reproduciendo=true;
 
-            Disposable ComprobacionRegistro = RxTextView.textChanges(nombreIntroducido)
-                    .subscribe(new Consumer<CharSequence>() {
-                        @Override
-                        public void accept(CharSequence charSequence) throws  Exception{
-                            //Add your logic to work on the Charsequence
-                            String nombreintroducidocomp = nombreIntroducido.getText().toString();
-                            if (nombreintroducidocomp.length() > 6) {
-                                btnGuardar.setEnabled(true);
-                            }else
-                                btnGuardar.setEnabled(false);
-                        }
-                    });
+            nombreIntroducido.addTextChangedListener(new TextWatcher() {
+
+                public void afterTextChanged(Editable s) {}
+
+                public void beforeTextChanged(CharSequence s, int start,
+                                              int count, int after) {
+
+                }
+
+                public void onTextChanged(CharSequence s, int start,
+                                          int before, int count) {
+                    comprobacionRegistro();
+                }
+            });
+
+
         }
     }
 
+    private void comprobacionRegistro(){
+        Disposable ComprobacionRegistro = RxTextView.textChanges(nombreIntroducido)
+                .subscribe(new Consumer<CharSequence>() {
+                    @Override
+                    public void accept(CharSequence charSequence) throws  Exception{
+                        //Add your logic to work on the Charsequence
+                        nombreintroducidocomp = nombreIntroducido.getText().toString();
+                        if (nombreintroducidocomp.length() > 6) {
+                            btnGuardar.setEnabled(true);
+                        }else
+                            btnGuardar.setEnabled(false);
+                    }
+                });
+    }
     private void splitImage(ImageView image) {
         pieces = new ArrayList<>();
 
